@@ -2,7 +2,7 @@ https://docs.google.com/document/d/1_ua0_05RNPVgfxvGYrnIMUInQrzjr3dgfFaeyh_KJ4w/
 
 Project Proposal:
 Measuring Political Freedom Around the World
-By: Joe Despres A44775954, Joe Sigler A52842027, Jacob Haywood ?, Sabrina Ball A53376769
+
 Question of Motivation
 What political factors affect people’s civil liberties and personal freedoms? We feel that civil and political freedoms are essential to a good life. Therefore, we would like to know what factors would be helpful in predicting how much political freedom the citizens of a country have.
 Summary information about the data (number of observations, brief summary of each variable, where the data is from, etc)

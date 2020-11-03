@@ -1,0 +1,64 @@
+---
+title             : "Along the Way: To a Better Path"
+shorttitle        : "Along the Way: To a Better Path"
+
+author: 
+  - name          : "Joe Despres"
+    affiliation   : ""
+    corresponding : no    # Define only one corresponding author
+    address       : ""
+    email         : ""
+
+
+affiliation:
+  - id            : ""
+    institution   : "Grand Valley State University"
+
+date:
+  - date          : "`r format(Sys.time(), '%B  %dth,  %Y')`"
+
+
+authornote:
+
+abstract:
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+```{r setup, include = FALSE}
+library("papaja")
+library(bookdown)
+```
+
+
+\newpage
+
+
+```{r create_r-references, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
+
+
