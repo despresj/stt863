@@ -1,8 +1,7 @@
 library(tidyverse)
-#hey we are editing
-# Read and Clean ----------------------------------------------------------
-files <- list.files(path = here::here("sttproj", "data"), pattern = ".csv")
 
+# Read and Clean ----------------------------------------------------------
+files <- list.files(path = here::here("data"), pattern = ".csv")
 files
 
 cleaning <- function(df){
@@ -10,19 +9,16 @@ cleaning <- function(df){
 }
 
 files %>% 
-  map(function(x) read_csv(paste0("sttproj/data/", x))) %>% 
+  map(function(x) read_csv(paste0("data/", x))) %>% 
   setNames(gsub("\\.csv$", "", files)) %>% 
   map(cleaning) %>% 
   bind_rows(.id = "id") %>% 
-  pivot_wider(names_from = id) # %>% 
-write_csv(here::here("sttproj", "merged", "df.csv"))
+  pivot_wider(names_from = id)# %>% 
+write_csv(here::here("merged", "df.csv"))
 
 # Filtering ---------------------------------------------------------------
-
-data <- read_csv(here::here("sttproj", "merged", "df.csv"))
-vars <- paste0(colnames(data), sep = ", ", collapse = "" )
-data %>% select(-ends_with("_fh")) %>% names() %>% paste0(., sep = ", ", collapse = "" )
-
+data <- read_csv(here::here("merged", "df.csv"))
+data %>% View()
 
 
 

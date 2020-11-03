@@ -1,6 +1,8 @@
+library(tidyverse)
 
 # best_subset_selection ---------------------------------------------------
 
+data <- read_csv(here::here("data", "df.csv"))
 
 names(data)
 vars <- data %>% 
@@ -24,6 +26,7 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   bind_rows(.id = "id") %>% 
   distinct() %>% 
   rename(model = id) 
+
 
 subsets %>% View()
 

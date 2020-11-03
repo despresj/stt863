@@ -1,5 +1,8 @@
+library(tidyverse)
 
 # Visuals -------------------------------------------------------------
+
+data <- read_csv(here::here("data", "df.csv"))
 
 data %>% 
   select(-year) %>% 
