@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # Read and Clean ----------------------------------------------------------
-files <- list.files(path = here::here("data"), pattern = ".csv")
+files <- list.files(path = here::here("raw_data"), pattern = ".csv")
 files
 
 cleaning <- function(df){
@@ -9,7 +9,7 @@ cleaning <- function(df){
 }
 
 files %>% 
-  map(function(x) read_csv(paste0("data/", x))) %>% 
+  map(function(x) read_csv(paste0("raw_data/", x))) %>% 
   setNames(gsub("\\.csv$", "", files)) %>% 
   map(cleaning) %>% 
   bind_rows(.id = "id") %>% 
@@ -17,7 +17,7 @@ files %>%
 write_csv(here::here("merged", "df.csv"))
 
 # Filtering ---------------------------------------------------------------
-data <- read_csv(here::here("merged", "df.csv"))
+data <- read_csv(here::here("data", "df.csv"))
 data %>% View()
 
 
