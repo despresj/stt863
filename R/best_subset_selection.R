@@ -27,6 +27,6 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   distinct() %>% 
   rename(model = id) 
 
-write_csv(subsets, here::here("data", "bestsebsets.csv"))
 subsets %>% View()
 
+write_csv(subsets, here::here("data", "bestsebsets.csv"))
