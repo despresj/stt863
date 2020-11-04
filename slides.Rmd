@@ -1,8 +1,7 @@
 ---
 title: "Measuring Political Freedom Around the World"
-subtitle: " Joe Despres, Joe Sigler, Jacob Haywood"
-institute: "MSU"
-date: "updated: `r Sys.Date()`"
+subtitle: "Sabrina Ball, Joe Despres, Joe Sigler, Jacob Haywood"
+date: "Last compiled `r format(Sys.time(), '%H:%M')`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -15,8 +14,24 @@ output:
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+options(htmltools.dir.version = FALSE, echo = FALSE)
+library(gtsummary)
+source(here::here("R", "visualization.R"))
+options(digits = 3)
 ```
+
+---
+```{r echo=FALSE}
+best_subsets %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  select(model, adj.r.squared) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 6))
+```
+---
+
+---
+
+---
 
 ???
 
