@@ -13,12 +13,14 @@ files %>%
   setNames(gsub("\\.csv$", "", files)) %>% 
   map(cleaning) %>% 
   bind_rows(.id = "id") %>% 
-  pivot_wider(names_from = id)# %>% 
-write_csv(here::here("merged", "df.csv"))
+  pivot_wider(names_from = id) # %>% 
+write_csv(here::here("data", "df.csv"))
 
 # Filtering ---------------------------------------------------------------
-data <- read_csv(here::here("data", "df.csv"))
+data <- read_csv(here::here("data", "df.csv")) %>% 
+  filter(year > 2009) 
+
 data %>% View()
 
-
+dim(data)
 
