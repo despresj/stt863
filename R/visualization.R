@@ -51,7 +51,7 @@ data %>%
 
 data %>% 
   ggplot(aes(x = gini, y = polrights_fh)) + 
-  geom_smooth(se = false)
+  geom_smooth(se = FALSE)
 
 r <- best_subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
 
