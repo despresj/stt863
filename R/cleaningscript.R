@@ -8,18 +8,19 @@ cleaning <- function(df){
   df <- pivot_longer(df, cols = -country, names_to = "year")
 }
 
-data <- files %>% 
+files %>% 
   map(function(x) read_csv(paste0("raw_data/", x))) %>% 
   setNames(gsub("\\.csv$", "", files)) %>% 
   map(cleaning) %>% 
   bind_rows(.id = "id") %>% 
-  pivot_wider(names_from = id) 
-
-
-
-# Filtering ---------------------------------------------------------------
-data %>% filter(year > 2000) %>% 
+  pivot_wider(names_from = id) # %>% 
 write_csv(here::here("data", "df.csv"))
 
-data <- read_csv(here::here("data", "df.csv")) 
+# Filtering ---------------------------------------------------------------
+data <- read_csv(here::here("data", "df.csv")) %>% 
+  filter(year > 2009) 
+
+data %>% View()
+
+dim(data)
 
