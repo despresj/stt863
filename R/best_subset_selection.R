@@ -29,4 +29,4 @@ subsets <- map(models, function(x) lm(x, data)) %>%
 
 subsets %>% View()
 
-write_csv(subsets, here::here("data", "bestsebsets.csv"))
+write_csv(subsets, here::here("data", "best_subsets.csv"))
