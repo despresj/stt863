@@ -23,7 +23,11 @@ dep_vars
 resp_vars
 ```
 
-Our dependent variables are indexes measured in increments of 0.5, can we use regression methods without making extreme transformations?
+Our dependent variables are indexes measured from 1 to 7. With one being the highest degree of freedom and rights and , can we use regression methods without making extreme transformations?
+
+*subtract mean and divide by sd.*
+
+
 
 ```{r}
 
@@ -36,6 +40,7 @@ p2 <- data %>%
   geom_histogram(bins = 15) + labs(title = "Civil Liberties Index", subtitle = 'Further Right More Civli Liberties')
 
 p1 + p2
+
 
 ```
 
@@ -78,6 +83,11 @@ subsets %>%
   labs(title = "Best Subsets", x = "Parameters", y = "Adjusted R Squared")
 ```
 
+```{r}
+
+```
+
+
 at 5 degrees of freedom
 ```{r}
 model_df5 <- subsets %>% filter(df == 5) %>% 
@@ -87,6 +97,12 @@ model_df5 <- subsets %>% filter(df == 5) %>%
 model_df5
 fit <- lm(model_df5, data = data)
 summary(fit)
+df = matrix(c(predict(fit), data$polrights_fh), ncol = 2)
+
+matplot(df)
+
+plot(predict(fit), data$polrights_fh)
+
 
 ```
 
