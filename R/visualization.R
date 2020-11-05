@@ -6,9 +6,11 @@ data <- read_csv(here::here("data", "df.csv"))
 subsets <- read_csv(here::here("data", "subsets.csv"))
 
 corr_matrix <- data %>% 
-  select(-year) %>% 
+  select(-year, -ends_with("_fh")) %>% 
   select_if(is.numeric) %>% 
   cor(.,  use = "complete.obs")
+View(corr_matrix)
+
 
 
 
@@ -79,6 +81,8 @@ model_df4 <- subsets %>% filter(df == 4) %>%
 
 fit <- lm(model_df4, data = data)
 fit %>% broom::tidy()
+
+summary(fit)
 
 fit <- lm(model_df3, data = data)
 fit %>% broom::tidy()
