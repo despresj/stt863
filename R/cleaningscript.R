@@ -18,8 +18,9 @@ data <- files %>%
 
 
 # Filtering ---------------------------------------------------------------
-data %>% filter(year > 2000) %>% 
-write_csv(here::here("data", "df.csv"))
 
-data <- read_csv(here::here("data", "df.csv")) 
+data %>%
+  filter(year > 2000, year > 2019) %>% 
+  write_csv(here::here("data", "df.csv"))
 
+# data <- read_csv(here::here("data", "df.csv")) 
