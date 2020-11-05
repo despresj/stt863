@@ -10,11 +10,7 @@ vars <- data %>%
   select(-country, -year, -ends_with("_fh")) %>%
   names()
 
-# make it continuous
-data$garbage <- data$polrights_fh + rnorm(length(data$polrights_fh),3.68,1.94)
-
 outcome <- "polrights_fh"
-outcome <- "garbage"
 
 models <- list()
 for (i in 1:length(vars)) {
@@ -32,6 +28,15 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   distinct() %>% 
   rename(model = id) 
 
-subsets %>% View()
+subsets %>% 
+  write_csv(here::here("data", "best_subsets.csv"))
 
-# write_csv(subsets, here::here("data", "best_subsets.csv"))
+
+
+
+
+# this cannot be right ---------------------------------------------------
+
+
+data$garbage <- data$polrights_fh + rnorm(length(data$polrights_fh),3.68,1.94)
+outcome <- "garbage"
