@@ -29,7 +29,7 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   rename(model = id) 
 
 subsets %>% 
-  write_csv(here::here("data", "best_subsets.csv"))
+  write_csv(here::here("data", "subsets.csv"))
 
 
 
