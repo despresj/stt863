@@ -2,7 +2,7 @@ library(tidyverse)
 
 # Read and Clean ----------------------------------------------------------
 files <- list.files(path = here::here("raw_data"), pattern = ".csv")
-files
+
 
 cleaning <- function(df){
   df <- pivot_longer(df, cols = -country, names_to = "year")
@@ -23,8 +23,8 @@ countries <- readRDS(here::here("data", "countries.RDS"))
 data <- data %>%
   filter(year > 2000, year < 2019, country %in% countries) %>% 
   group_by(country) %>%
-  mutate_all(list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>% 
-  # Iceland spent 0 so I needed to manually recode that
+  mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>% 
+# Iceland spent 0 so I needed to manually recode that
   mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>% 
   mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
          # https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
@@ -38,4 +38,4 @@ data <- data %>%
 
 # writing -----------------------------------------------------------------
 write_csv(data, here::here("data", "df.csv"))
-
+skimr::skim(ungroup(data))
