@@ -33,9 +33,7 @@ data <- data %>%
          murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34))
 
-
-
-
 # writing -----------------------------------------------------------------
+
 write_csv(data, here::here("data", "df.csv"))
 skimr::skim(ungroup(data))
