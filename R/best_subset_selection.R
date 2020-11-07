@@ -28,15 +28,7 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   distinct() %>% 
   rename(model = id) 
 
-subsets %>% 
-  write_csv(here::here("data", "subsets.csv"))
+# writing -----------------------------------------------------------------
 
+write_csv(subsets, here::here("data", "subsets.csv"))
 
-
-
-
-# this cannot be right ---------------------------------------------------
-
-
-data$garbage <- data$polrights_fh + rnorm(length(data$polrights_fh),3.68,1.94)
-outcome <- "garbage"
