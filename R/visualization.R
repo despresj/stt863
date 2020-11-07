@@ -4,31 +4,22 @@ theme_set(theme_light())
 
 data <- read_csv(here::here("data", "df.csv"))
 subsets <- read_csv(here::here("data", "subsets.csv"))
+names(data)
 
 corr_matrix <- data %>% 
-  select(-year, -ends_with("_fh")) %>% 
-  select_if(is.numeric) %>% 
+  select(-year, -country) %>% 
   cor(.,  use = "complete.obs")
+
 View(corr_matrix)
 
-
-
+names(data)
 
 data %>% 
-  ggplot(mapping = aes(x = freedix_fh)) + 
+  ggplot(mapping = aes(x = polrights_fh)) + 
   geom_histogram(bins = 10)
 
 data %>% 
   ggplot(mapping = aes(x = polrights_fh)) + 
-  geom_histogram()
-
-data %>% 
-  ggplot(mapping = aes(x = cliberities_fh)) + 
-  geom_histogram()
-
-data %>% 
-  mutate(trans_civlib = exp(cliberities_fh)) %>% 
-  ggplot(mapping = aes(x = trans_civlib)) + 
   geom_histogram()
 
 data %>% 
@@ -74,6 +65,7 @@ model_df5 <- subsets %>% filter(df == 5) %>%
 model_df5
 fit <- lm(model_df5, data = data)
 fit %>% broom::tidy()
+summary(fit)
 
 model_df4 <- subsets %>% filter(df == 4) %>% 
   arrange(desc(adj.r.squared)) %>% 
