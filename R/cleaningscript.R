@@ -15,9 +15,8 @@ data <- files %>%
   bind_rows(.id = "id") %>% 
   pivot_wider(names_from = id)
 
-
-
 # Filtering ---------------------------------------------------------------
+
 countries <- readRDS(here::here("data", "countries.RDS"))
 
 data <- data %>%
@@ -37,4 +36,5 @@ data <- data %>%
 # writing -----------------------------------------------------------------
 
 write_csv(data, here::here("data", "df.csv"))
+
 skimr::skim(ungroup(data))
