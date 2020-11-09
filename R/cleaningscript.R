@@ -30,7 +30,7 @@ data <- data %>%
          # lose 3 important countries in LA
          murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
-  relocate(polrights_fh)
+  relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh))
 
 # writing -----------------------------------------------------------------
 
