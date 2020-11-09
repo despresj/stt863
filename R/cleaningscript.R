@@ -3,7 +3,6 @@ library(tidyverse)
 # Read and Clean ----------------------------------------------------------
 files <- list.files(path = here::here("raw_data"), pattern = ".csv")
 
-
 cleaning <- function(df){
   df <- pivot_longer(df, cols = -country, names_to = "year")
 }
