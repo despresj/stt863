@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = FALSE)
 summarsze fh index
 
 ---
-
+# Best Subsets
 ```{r message=FALSE}
 subsets %>% 
   group_by(df) %>% 
@@ -39,16 +39,18 @@ subsets %>%
   arrange(desc(a_rsq)) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3))
 ```
-
-```{r, message=FALSE, warning=FALSE, fig.dim=3}
+---
+# Best Subsets
+```{r, message=FALSE, warning=FALSE}
 r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
-
 
 subsets %>% 
   ggplot(aes(x = df, y = adj.r.squared)) + 
   geom_point() + 
   geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "Green") + 
-  labs(title = "Best Subsets", x = "Parameters", y = "Adjusted R Squared")
+  labs(title = "Best Subsets", x = "Parameters", y = "Adjusted R Squared") + 
+  scale_x_continuous(breaks = 1:9) + 
+  theme_light(base_size = 12)
 ```
 
 
@@ -63,6 +65,13 @@ equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line =
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 
+
+---
+# show charts
+
+---
+
+# Some model test
 
 ---
 
