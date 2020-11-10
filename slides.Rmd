@@ -17,15 +17,42 @@ options(htmltools.dir.version = FALSE, echo = FALSE)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# Introduction
-- study political freedom as a function of social, economic, political factors
-- gapminder data
-- filtered to only include OECD
+# Outline
+
+* What factors are associated with an increase in political freedom?
+
+--
+
+* study political freedom as a function of social, economic, political factors
+
+--
+
+* From Data provided by the Gapminder Foundation.
+
+---
+class: inverse, middle, center
+
+# Data
+
+---
+
+
+# Data
+
+* filtered to only include OECD Countries from year 2000 to 2018
 
 ---
 
 # Define political freedom
-summarsze fh index
+
+--
+
+* Freedomhouse index
+
+--
+
+* summarsze fh index
+
 
 ---
 # Best Subsets
@@ -53,36 +80,59 @@ subsets %>%
   theme_light(base_size = 12)
 ```
 
-
 ---
+
+class: inverse, middle, center
+
 # Model
+---
+
+class: center, middle
 
 ```{r include=FALSE}
 equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line = 1)
 ```
 
+$$
+\large
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
+$$
 
 
 ---
-# show charts
+class: center
 
----
-
-# Some model test
-
----
+$$
+\tiny
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
 
 ```{r}
 broom::tidy(model_df5) %>% 
   kableExtra::kable()
 ```
 ---
-
+class: center
+$$
+\tiny
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
 ```{r}
 broom::tidy(model_df5) %>% 
   kableExtra::kable() %>% 
   kableExtra::row_spec(4, bold = T, color = "white", background = "#D7261E")
 ```
+
+---
+
+class: center, middle
+
+# Thanks You and We are Happy to Take Questions
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
