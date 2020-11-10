@@ -5,7 +5,6 @@ date: "Last compiled `r format(Sys.time(), '%H:%M')`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    mathjax: null
     nature:
       highlightStyle: github
       highlightLines: true
@@ -15,18 +14,25 @@ output:
 ```{r setup, include=FALSE}
 source(here::here("R", "regression.R"))
 options(htmltools.dir.version = FALSE, echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # Introduction
-- political freedom as a function of 
-- variables
-
-
-
+- study political freedom as a function of social, economic, political factors
+- gapminder data
+- filtered to only include OECD
 
 ---
-```{r echo=FALSE}
+
+# Define political freedom
+summarsze fh index
+
+---
+
+```{r message=FALSE}
 subsets %>% 
+  group_by(df) %>% 
+  filter(adj.r.squared == max(adj.r.squared)) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   rename(a_rsq = adj.r.squared) %>% 
   select(df, a_rsq, model) %>% 
@@ -34,23 +40,40 @@ subsets %>%
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3))
 ```
 
+```{r, message=FALSE, warning=FALSE, fig.dim=3}
+r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
+
+
+subsets %>% 
+  ggplot(aes(x = df, y = adj.r.squared)) + 
+  geom_point() + 
+  geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "Green") + 
+  labs(title = "Best Subsets", x = "Parameters", y = "Adjusted R Squared")
+```
+
+
 ---
 # Model
+
+```{r include=FALSE}
+equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line = 1)
+```
+
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+
+
+---
 
 ```{r}
-# equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line = 1)
+broom::tidy(model_df5) %>% 
+  kableExtra::kable()
 ```
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
-$$ 
-
-\operatorname{polrights\_fh} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) + \beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
- 
-$$
-
-
 ---
 
-# Model
-
----
-# Conclusions
+```{r}
+broom::tidy(model_df5) %>% 
+  kableExtra::kable() %>% 
+  kableExtra::row_spec(4, bold = T, color = "white", background = "#D7261E")
+```
