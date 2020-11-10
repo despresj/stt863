@@ -11,33 +11,33 @@ output:
       countIncrementalSlides: false
 ---
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE, echo = FALSE)
-library(gtsummary)
-source(here::here("R", "visualization.R"))
+source(here::here("R", "regression.R"))
 options(digits = 3)
 ```
 
 ---
 ```{r echo=FALSE}
-best_subsets %>% 
+subsets %>% 
   mutate_if(is.numeric, round, 3) %>% 
   select(model, adj.r.squared) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 6))
 ```
 ---
 
----
 
 ---
 
-???
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+# Introduction
 
----
+# Model
+
+# Findings
+
+# Conclusions
+
 class: center, middle
 
 # xaringan

@@ -30,10 +30,12 @@ data <- data %>%
          # lose 3 important countries in LA
          murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
-  relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh))
+  relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
+                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)
 
 # writing -----------------------------------------------------------------
 
 write_csv(data, here::here("data", "df.csv"))
 
+View(data)
 skimr::skim(ungroup(data))

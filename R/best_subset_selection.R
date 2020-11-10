@@ -32,3 +32,4 @@ subsets <- map(models, function(x) lm(x, data)) %>%
 
 write_csv(subsets, here::here("data", "subsets.csv"))
 
+subsets %>% select(model) %>% tail(1) %>% as.character()
