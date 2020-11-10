@@ -43,8 +43,7 @@ data$resid <- resid(model_df5)
 # Second model ------------------------------------------------------------
 
 subsets %>% filter(df == 4) %>% 
-  arrange(desc(adj.r.squared)) %>% 
-  View()
+  arrange(desc(adj.r.squared)) 
 
 model_df4_formula <- subsets %>% filter(df == 4) %>% 
   arrange(desc(adj.r.squared)) %>% 
@@ -57,8 +56,7 @@ summary(fit_df4)
 # third -------------------------------------------------------------------
 
 subsets %>% filter(df == 6) %>% 
-  arrange(desc(adj.r.squared)) %>% 
-  View()
+  arrange(desc(adj.r.squared)) 
 
 model_df6_formula <- subsets %>% filter(df == 6) %>% 
   arrange(desc(adj.r.squared)) %>% 
