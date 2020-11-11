@@ -16,7 +16,7 @@ source(here::here("R", "regression.R"))
 library(kableExtra)
 options(htmltools.dir.version = FALSE, echo = FALSE)
 knitr::opts_chunk$set(echo = FALSE)
-xaringanExtra::use_slide_tone()
+# xaringanExtra::use_slide_tone()
 ```
 
 # Outline
