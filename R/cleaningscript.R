@@ -25,11 +25,11 @@ data <- data %>%
 # Iceland spent 0 so I needed to manually recode that
   mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>% 
   mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+         murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
+         murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
          # https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
          # these murder rates were not included in the gapminder but i didnt want to 
          # lose 3 important countries in LA
-         murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
-         murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
   relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
                                     military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)
 

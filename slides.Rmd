@@ -15,21 +15,23 @@ output:
 source(here::here("R", "regression.R"))
 library(kableExtra)
 options(htmltools.dir.version = FALSE, echo = FALSE)
-knitr::opts_chunk$set(echo = FALSE)
-# xaringanExtra::use_slide_tone()
+knitr::opts_chunk$set(echo = FALSE) 
 ```
 
-# Outline
+# Research Question
 
 * What factors are associated with an increase in political freedom?
 
 --
 
-* study political freedom as a function of social, economic, political factors
+* Observational study of political freedom as a function of social, economic, political factors.
 
 --
-
 * From Data provided by the Gapminder Foundation.
+
+-- 
+
+* filtered to only include OECD Countries from year 2000 to 2018 by necessity
 
 ---
 class: inverse, middle, center
@@ -38,25 +40,36 @@ class: inverse, middle, center
 
 ---
 
-
-# Data
-
-* filtered to only include OECD Countries from year 2000 to 2018
-
----
-
-# Define political freedom
-
---
-
-* Freedomhouse index
+# Political Freedom
 
 --
 
 * summarsze fh index
 
+---
+
+
+# Data
+
+* covarites w/ exp
 
 ---
+
+# Summary Stats
+
+---
+
+# Assumptions
+
+--
+* Finite mean and sd
+* independance
+* Linearity
+* Normaily
+* Homoskidasticity
+
+---
+
 # Best Subsets
 ```{r message=FALSE}
 subsets %>% 
@@ -68,11 +81,12 @@ subsets %>%
   arrange(desc(a_rsq)) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3))
 ```
+
 ---
 
 class: center
-### Best Subsets
-```{r, message=FALSE, warning=FALSE, fig.align='center', fig.width=12, fig.height=8}
+
+```{r, message=FALSE, warning=FALSE}
 r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
 
 subsets %>% 
@@ -134,6 +148,26 @@ broom::tidy(model_df5) %>%
 ```
 
 ---
+# Remedial measured
+
+* plot
+* 
+* vif
+car::vif(fit)
+
+* Brown Forsythe
+
+---
+# Conclusions
+
+---
+class: center, middle
+
+# Thanks You and We are Happy to Take Questions
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+---
 
 <font size="2">
 ```{r results='asis'}
@@ -143,11 +177,3 @@ stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html",
                      header = FALSE,
                      single.row = TRUE)
 ```
-
-
----
-class: center, middle
-
-# Thanks You and We are Happy to Take Questions
-
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
