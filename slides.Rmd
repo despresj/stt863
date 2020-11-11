@@ -139,11 +139,19 @@ broom::tidy(model_df5) %>%
 
 class: center, top
 <font size="1">
+<<<<<<< HEAD
 ```{r results='asis',out.width='25%', fig.align='center',}
 stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
                      title = "Regression Results", 
                      covariate.labels = c(),header = FALSE,
 single.row=FALSE,column.sep.width = "-15pt")
+=======
+```{r results='asis',out.width='25%', fig.align='center'}
+stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
+                     title = "Regression Results", 
+                     covariate.labels = c(),header = FALSE,
+single.row=FALSE,column.sep.width = "-15pt", column.separate = 1)
+>>>>>>> 45c40607e713d9ac793f469171cbeb25c1a1a705
 ```
 
 
