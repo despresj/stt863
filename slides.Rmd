@@ -82,8 +82,6 @@ subsets %>%
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_light(base_size = 30)
-
-
 ```
 
 ---
@@ -111,7 +109,7 @@ $$
 class: center
 
 $$
-\tiny
+\small
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -122,9 +120,9 @@ broom::tidy(model_df5) %>%
   kable()
 ```
 ---
-class: animated, fadeIn, center
+class: center
 $$
-\tiny
+\small
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -137,21 +135,13 @@ broom::tidy(model_df5) %>%
 
 ---
 
-class: center, top
-<font size="1">
-<<<<<<< HEAD
-```{r results='asis',out.width='25%', fig.align='center',}
+<font size="-10">
+```{r results='asis'}
 stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
                      title = "Regression Results", 
-                     covariate.labels = c(),header = FALSE,
-single.row=FALSE,column.sep.width = "-15pt")
-=======
-```{r results='asis',out.width='25%', fig.align='center'}
-stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
-                     title = "Regression Results", 
-                     covariate.labels = c(),header = FALSE,
-single.row=FALSE,column.sep.width = "-15pt", column.separate = 1)
->>>>>>> 45c40607e713d9ac793f469171cbeb25c1a1a705
+                     covariate.labels = c(),
+                     header = FALSE,
+                     single.row = FALSE)
 ```
 
 
