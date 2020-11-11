@@ -135,13 +135,13 @@ broom::tidy(model_df5) %>%
 
 ---
 
-<font size="-10">
+<font size="2">
 ```{r results='asis'}
 stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
                      title = "Regression Results", 
                      covariate.labels = c(),
                      header = FALSE,
-                     single.row = FALSE)
+                     single.row = TRUE)
 ```
 
 
