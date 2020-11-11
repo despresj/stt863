@@ -1,0 +1,42 @@
+---
+title: "slides"
+author: "Joe Despres"
+date: "11/9/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+source(here::here("R", "regression.R"))
+options(htmltools.dir.version = FALSE, echo = FALSE)
+```
+
+
+# Introduction
+- political freedom as a function of 
+- 
+---
+# Model
+```{r}
+equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line = 1)
+```
+
+$$
+\operatorname{polrights\_fh} = \beta_{0} + 
+\beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +
+\beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+$$
+
+---
+```{r echo=FALSE}
+subsets %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  select(model, adj.r.squared) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 6))
+```
+---
+
+# Model
+
+# Findings
+
+# Conclusions

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Measuring Political Freedom Around the World</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/tone/Tone.js"></script>
+    <script src="libs/slide-tone/slide-tone.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Measuring Political Freedom Around the World
+## Sabrina Ball, Joe Despres, Joe Sigler, Jacob Haywood
+### Last compiled 21:53
+
+---
+
+
+
+
+# Outline
+
+* What factors are associated with an increase in political freedom?
+
+--
+
+* study political freedom as a function of social, economic, political factors
+
+--
+
+* From Data provided by the Gapminder Foundation.
+
+---
+class: inverse, middle, center
+
+# Data
+
+---
+
+
+# Data
+
+* filtered to only include OECD Countries from year 2000 to 2018
+
+---
+
+# Define political freedom
+
+--
+
+* Freedomhouse index
+
+--
+
+* summarsze fh index
+
+
+---
+# Best Subsets
+<div id="htmlwidget-02ee7fd2ad5fc9c95440" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-02ee7fd2ad5fc9c95440">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>df<\/th>\n      <th>a_rsq<\/th>\n      <th>model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+---
+
+class: center
+### Best Subsets
+&lt;img src="slides_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: inverse, middle, center
+
+# Model
+---
+
+class: center, middle
+
+
+
+$$
+\large
+`\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}`
+$$
+
+
+---
+class: center
+
+$$
+\tiny
+`\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}`
+$$
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.6456429 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6571277 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.113169 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; corruption_perception_index_cpi &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0233287 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0016550 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.095965 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; edu_exp_gdp_per_person &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.9003406 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5337050 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.560657 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0003973 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; life_expectancy_years &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.0208733 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0083968 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.485858 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0131773 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; military_spending_pct_of_gdp &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.1498712 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0186121 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.052338 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; murder_per_mil_people &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.0349922 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0042801 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.175645 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+class: animated, fadeIn, center
+$$
+\tiny
+`\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}`
+$$
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.6456429 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6571277 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.113169 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; corruption_perception_index_cpi &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0233287 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0016550 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.095965 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; edu_exp_gdp_per_person &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.9003406 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5337050 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.560657 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0003973 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: white !important;background-color: #D7261E !important;"&gt; life_expectancy_years &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;"&gt; -0.0208733 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;"&gt; 0.0083968 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;"&gt; -2.485858 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;"&gt; 0.0131773 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; military_spending_pct_of_gdp &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.1498712 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0186121 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.052338 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; murder_per_mil_people &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.0349922 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0042801 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.175645 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0000000 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: center, top
+&lt;font size="1"&gt;
+
+&lt;table style="text-align:center"&gt;&lt;caption&gt;&lt;strong&gt;Regression Results&lt;/strong&gt;&lt;/caption&gt;
+&lt;tr&gt;&lt;td colspan="4" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td colspan="3"&gt;&lt;em&gt;Dependent variable:&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan="3" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td colspan="3"&gt;polrights_fh&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(1)&lt;/td&gt;&lt;td&gt;(2)&lt;/td&gt;&lt;td&gt;(3)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="4" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;corruption_perception_index_cpi&lt;/td&gt;&lt;td&gt;0.023&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.023&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.022&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.002)&lt;/td&gt;&lt;td&gt;(0.002)&lt;/td&gt;&lt;td&gt;(0.002)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;edu_exp_gdp_per_person&lt;/td&gt;&lt;td&gt;1.746&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.900&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;1.898&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.562)&lt;/td&gt;&lt;td&gt;(0.534)&lt;/td&gt;&lt;td&gt;(0.536)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;internet_users&lt;/td&gt;&lt;td&gt;0.001&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.001)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;life_expectancy_years&lt;/td&gt;&lt;td&gt;-0.025&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.021&lt;sup&gt;**&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.009)&lt;/td&gt;&lt;td&gt;(0.008)&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;military_spending_pct_of_gdp&lt;/td&gt;&lt;td&gt;-0.146&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.150&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.153&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.019)&lt;/td&gt;&lt;td&gt;(0.019)&lt;/td&gt;&lt;td&gt;(0.019)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;murder_per_mil_people&lt;/td&gt;&lt;td&gt;-0.035&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.035&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;-0.033&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.004)&lt;/td&gt;&lt;td&gt;(0.004)&lt;/td&gt;&lt;td&gt;(0.004)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;Constant&lt;/td&gt;&lt;td&gt;6.944&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;6.646&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;5.068&lt;sup&gt;***&lt;/sup&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;(0.740)&lt;/td&gt;&lt;td&gt;(0.657)&lt;/td&gt;&lt;td&gt;(0.171)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="4" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;Observations&lt;/td&gt;&lt;td&gt;648&lt;/td&gt;&lt;td&gt;648&lt;/td&gt;&lt;td&gt;648&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.548&lt;/td&gt;&lt;td&gt;0.547&lt;/td&gt;&lt;td&gt;0.543&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;Adjusted R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;0.543&lt;/td&gt;&lt;td&gt;0.544&lt;/td&gt;&lt;td&gt;0.540&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;Residual Std. Error&lt;/td&gt;&lt;td&gt;0.531 (df = 641)&lt;/td&gt;&lt;td&gt;0.531 (df = 642)&lt;/td&gt;&lt;td&gt;0.533 (df = 643)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td style="text-align:left"&gt;F Statistic&lt;/td&gt;&lt;td&gt;129.343&lt;sup&gt;***&lt;/sup&gt; (df = 6; 641)&lt;/td&gt;&lt;td&gt;155.112&lt;sup&gt;***&lt;/sup&gt; (df = 5; 642)&lt;/td&gt;&lt;td&gt;190.808&lt;sup&gt;***&lt;/sup&gt; (df = 4; 643)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan="4" style="border-bottom: 1px solid black"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="text-align:left"&gt;&lt;em&gt;Note:&lt;/em&gt;&lt;/td&gt;&lt;td colspan="3" style="text-align:right"&gt;&lt;sup&gt;*&lt;/sup&gt;p&lt;0.1; &lt;sup&gt;**&lt;/sup&gt;p&lt;0.05; &lt;sup&gt;***&lt;/sup&gt;p&lt;0.01&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+
+---
+class: center, middle
+
+# Thanks You and We are Happy to Take Questions
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
