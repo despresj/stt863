@@ -6,6 +6,8 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/jquery/jquery.min.js"></script>
     <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
@@ -15,8 +17,6 @@
     <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
     <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
     <script src="libs/crosstalk/js/crosstalk.min.js"></script>
-    <script src="libs/kePrint/kePrint.js"></script>
-    <link href="libs/lightable/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 
 # Measuring Political Freedom Around the World
 ## Sabrina Ball, Joe Despres, Joe Sigler, Jacob Haywood
-### Last compiled 23:24
+### Last compiled 13:15
 
 ---
 
@@ -33,7 +33,11 @@ class: center, middle, inverse, title-slide
 
 # Research Question
 
-* What factors are associated with an increase in political freedom?
+* This study will focus on political freedom around the world. 
+
+--
+
+* We ask: What factors are associated with an increase in political freedom?
 
 --
 
@@ -64,13 +68,507 @@ https://docs.google.com/spreadsheets/d/1AmmTVOAFMXZx3a-OYyKQaNM-dQJAvGCJOwfWzixo
 ---
 
 
-# Data
+# Covariates  
 
-* covarites w/ exp
+- Country  
+
+--
+
+- Year from 2000 to 2018  
+
+--
+
+- Corruption Perception Index Ranging from 0 to 100 with 0 being the most corruption perception.  
+
+--
+
+- Education Expenditure in GDP per Person
+
+--
+
+- Electricity use per person in Kilowatt Hours.
+
+--
+
+- Gini Coefficient. A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth. 
+
+--
+
+- Percentage of population That use the Internet.
+
+--
+
+- Labor Force Participation.
+
+--
+
+- Life Expectancy
+
+--
+
+- Military Spending as a percentage of GDP
+
+--
+
+- Murders per million people. 
 
 ---
 
-# Summary Stats
+&lt;table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 6px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; Country &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; CPI &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Edu Exp &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Electric Use &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Gini &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Internet Users &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Labor Force &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Life Expectancy &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Military Spending &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Murder Rate &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Australia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10572.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Austria &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 73.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8110.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.47 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.81 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Belgium &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8294.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Canada &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 82.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16316.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 77.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chile &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 70.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3294.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Colombia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1023.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 53.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 77.79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.34 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Czech Republic &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6265.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.43 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 77.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.83 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Denmark &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 90.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6423.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Estonia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5971.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Finland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 88.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16111.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; France &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 70.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7438.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Germany &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7116.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.55 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Greece &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5299.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.96 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hungary &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3820.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.47 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Iceland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 41555.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.92 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 89.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 82.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Ireland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 73.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5993.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.87 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Israel &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 61.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6725.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 41.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.92 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Italy &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5524.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.78 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Japan &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8245.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Latvia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 55.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3013.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 35.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Lithuania &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 58.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3410.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 35.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 53.53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 73.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Luxembourg &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15622.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mexico &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2032.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Netherlands &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6886.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.92 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.43 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.89 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; New Zealand &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 90.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9473.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.39 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Norway &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24244.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 88.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.87 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.82 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Poland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3622.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Portugal &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4675.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36.70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 49.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.04 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Slovenia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6691.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.81 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.82 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; South Korea &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8598.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Spain &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 58.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5712.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.91 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.73 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Sweden &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 87.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14916.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 81.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.91 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Switzerland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8071.67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 82.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Turkey &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2283.33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 40.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 77.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; United Kingdom &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5901.11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.34 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; United States &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13300.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 40.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 70.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+![](slides_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
 
 ---
 
@@ -86,19 +584,19 @@ https://docs.google.com/spreadsheets/d/1AmmTVOAFMXZx3a-OYyKQaNM-dQJAvGCJOwfWzixo
 ---
 
 # Best Subsets by Adjusted R Squared
-<div id="htmlwidget-7c89404a99b798cccba4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7c89404a99b798cccba4">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>A_Rsq<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-63df3ddc178b68bc8ea2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-63df3ddc178b68bc8ea2">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>A_Rsq<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 # Best Subsets by AIC
-<div id="htmlwidget-30ff98e8eb5dc380f67d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-30ff98e8eb5dc380f67d">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,4,9,3,2,1],[1026.529,1027.748,1028.942,1030.424,1030.737,1032.24,1041.256,1083.917,1170.321],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>AIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-160feec038d067e6f780" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-160feec038d067e6f780">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,4,9,3,2,1],[1026.529,1027.748,1028.942,1030.424,1030.737,1032.24,1041.256,1083.917,1170.321],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>AIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
 # Best Subsets by BIC
-<div id="htmlwidget-d2d0d8d2e3de5d36e6a6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d2d0d8d2e3de5d36e6a6">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[4,5,6,3,7,8,9,2,1],[1057.58,1057.847,1063.539,1063.625,1069.207,1075.163,1081.452,1101.812,1183.743],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>BIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6286ab05e9c538769033" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6286ab05e9c538769033">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[4,5,6,3,7,8,9,2,1],[1057.58,1057.847,1063.539,1063.625,1069.207,1075.163,1081.452,1101.812,1183.743],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>BIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -106,14 +604,14 @@ class: center, middle
 
 # Best Subsets
 
-![](slides_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
 # Best Subsets
 
-![](slides_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](slides_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ---
 

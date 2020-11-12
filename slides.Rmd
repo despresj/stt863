@@ -20,7 +20,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Research Question
 
-* What factors are associated with an increase in political freedom?
+* This study will focus on political freedom around the world. 
+
+--
+
+* We ask: What factors are associated with an increase in political freedom?
 
 --
 
@@ -51,13 +55,75 @@ https://docs.google.com/spreadsheets/d/1AmmTVOAFMXZx3a-OYyKQaNM-dQJAvGCJOwfWzixo
 ---
 
 
-# Data
+# Covariates  
 
-* covarites w/ exp
+- Country  
+
+--
+
+- Year from 2000 to 2018  
+
+--
+
+- Corruption Perception Index Ranging from 0 to 100 with 0 being the most corruption perception.  
+
+--
+
+- Education Expenditure in GDP per Person
+
+--
+
+- Electricity use per person in Kilowatt Hours.
+
+--
+
+- Gini Coefficient. A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth. 
+
+--
+
+- Percentage of population That use the Internet.
+
+--
+
+- Labor Force Participation.
+
+--
+
+- Life Expectancy
+
+--
+
+- Military Spending as a percentage of GDP
+
+--
+
+- Murders per million people. 
 
 ---
 
-# Summary Stats
+```{r message=FALSE}
+data %>% 
+  group_by(country) %>% 
+summarise(across(.cols = c(corruption_perception_index_cpi:murder_per_mil_people), mean)) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kable(
+    col.names = c("Country", "CPI", "Edu Exp", "Electric Use", "Gini", "Internet Users", "Labor Force", "Life Expectancy","Military Spending", "Murder Rate")) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 6, fixed_thead = T)
+```
+
+---
+
+```{r}
+data %>% 
+  group_by(polrights_fh) %>% 
+  add_count(polrights_fh) %>% 
+  ggplot() + 
+  geom_bar(aes(x = polrights_fh)) + 
+  geom_text(aes(x = polrights_fh, y = n, label = n)) + 
+  scale_x_continuous(breaks = 1:7) + 
+  theme_test()
+```
+
 
 ---
 
