@@ -27,9 +27,10 @@ knitr::opts_chunk$set(echo = FALSE)
 * Observational study of political freedom as a function of social, economic, political factors.
 
 --
+
 * From Data provided by the Gapminder Foundation.
 
--- 
+--
 
 * filtered to only include OECD Countries from year 2000 to 2018 by necessity
 
@@ -45,6 +46,7 @@ class: inverse, middle, center
 --
 
 * summarsze fh index
+https://docs.google.com/spreadsheets/d/1AmmTVOAFMXZx3a-OYyKQaNM-dQJAvGCJOwfWzixo2Pk/edit#gid=266682269 
 
 ---
 
@@ -70,7 +72,7 @@ class: inverse, middle, center
 
 ---
 
-# Best Subsets
+# Best Subsets by Adjusted R Squared
 ```{r message=FALSE}
 subsets %>% 
   group_by(df) %>% 
@@ -79,14 +81,44 @@ subsets %>%
   rename(a_rsq = adj.r.squared) %>% 
   select(df, a_rsq, model) %>% 
   arrange(desc(a_rsq)) %>% 
-DT::datatable(fillContainer = FALSE, options = list(pageLength = 3))
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 3), 
+              colnames = c("DF", "A_Rsq", "Model"))
+```
+
+---
+# Best Subsets by AIC
+```{r message=FALSE}
+subsets %>% 
+  group_by(df) %>% 
+  filter(AIC == min(AIC)) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  select(df, AIC, model) %>% 
+  arrange(AIC) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
+              colnames = c("DF", "AIC", "Model"))
 ```
 
 ---
 
-class: center
+# Best Subsets by BIC
+```{r message=FALSE}
+subsets %>% 
+  group_by(df) %>% 
+  filter(BIC == min(BIC)) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  select(df, BIC, model) %>% 
+  arrange(BIC) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
+              colnames = c("DF", "BIC", "Model"))
+```
 
-```{r, message=FALSE, warning=FALSE}
+---
+
+class: center, middle
+
+# Best Subsets
+
+```{r, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
 r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
 
 subsets %>% 
@@ -95,7 +127,24 @@ subsets %>%
   geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "Green") + 
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
-  theme_light(base_size = 30)
+  theme_test(base_size = 30)
+```
+
+---
+class: center, middle
+
+# Best Subsets
+
+```{r, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+r <- subsets %>% group_by(df) %>% summarise(AIC = max(AIC, na.rm = T))
+
+subsets %>% 
+  ggplot(aes(x = df, y = AIC)) + 
+  geom_point() + 
+  geom_smooth(data = r, aes(df, AIC), se = FALSE, span = 0.5, color = "red") + 
+  labs(title = "", x = "Parameters", y = "AIC") + 
+  scale_x_continuous(breaks = 1:9) + 
+  theme_test(base_size = 30)
 ```
 
 ---
@@ -103,6 +152,7 @@ subsets %>%
 class: inverse, middle, center
 
 # Model
+
 ---
 
 class: center, middle
@@ -133,6 +183,15 @@ $$
 broom::tidy(model_df5) %>% 
   kable()
 ```
+
+***
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
 ---
 class: center
 $$
@@ -144,8 +203,114 @@ $$
 ```{r}
 broom::tidy(model_df5) %>% 
   kable() %>% 
-  row_spec(4, bold = T, color = "white", background = "#D7261E")
+  row_spec(2, color = "white", background = "#D7261E")
 ```
+
+***
+
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
+
+---
+class: center
+$$
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+```{r}
+broom::tidy(model_df5) %>% 
+  kable() %>% 
+  row_spec(3, color = "white", background = "#D7261E")
+```
+
+***
+
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
+
+---
+class: center
+$$
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+```{r}
+broom::tidy(model_df5) %>% 
+  kable() %>% 
+  row_spec(4, color = "white", background = "#D7261E")
+```
+
+***
+
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
+
+---
+
+class: center
+$$
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+```{r}
+broom::tidy(model_df5) %>% 
+  kable() %>% 
+  row_spec(5, color = "white", background = "#D7261E")
+```
+
+***
+
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
+---
+class: center
+$$
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+```{r}
+broom::tidy(model_df5) %>% 
+  kable() %>% 
+  row_spec(6, color = "white", background = "#D7261E")
+```
+
+***
+
+```{r}
+broom::glance(model_df5) %>% 
+  select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
+```
+
 
 ---
 # Remedial measured
