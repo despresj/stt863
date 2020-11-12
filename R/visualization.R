@@ -111,3 +111,15 @@ plot(data$murder_per_mil_people, resid(fit))
 
 sort(resid(model_df5))
 data$resid <- resid(model_df5)
+
+
+hsit <- model_df5 %>% 
+  broom::augment() %>% 
+  ggplot() + 
+  geom_histogram(aes(.resid), bins = 200) +
+  scale_x_continuous(limits = c(-4,4))
+
+model_df5 %>% 
+  broom::augment() %>% 
+  ggplot() + 
+  geom_qq(aes(.resid))

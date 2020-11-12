@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 --
 
-* We ask: What factors are associated with an increase in political freedom?
+* We ask: What factors are associated with an increase in political freedom?.
 
 --
 
@@ -47,10 +47,19 @@ class: inverse, middle, center
 
 # Political Freedom
 
+- Freedomhouse quantifies Political Rights by 10 different indicators grouped in three subcategories.
+
 --
 
-* summarsze fh index
-https://docs.google.com/spreadsheets/d/1AmmTVOAFMXZx3a-OYyKQaNM-dQJAvGCJOwfWzixo2Pk/edit#gid=266682269 
+1. Electoral Process
+
+--
+
+1. Political Participation and Pluralism
+
+--
+
+1. Discretionary Political rights. 
 
 ---
 
@@ -233,8 +242,6 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
-
-
 ---
 class: center
 
@@ -247,7 +254,11 @@ $$
 
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable()
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names = c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) 
+
 ```
 
 ***
@@ -268,7 +279,10 @@ $$
 $$
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"))  %>% 
   row_spec(2, color = "white", background = "#D7261E")
 ```
 
@@ -292,7 +306,10 @@ $$
 $$
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) %>% 
   row_spec(3, color = "white", background = "#D7261E")
 ```
 
@@ -316,7 +333,10 @@ $$
 $$
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) %>% 
   row_spec(4, color = "white", background = "#D7261E")
 ```
 
@@ -341,7 +361,10 @@ $$
 $$
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) %>% 
   row_spec(5, color = "white", background = "#D7261E")
 ```
 
@@ -364,7 +387,10 @@ $$
 $$
 ```{r}
 broom::tidy(model_df5) %>% 
-  kable() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) %>% 
   row_spec(6, color = "white", background = "#D7261E")
 ```
 
@@ -377,9 +403,32 @@ broom::glance(model_df5) %>%
   kable()
 ```
 
+---
+# Remedial measures
+```{r}
+model_df5 %>% 
+  broom::augment() %>% 
+  ggplot() + 
+  geom_histogram(aes(.resid), bins = 200) +
+  scale_x_continuous(limits = c(-4,4))
+
+
+```
 
 ---
-# Remedial measured
+# Remedial measures
+
+```{r}
+model_df5 %>% 
+  broom::augment() %>% 
+  mutate(yhat = predict(model_df5)) %>% 
+  ggplot() + 
+  geom_point(aes(x = yhat, y = .resid)) + 
+  geom_hline(yintercept = 0, color = "red") + 
+  scale_y_continuous(limits = c(-4,4))
+```
+
+---
 
 * plot
 * 
