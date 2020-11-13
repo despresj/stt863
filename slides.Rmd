@@ -15,7 +15,7 @@ output:
 source(here::here("R", "regression.R"))
 theme_set(theme_light(base_size = 30))
 options(htmltools.dir.version = FALSE, echo = FALSE)
-knitr::opts_chunk$set(echo = FALSE, fig.width=12, fig.height=8) 
+knitr::opts_chunk$set(echo = FALSE, fig.width = 12, fig.height = 8) 
 ```
 
 # Research Question
@@ -39,9 +39,16 @@ knitr::opts_chunk$set(echo = FALSE, fig.width=12, fig.height=8)
 * filtered to only include OECD Countries from year 2000 to 2018 by necessity
 
 ---
+# OECD
+
+---
 class: inverse, middle, center
 
 # Data
+
+---
+
+Inputing median
 
 ---
 
@@ -109,7 +116,7 @@ class: inverse, middle, center
 - Murders per million people. 
 
 ---
-
+# needs work
 ```{r message=FALSE}
 data %>% 
   group_by(country) %>% 
@@ -133,7 +140,7 @@ data %>%
   viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
   theme_test(base_size = 30) + 
-  theme(legend.position="none")
+  theme(legend.position = "none")
 ```
 
 
@@ -151,6 +158,7 @@ data %>%
 ---
 
 # Best Subsets by Adjusted R Squared
+?latex
 ```{r message=FALSE}
 subsets %>% 
   group_by(df) %>% 
@@ -236,7 +244,7 @@ class: inverse, middle, center
 class: center, middle
 
 ```{r include=FALSE}
-equatiomatic::extract_eq(model = model_df5, intercept = "beta", terms_per_line = 1)
+equatiomatic::extract_eq(model = fit_df5, intercept = "beta", terms_per_line = 1)
 ```
 
 $$
@@ -256,7 +264,7 @@ $$
 $$
 
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -265,7 +273,7 @@ broom::tidy(model_df5) %>%
 
 ***
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
@@ -280,7 +288,7 @@ $$
 \end{align}
 $$
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -291,7 +299,7 @@ broom::tidy(model_df5) %>%
 ***
 
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
@@ -307,7 +315,7 @@ $$
 \end{align}
 $$
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -318,7 +326,7 @@ broom::tidy(model_df5) %>%
 ***
 
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
@@ -334,7 +342,7 @@ $$
 \end{align}
 $$
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -345,7 +353,7 @@ broom::tidy(model_df5) %>%
 ***
 
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
@@ -362,7 +370,7 @@ $$
 \end{align}
 $$
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -373,13 +381,14 @@ broom::tidy(model_df5) %>%
 ***
 
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
 ```
 
 ---
+
 class: center
 $$
 \small
@@ -388,7 +397,7 @@ $$
 \end{align}
 $$
 ```{r}
-broom::tidy(model_df5) %>% 
+broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
@@ -399,7 +408,7 @@ broom::tidy(model_df5) %>%
 ***
 
 ```{r}
-broom::glance(model_df5) %>% 
+broom::glance(fit_df5) %>% 
   select(r.squared, adj.r.squared, adj.r.squared, AIC, BIC) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   kable()
@@ -408,6 +417,9 @@ broom::glance(model_df5) %>%
 ---
 # F-Test on life expectancy
 
+---
+
+plots resids on cov
 ---
 
 class: center, middle
@@ -423,6 +435,66 @@ class: center, middle
 labeled_outliars + labeled_qq
 ```
 
+---
+
+```{r}
+broom::tidy(fit_df5) %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
+        caption = "Included Outliers") 
+```
+
+***
+
+```{r}
+data %>% 
+  filter(polrights_fh >= 4) %>% 
+  lm(model_df5_formula, .) %>% 
+  broom::tidy() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
+        caption = "Removed Outliers") 
+```
+
+---
+
+```{r}
+broom::tidy(fit_df5) %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
+        caption = "Included Outliers") %>% 
+  row_spec(3, color = "white", background = "#D7261E")
+```
+
+***
+
+```{r}
+data %>% 
+  filter(polrights_fh >= 4) %>% 
+  lm(model_df5_formula, .) %>% 
+  broom::tidy() %>% 
+  mutate(p.value = as.character(p.value)) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(p.value = as.numeric(p.value)) %>% 
+  kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
+        caption = "Removed Outliers") %>% 
+  row_spec(3, color = "white", background = "#D7261E")
+```
+
+---
+
+# Discussion of outliers
+
+- We identified these outliers.
+- confirmed they are not errors. 
+- decided to keep them because They are indicating a substancial loss in political freedom which falls outside of the scope of the model. However, is important for our reserach Q.
+***
 > A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance. -Chapter 3 p.108
 
 ---
@@ -430,10 +502,10 @@ labeled_outliars + labeled_qq
 # Remedial measures
 
 ```{r}
-model_df5 %>% 
+fit_df5 %>% 
   broom::augment() %>% 
-  mutate(yhat = predict(model_df5),
-         resid = resid(model_df5)) %>% 
+  mutate(yhat = predict(fit_df5),
+         resid = resid(fit_df5)) %>% 
   ggplot() + 
   geom_point(aes(x = yhat, y = resid)) + 
   geom_hline(yintercept = 0, color = "red") + 
@@ -442,17 +514,23 @@ model_df5 %>%
 
 ---
 
+```{r}
+car::vif(fit_df5)
+```
+* vif
+
+---
+
 # Brown - Forthe
 
-* plot
-* 
-* vif
-car::vif(fit)
 
 * Brown Forsythe
 
 ---
 # Conclusions
+
+1. we think this
+1. because
 
 ---
 class: center, middle
@@ -465,7 +543,7 @@ Slides created via the R package [**xaringan**](https://github.com/yihui/xaringa
 
 <font size="2">
 ```{r results='asis'}
-stargazer::stargazer(fit_df6, model_df5, fit_df4, type = "html", 
+stargazer::stargazer(fit_df6, fit_df5, fit_df4, fit_df3, type = "html", 
                      title = "Regression Results", 
                      covariate.labels = c(),
                      header = FALSE,
