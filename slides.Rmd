@@ -423,6 +423,8 @@ class: center, middle
 labeled_outliars + labeled_qq
 ```
 
+> A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance. -Chapter 3 p.108
+
 ---
 
 # Remedial measures
