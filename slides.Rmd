@@ -13,9 +13,9 @@ output:
 
 ```{r setup, include=FALSE}
 source(here::here("R", "regression.R"))
-library(kableExtra)
+theme_set(theme_light(base_size = 30))
 options(htmltools.dir.version = FALSE, echo = FALSE)
-knitr::opts_chunk$set(echo = FALSE) 
+knitr::opts_chunk$set(echo = FALSE, fig.width=12, fig.height=8) 
 ```
 
 # Research Question
@@ -121,16 +121,19 @@ summarise(across(.cols = c(corruption_perception_index_cpi:murder_per_mil_people
 ```
 
 ---
-
+class: center, middle
 ```{r}
 data %>% 
   group_by(polrights_fh) %>% 
   add_count(polrights_fh) %>% 
   ggplot() + 
-  geom_bar(aes(x = polrights_fh)) + 
-  geom_text(aes(x = polrights_fh, y = n, label = n)) + 
+  geom_bar(aes(x = polrights_fh, fill = factor(polrights_fh)), color = "black") + 
+  
+  geom_text(aes(x = polrights_fh, y = n, label = n), vjust = -.75) + 
+  viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
-  theme_test()
+  theme_test(base_size = 30) + 
+  theme(legend.position="none")
 ```
 
 
@@ -258,7 +261,6 @@ broom::tidy(model_df5) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
   kable(col.names = c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value")) 
-
 ```
 
 ***
@@ -404,31 +406,41 @@ broom::glance(model_df5) %>%
 ```
 
 ---
+# F-Test on life expectancy
+
+---
+
+class: center, middle
 # Remedial measures
-```{r}
-model_df5 %>% 
-  broom::augment() %>% 
-  ggplot() + 
-  geom_histogram(aes(.resid), bins = 200) +
-  scale_x_continuous(limits = c(-4,4))
-
-
+```{r warning=FALSE}
+hist + qq  
 ```
 
 ---
+class: center, middle
+# Remedial measures
+```{r message=FALSE}
+labeled_outliars + labeled_qq
+```
+
+---
+
 # Remedial measures
 
 ```{r}
 model_df5 %>% 
   broom::augment() %>% 
-  mutate(yhat = predict(model_df5)) %>% 
+  mutate(yhat = predict(model_df5),
+         resid = resid(model_df5)) %>% 
   ggplot() + 
-  geom_point(aes(x = yhat, y = .resid)) + 
+  geom_point(aes(x = yhat, y = resid)) + 
   geom_hline(yintercept = 0, color = "red") + 
   scale_y_continuous(limits = c(-4,4))
 ```
 
 ---
+
+# Brown - Forthe
 
 * plot
 * 
