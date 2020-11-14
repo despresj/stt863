@@ -131,6 +131,8 @@ colnames(t2) <- c("Obs. Number", "Data Point")
 knitr::kable(list(t1, t2), caption = "Illustrated Example")
 ```
 
+$$Median = 264.98$$
+
 ---
 
 ```{r message=FALSE}
