@@ -23,7 +23,7 @@ class: center, middle, inverse, title-slide
 
 # Measuring Political Freedom Around the World
 ## Sabrina Ball, Joe Despres, Joe Sigler, Jacob Haywood
-### Last compiled 23:03
+### Last compiled 20:09
 
 ---
 
@@ -51,16 +51,16 @@ class: center, middle, inverse, title-slide
 * filtered to only include OECD Countries from year 2000 to 2018 by necessity
 
 ---
+class: center
 # OECD
+
+![](OECD.jpeg)
+
 
 ---
 class: inverse, middle, center
 
 # Data
-
----
-
-Inputing median
 
 ---
 
@@ -128,7 +128,88 @@ Inputing median
 - Murders per million people. 
 
 ---
-# needs work
+
+class: center
+# Inputing Median
+
+&lt;table class="kable_wrapper"&gt;
+&lt;caption&gt;Illustrated Example&lt;/caption&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td&gt; 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Obs. Number &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Data Point &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 276.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 286.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 236.89 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;/td&gt;
+   &lt;td&gt; 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Obs. Number &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Data Point &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 276.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 264.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 286.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 236.89 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+ &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
 &lt;table class="table table-striped table-hover table-condensed table-responsive" style="font-size: 6px; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
@@ -582,8 +663,7 @@ Inputing median
 
 ---
 class: center, middle
-![](slides_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
-
+![](slides_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -599,35 +679,34 @@ class: center, middle
 ---
 
 # Best Subsets by Adjusted R Squared
-?latex
-<div id="htmlwidget-f6285841ddb6da26054f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f6285841ddb6da26054f">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>A_Rsq<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-67cca66ea6055cf681d9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-67cca66ea6055cf681d9">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>A_Rsq<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 # Best Subsets by AIC
-<div id="htmlwidget-0e0d701d61982adbcb52" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0e0d701d61982adbcb52">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,4,9,3,2,1],[1026.529,1027.748,1028.942,1030.424,1030.737,1032.24,1041.256,1083.917,1170.321],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>AIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9a2309de81cd3c32cb4c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9a2309de81cd3c32cb4c">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,4,9,3,2,1],[1026.529,1027.748,1028.942,1030.424,1030.737,1032.24,1041.256,1083.917,1170.321],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>AIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
 # Best Subsets by BIC
-<div id="htmlwidget-b0a32d42f8ae4729d31f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b0a32d42f8ae4729d31f">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[4,5,6,3,7,8,9,2,1],[1057.58,1057.847,1063.539,1063.625,1069.207,1075.163,1081.452,1101.812,1183.743],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>BIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6232d449757335361f84" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6232d449757335361f84">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[4,5,6,3,7,8,9,2,1],[1057.58,1057.847,1063.539,1063.625,1069.207,1075.163,1081.452,1101.812,1183.743],["polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + edu_exp_gdp_per_person + electricity_use_per_person + gini + internet_users + labour_force_participation_rate_percent + life_expectancy_years + military_spending_pct_of_gdp + murder_per_mil_people","polrights_fh ~ corruption_perception_index_cpi + gini","polrights_fh ~ corruption_perception_index_cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>BIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
-class: center, middle
-
-# Best Subsets
-
-![](slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
-
----
 class: center, middle
 
 # Best Subsets
 
 ![](slides_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+
+# Best Subsets
+
+![](slides_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -1164,21 +1243,18 @@ $$
 &lt;/table&gt;
 
 ---
-# F-Test on life expectancy
-
----
-
-plots resids on cov
----
 
 class: center, middle
-# Remedial measures
-![](slides_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
----
-class: center, middle
-# Remedial measures
 ![](slides_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+
+![](slides_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+---
+
+![](slides_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -1416,6 +1492,8 @@ class: center, middle
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+
+
 ---
 
 # Discussion of outliers
@@ -1426,31 +1504,86 @@ class: center, middle
 ***
 &gt; A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance. -Chapter 3 p.108
 
----
-
-# Remedial measures
-
-![](slides_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
 
 ---
 
+# Brown Forsythe Test
 
-```
-## corruption_perception_index_cpi          edu_exp_gdp_per_person 
-##                        1.582845                        1.115893 
-##           life_expectancy_years    military_spending_pct_of_gdp 
-##                        1.304644                        1.070896 
-##           murder_per_mil_people 
-##                        1.590266
-```
-* vif
+
+
+$$ 
+`\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}`
+$$
+***
+
+$$ 
+`\begin{align}
+\bar{d_{{1}}}= 0.489 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.177 \\
+\end{align}`
+$$
+*** 
+
+$$
+`\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {{\bar {d}}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}`
+$$
+***
+
+$$
+`\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.489 -{0.177}}{0.176 {\sqrt {{\frac {1}{324}}+{\frac {1}{324}}}}}}} = 9.49
+\end{align}`
+$$
+
+$$
+`\begin{align}
+t(.975; 643) = 1.963
+\end{align}`
+$$
+- Conclude Error variance is not constant
 
 ---
 
-# Brown - Forthe
+# Brown Forsythe Test Dropping Outliars
 
 
-* Brown Forsythe
+
+$$ 
+`\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}`
+$$
+***
+
+$$ 
+`\begin{align}
+\bar{d_{{1}}}= 0.447 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.176 \\
+\end{align}`
+$$
+*** 
+
+$$
+`\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {{\bar {d}}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}`
+$$
+***
+
+$$
+`\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.447 -{0.176}}{0.176 {\sqrt {{\frac {1}{322}}+{\frac {1}{322}}}}}}} = 10.274
+\end{align}`
+$$
+
+$$
+`\begin{align}
+t(.975; 639) = 1.963
+\end{align}`
+$$
+- Conclude again Error variance is not constant even when outliars are removed
 
 ---
 # Conclusions

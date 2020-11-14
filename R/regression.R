@@ -45,7 +45,7 @@ hist <- fit_df5 %>%
   broom::augment() %>% 
   ggplot(aes(.resid)) + 
   geom_histogram(bins = 100, fill = "black") +
-  scale_x_continuous(limits = c(-4,4)) 
+  scale_x_continuous(limits = c(-4,4)) + labs(y = "Density", x = "Residual", "Histogram")
 
 hist
 
@@ -55,7 +55,7 @@ qq <- fit_df5 %>%
   stat_qq() +
   stat_qq_line() + 
 scale_x_continuous(limits = c(-4,4)) + 
-scale_y_continuous(limits = c(-4,4)) 
+scale_y_continuous(limits = c(-4,4)) + labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected")
 
 labeled_outliars <- hist +
   geom_point(outliars, mapping = aes(x = .resid, y = 1), color = "#D7261E", shape = 13, size = 10) + 

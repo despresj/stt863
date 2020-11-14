@@ -39,16 +39,16 @@ knitr::opts_chunk$set(echo = FALSE, fig.width = 12, fig.height = 8)
 * filtered to only include OECD Countries from year 2000 to 2018 by necessity
 
 ---
+class: center
 # OECD
+
+![](OECD.jpeg)
+
 
 ---
 class: inverse, middle, center
 
 # Data
-
----
-
-Inputing median
 
 ---
 
@@ -116,7 +116,23 @@ Inputing median
 - Murders per million people. 
 
 ---
-# needs work
+
+class: center
+# Inputing Median
+
+```{r}
+set.seed(69)
+t1 <- cbind(1:5, round(runif(5, 200, 300), 2))
+t1[3,2] <- NA
+t2 <- t1
+colnames(t1) <- c("Obs. Number", "Data Point")
+t2[3,2] <- median(t1[,2], na.rm = TRUE)
+colnames(t2) <- c("Obs. Number", "Data Point")
+knitr::kable(list(t1, t2), caption = "Illustrated Example")
+```
+
+---
+
 ```{r message=FALSE}
 data %>% 
   group_by(country) %>% 
@@ -140,9 +156,9 @@ data %>%
   viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
   theme_test(base_size = 30) + 
-  theme(legend.position = "none")
+  theme(legend.position = "none") + 
+  labs(y = "Number", x = "Political Freedom", title = "Distribution of Political Freedom Within the OECD")
 ```
-
 
 ---
 
@@ -158,7 +174,6 @@ data %>%
 ---
 
 # Best Subsets by Adjusted R Squared
-?latex
 ```{r message=FALSE}
 subsets %>% 
   group_by(df) %>% 
@@ -415,24 +430,31 @@ broom::glance(fit_df5) %>%
 ```
 
 ---
-# F-Test on life expectancy
-
----
-
-plots resids on cov
----
 
 class: center, middle
-# Remedial measures
+
 ```{r warning=FALSE}
-hist + qq  
+hist + qq
 ```
 
 ---
 class: center, middle
-# Remedial measures
+
 ```{r message=FALSE}
 labeled_outliars + labeled_qq
+```
+---
+
+```{r}
+fit_df5 %>% 
+  broom::augment() %>% 
+  mutate(yhat = predict(fit_df5),
+         resid = resid(fit_df5)) %>% 
+  ggplot() + 
+  geom_point(aes(x = yhat, y = resid)) + 
+  geom_hline(yintercept = 0, color = "red") + 
+  scale_y_continuous(limits = c(-4,4)) + 
+  labs(y = "Residual", x = "Predicted Value")
 ```
 
 ---
@@ -487,6 +509,8 @@ data %>%
   row_spec(3, color = "white", background = "#D7261E")
 ```
 
+
+
 ---
 
 # Discussion of outliers
@@ -497,34 +521,127 @@ data %>%
 ***
 > A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance. -Chapter 3 p.108
 
+
 ---
 
-# Remedial measures
+# Brown Forsythe Test
 
 ```{r}
-fit_df5 %>% 
-  broom::augment() %>% 
-  mutate(yhat = predict(fit_df5),
-         resid = resid(fit_df5)) %>% 
-  ggplot() + 
-  geom_point(aes(x = yhat, y = resid)) + 
-  geom_hline(yintercept = 0, color = "red") + 
-  scale_y_continuous(limits = c(-4,4))
+df <- data %>% 
+  mutate(predict = predict(fit_df5),
+               e = resid(fit_df5)) %>% 
+  arrange(predict)
+
+lower <- df %>% filter(predict < quantile(predict, .5)) %>% arrange(predict)
+upper <- df %>% filter(predict >= quantile(predict, .5)) %>% arrange(desc(predict))
+
+d1 <- mean(abs(lower$e - median(lower$e)))
+d2 <- mean(abs(upper$e - median(upper$e)))
+
+s <- sum((abs(lower$e - median(lower$e)) - d1)^2) +
+     sum((abs(upper$e - median(upper$e)) - d2)^2)
+sq <- s / (nrow(df) - 2)
+s <- sqrt(sq)
+sq <- sqrt((1/nrow(lower)) + (1/nrow(upper)))
+tstar <- (d1 - d2) / (s*sq)
+# qt(p = .975, 79)
+# c(d1, d2, s, tstar)
 ```
 
+$$ 
+\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}
+$$
+***
+
+$$ 
+\begin{align}
+\bar{d_{{1}}}= 0.489 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.177 \\
+\end{align}
+$$
+*** 
+
+$$
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {{\bar {d}}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}
+$$
+***
+
+$$
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.489 -{0.177}}{0.176 {\sqrt {{\frac {1}{324}}+{\frac {1}{324}}}}}}} = 9.49
+\end{align}
+$$
+
+$$
+\begin{align}
+t(.975; 643) = 1.963
+\end{align}
+$$
+- Conclude Error variance is not constant
+
 ---
+
+# Brown Forsythe Test Dropping Outliars
 
 ```{r}
-car::vif(fit_df5)
+df <- data %>% 
+  mutate(predict = predict(fit_df5),
+               e = resid(fit_df5)) %>% 
+  filter(polrights_fh >= 4) %>% 
+  arrange(predict)
+
+lower <- df %>% filter(predict < quantile(predict, .5)) %>% arrange(predict)
+upper <- df %>% filter(predict >= quantile(predict, .5)) %>% arrange(desc(predict))
+
+d1 <- mean(abs(lower$e - median(lower$e)))
+d2 <- mean(abs(upper$e - median(upper$e)))
+
+s <- sum((abs(lower$e - median(lower$e)) - d1)^2) +
+     sum((abs(upper$e - median(upper$e)) - d2)^2)
+sq <- s / (nrow(df) - 2)
+s <- sqrt(sq)
+sq <- sqrt((1/nrow(lower)) + (1/nrow(upper)))
+tstar <- (d1 - d2) / (s*sq)
+# qt(p = .975, 79)
+# c(d1, d2, s, tstar)
 ```
-* vif
 
----
+$$ 
+\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}
+$$
+***
 
-# Brown - Forthe
+$$ 
+\begin{align}
+\bar{d_{{1}}}= 0.447 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.176 \\
+\end{align}
+$$
+*** 
 
+$$
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {{\bar {d}}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}
+$$
+***
 
-* Brown Forsythe
+$$
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.447 -{0.176}}{0.176 {\sqrt {{\frac {1}{322}}+{\frac {1}{322}}}}}}} = 10.274
+\end{align}
+$$
+
+$$
+\begin{align}
+t(.975; 639) = 1.963
+\end{align}
+$$
+- Conclude again Error variance is not constant even when outliars are removed
 
 ---
 # Conclusions
