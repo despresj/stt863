@@ -146,17 +146,34 @@ class: inverse, middle, center
 # Summary Statistics
 ---
 
+class: middle, center
+
 ```{r message=FALSE}
 data %>% 
   group_by(country) %>% 
 summarise(across(.cols = c(corruption_perception_index_cpi:murder_per_mil_people), mean)) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kable(
-    col.names = c("Country", "CPI", "Edu Exp", "Electric Use", "Gini", "Internet Users", "Labor Force", "Life Expectancy","Military Spending", "Murder Rate")) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 6, fixed_thead = T)
+select(country, internet_users:murder_per_mil_people) %>% 
+    mutate_if(is.numeric, round, 2) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 5), caption = "Mean", 
+            colnames =  c("Country","Internet Users", "Labor Force", "Life Expectancy", "Military Spending", "Murder Rate") )
 ```
 
 ---
+class: middle, center
+
+
+```{r message=FALSE}
+data %>% 
+  group_by(country) %>% 
+summarise(across(.cols = c(corruption_perception_index_cpi:murder_per_mil_people), mean)) %>%
+  mutate_if(is.numeric, round, 2) %>% 
+select(country, corruption_perception_index_cpi:gini) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 5), caption = "Mean", 
+              colnames = c("Country", "CPI", "Edu Exp", "Electric Use", "Gini"))
+```
+
+---
+
 class: center, middle
 ```{r}
 lab <- data %>% 
@@ -169,7 +186,8 @@ data %>%
   add_count(polrights_fh) %>% 
   ggplot(aes(x = polrights_fh, fill = factor(polrights_fh)), color = "#3C989E") + 
   geom_bar() + 
-  geom_text(data = lab, aes(x = polrights_fh, y = n, label = n), color = "#3C989E", size = 8) + 
+  geom_text(data = lab, aes(x = polrights_fh, y = n, label = n),
+            color = "#3C989E", size = 8, vjust = -.10) + 
   viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
   theme_test(base_size = 30) + 
@@ -488,22 +506,24 @@ hist + qq
 class: center, middle
 
 ```{r}
-outliars <- fit_df5 %>% 
+outliers <- fit_df5 %>% 
   broom::augment() %>% 
   filter(.resid < -4*sd(.resid))
 
-labeled_outliars <- hist +
-  geom_point(outliars, mapping = aes(x = .resid, y = 1), color = "#D7261E", shape = 13, size = 10) + 
-  geom_label(outliars, mapping = aes(x = -3.3, y = 5, label = "OUTLIARS"), color = "#D7261E", size = 3)
+labeled_outliers <- hist +
+  geom_point(outliers, mapping = aes(x = .resid, y = 1), color = "#D7261E", shape = 13, size = 10) + 
+  geom_label(outliers, mapping = aes(x = -3.3, y = 5, label = "OUTLIERS"), 
+             color = "#D7261E", size = 5)
 
-labeled_qq <- qq + geom_point(outliars, mapping = aes(x = -3, y = -3.9), color = "#D7261E", shape = 0, size = 15) +
-                   geom_point(outliars, mapping = aes(x = -2.6, y = -2.7), color = "#D7261E", shape = 0, size = 15) +
-                   geom_label(outliars, mapping = aes(x = -3, y = -3.5, label = "OUTLIARS"), color = "#D7261E", size = 3)
+labeled_qq <- qq + geom_point(outliers, mapping = aes(x = -3, y = -3.9),
+                              color = "#D7261E", shape = 0, size = 15) +
+                   geom_point(outliers, mapping = aes(x = -2.6, y = -2.7), color = "#D7261E", shape = 0, size = 15) +
+                   geom_label(outliers, mapping = aes(x = -3, y = -3.5, label = "OUTLIERS"), color = "#D7261E", size = 5)
 
 ```
 
 ```{r message=FALSE}
-labeled_outliars + labeled_qq
+labeled_outliers + labeled_qq
 ```
 ---
 
@@ -584,8 +604,8 @@ data %>%
 
 
 ---
-class: center
-# Brown Forsythe Test
+
+#### Brown Forsythe Test Dropping outliers
 
 ```{r}
 df <- data %>% 
@@ -645,7 +665,7 @@ $$
 
 ---
 
-# Brown Forsythe Test Dropping Outliars
+#### Brown Forsythe Test Dropping outliers
 
 ```{r}
 df <- data %>% 
@@ -702,7 +722,7 @@ $$
 t(.975; 639) = 1.963
 \end{align}
 $$
-- Conclude again Error variance is not constant even when outliars are removed
+- Conclude again Error variance is not constant even when outliers are removed
 
 ---
 # Conclusions
