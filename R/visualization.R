@@ -98,8 +98,11 @@ qqnorm(resid(model_df5))
 boxplot(resid(model_df5))
 
 plot(data$edu_exp_gdp_per_person, resid(fit))
+
 plot(data$corruption_perception_index_cpi, resid(fit))
+
 plot(data$polrights_fh, resid(fit))
+
 plot(data$electricity_use_per_person, resid(fit))
 plot(data$gini, resid(fit))
 plot(data$internet_users, resid(fit))
@@ -108,9 +111,6 @@ plot(data$life_expectancy_years, resid(fit))
 plot(data$military_spending_pct_of_gdp, resid(fit))
 plot(data$murder_per_mil_people, resid(fit))
 
-
-sort(resid(model_df5))
-data$resid <- resid(model_df5)
 
 
 hsit <- model_df5 %>% 

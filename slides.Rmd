@@ -12,11 +12,18 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-source(here::here("R", "regression.R"))
+library(tidyverse)
+library(kableExtra)
+library(patchwork)
+
 theme_set(theme_light(base_size = 30))
 options(htmltools.dir.version = FALSE, echo = FALSE)
 knitr::opts_chunk$set(echo = FALSE, fig.width = 12, fig.height = 8) 
+
+data <- readr::read_csv(here::here("data", "df.csv"))
+subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 ```
+
 
 # Research Question
 
@@ -73,14 +80,6 @@ class: inverse, middle, center
 
 # Covariates  
 
-- Country  
-
---
-
-- Year from 2000 to 2018  
-
---
-
 - Corruption Perception Index Ranging from 0 to 100 with 0 being the most corruption perception.  
 
 --
@@ -132,7 +131,10 @@ knitr::kable(list(t1, t2), caption = "Illustrated Example")
 ```
 
 $$Median = 264.98$$
+---
+class: inverse, middle, center
 
+# Summary Statistics
 ---
 
 ```{r message=FALSE}
@@ -148,13 +150,17 @@ summarise(across(.cols = c(corruption_perception_index_cpi:murder_per_mil_people
 ---
 class: center, middle
 ```{r}
+lab <- data %>% 
+  group_by(polrights_fh) %>% 
+  add_count(polrights_fh) %>% 
+  distinct(n)
+
 data %>% 
   group_by(polrights_fh) %>% 
   add_count(polrights_fh) %>% 
-  ggplot() + 
-  geom_bar(aes(x = polrights_fh, fill = factor(polrights_fh)), color = "black") + 
-  
-  geom_text(aes(x = polrights_fh, y = n, label = n), vjust = -.75) + 
+  ggplot(aes(x = polrights_fh, fill = factor(polrights_fh)), color = "black") + 
+  geom_bar() + 
+  geom_text(data = lab, aes(x = polrights_fh, y = n, label = n), vjust = -.75) + 
   viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
   theme_test(base_size = 30) + 
@@ -259,6 +265,15 @@ class: inverse, middle, center
 ---
 
 class: center, middle
+```{r}
+model_df5_formula <- subsets %>% filter(df == 5) %>% 
+  arrange(desc(adj.r.squared)) %>% 
+  select(model) %>% head(1) %>% as.character()
+
+fit_df5 <- lm(model_df5_formula, data)
+```
+
+
 
 ```{r include=FALSE}
 equatiomatic::extract_eq(model = fit_df5, intercept = "beta", terms_per_line = 1)
@@ -436,11 +451,44 @@ broom::glance(fit_df5) %>%
 class: center, middle
 
 ```{r warning=FALSE}
+
+hist <- fit_df5 %>% 
+  broom::augment() %>% 
+  ggplot(aes(.resid)) + 
+  geom_histogram(bins = 100, fill = "black") +
+  scale_x_continuous(limits = c(-4,4)) + labs(y = "Density", x = "Residual", title = "Histogram")
+
+
+qq <- fit_df5 %>% 
+  broom::augment() %>% 
+  ggplot(aes(sample = .resid)) + 
+  stat_qq() +
+  stat_qq_line() + 
+scale_x_continuous(limits = c(-4,4)) + 
+scale_y_continuous(limits = c(-4,4)) + labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected")
+```
+
+```{r}
 hist + qq
 ```
 
 ---
 class: center, middle
+
+```{r}
+outliars <- fit_df5 %>% 
+  broom::augment() %>% 
+  filter(.resid < -4*sd(.resid))
+
+labeled_outliars <- hist +
+  geom_point(outliars, mapping = aes(x = .resid, y = 1), color = "#D7261E", shape = 13, size = 10) + 
+  geom_label(outliars, mapping = aes(x = -3.3, y = 5, label = "OUTLIARS"), color = "#D7261E", size = 3)
+
+labeled_qq <- qq + geom_point(outliars, mapping = aes(x = -3, y = -3.9), color = "#D7261E", shape = 0, size = 15) +
+                   geom_point(outliars, mapping = aes(x = -2.6, y = -2.7), color = "#D7261E", shape = 0, size = 15) +
+                   geom_label(outliars, mapping = aes(x = -3, y = -3.5, label = "OUTLIARS"), color = "#D7261E", size = 3)
+
+```
 
 ```{r message=FALSE}
 labeled_outliars + labeled_qq
@@ -511,7 +559,13 @@ data %>%
   row_spec(3, color = "white", background = "#D7261E")
 ```
 
+---
+```{r, animation.hook="gifski", interval = .1}
+for(i in 1:(nrow(data))/5){
+plot(data$electricity_use_per_person[1:i*5], resid(fit_df5)[1:i*5], xlim=c(0,6000), ylim = c(-4, 1.25))
+}
 
+```
 
 ---
 
@@ -659,6 +713,27 @@ class: center, middle
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
 ---
+
+```{r}
+model_df6_formula <- subsets %>% filter(df == 6) %>% 
+  arrange(desc(adj.r.squared)) %>% 
+  select(model) %>% head(1) %>% as.character() 
+
+fit_df6 <- lm(model_df6_formula, data)
+
+model_df4_formula <- subsets %>% filter(df == 4) %>% 
+  arrange(desc(adj.r.squared)) %>% 
+  select(model) %>% head(1) %>% as.character() 
+
+fit_df4 <- lm(model_df4_formula, data)
+
+model_df3_formula <- subsets %>% filter(df == 3) %>% 
+  arrange(desc(adj.r.squared)) %>% 
+  select(model) %>% head(1) %>% as.character() 
+
+fit_df3 <- lm(model_df3_formula, data)
+
+```
 
 <font size="2">
 ```{r results='asis'}
