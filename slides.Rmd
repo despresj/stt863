@@ -137,11 +137,11 @@ colnames(t1) <- c("Obs. Number", "Data Point")
 colnames(t2) <- c("Obs. Number", "Data Point")
 
 kable(t1, align = "c") %>%
-  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  kable_styling(position = "float_left", full_width = F) %>% 
   row_spec(3, color = "white", background = "#3C989E")
 
 kable(t2, align = "c") %>%
-  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria")
+  kable_styling(full_width = FALSE, position = "left")
 ```
 
 ---
@@ -159,11 +159,11 @@ colnames(t1) <- c("Obs. Number", "Data Point")
 colnames(t2) <- c("Obs. Number", "Data Point")
 
 kable(t1, align = "c") %>%
-  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  kable_styling(position = "float_left", full_width = F) %>% 
   row_spec(3, color = "white", background = "#3C989E")
 
 kable(t2, align = "c") %>%
-  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria")
+  kable_styling(full_width = FALSE, position = "left")
 ```
 
 
@@ -184,11 +184,11 @@ t2[3,2] <- median(t1[,2], na.rm = TRUE)
 colnames(t2) <- c("Obs. Number", "Data Point")
 
 kable(t1, align = "c") %>%
-  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  kable_styling(position = "float_left", full_width = F) %>% 
   row_spec(3, color = "white", background = "#3C989E")
 
 kable(t2, align = "c") %>%
-  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria") %>% 
+  kable_styling(full_width = FALSE, position = "left") %>% 
   row_spec(3, color = "white", background = "#3C989E")
 ```
 
@@ -258,7 +258,7 @@ data %>%
 ### Independence
 ### Linearity
 ### Normality
-### Homoskidasticity
+### Homoscedasticity
 
 ---
 
