@@ -43,11 +43,11 @@ subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 
 --
 
-* From Data provided by the Gapminder Foundation.
+* From data provided by the Gapminder Foundation.
 
 --
 
-* filtered to only include OECD Countries from year 2000 to 2018 by necessity
+* Filtered to only include OECD Countries from year 2000 to 2018 by necessity.
 
 ---
 
@@ -73,22 +73,22 @@ class: inverse, middle, center
 
 --
 
-1. Electoral Process
+### 1. Electoral Process
 
 --
 
-1. Political Participation and Pluralism
+### 2. Political Participation and Pluralism
 
 --
 
-1. Discretionary Political rights. 
+### 3. Discretionary Political Rights
 
 ---
 
 
 # Covariates  
 
-- Corruption Perception Index Ranging from 0 to 100 with 0 being the most corruption perception.  
+- Corruption Perception Index ranges from 0 to 100 with 0 being the highest perception of corruption
 
 --
 
@@ -96,19 +96,19 @@ class: inverse, middle, center
 
 --
 
-- Electricity use per person in Kilowatt Hours.
+- Electricity use per person in Kilowatt Hours
 
 --
 
-- Gini Coefficient. A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth. 
+- Gini Coefficient: A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth
 
 --
 
-- Percentage of population That use the Internet.
+- Percentage of population That use the Internet
 
 --
 
-- Labor Force Participation.
+- Labor Force Participation
 
 --
 
@@ -120,12 +120,59 @@ class: inverse, middle, center
 
 --
 
-- Murders per million people. 
+- Murders per million people
 
+---
+class: center
+
+### Illustriated example Inputing Median
+
+```{r}
+set.seed(69)
+t1 <- cbind(1:5, round(runif(5, 200, 300), 2))
+t1[3,2] <- NA
+t2 <- t1
+colnames(t1) <- c("Obs. Number", "Data Point")
+
+colnames(t2) <- c("Obs. Number", "Data Point")
+
+kable(t1, align = "c") %>%
+  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  row_spec(3, color = "white", background = "#3C989E")
+
+kable(t2, align = "c") %>%
+  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria")
+```
+
+---
+class: center
+
+### Illustriated example Inputing Median
+
+```{r}
+set.seed(69)
+t1 <- cbind(1:5, round(runif(5, 200, 300), 2))
+t1[3,2] <- NA
+t2 <- t1
+colnames(t1) <- c("Obs. Number", "Data Point")
+
+colnames(t2) <- c("Obs. Number", "Data Point")
+
+kable(t1, align = "c") %>%
+  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  row_spec(3, color = "white", background = "#3C989E")
+
+kable(t2, align = "c") %>%
+  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria")
+```
+
+
+$$Median = 264.98$$
 ---
 
 class: center
-# Inputing Median
+
+### Illustriated example Inputing Median
 
 ```{r}
 set.seed(69)
@@ -135,7 +182,14 @@ t2 <- t1
 colnames(t1) <- c("Obs. Number", "Data Point")
 t2[3,2] <- median(t1[,2], na.rm = TRUE)
 colnames(t2) <- c("Obs. Number", "Data Point")
-knitr::kable(list(t1, t2), caption = "Illustrated Example")
+
+kable(t1, align = "c") %>%
+  kable_styling(position = "float_left", full_width = F, html_font = "Cambria") %>% 
+  row_spec(3, color = "white", background = "#3C989E")
+
+kable(t2, align = "c") %>%
+  kable_styling(full_width = FALSE, position = "left", html_font = "Cambria") %>% 
+  row_spec(3, color = "white", background = "#3C989E")
 ```
 
 $$Median = 264.98$$
@@ -190,7 +244,7 @@ data %>%
   viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
   scale_x_continuous(breaks = 1:7) + 
   theme_test(base_size = 30) + 
-#  #  theme_xaringan() +  + 
+#    + 
   theme(legend.position = "none") + 
   labs(y = "Number", x = "Political Freedom", title = "Distribution of Political Freedom")
 ```
@@ -200,11 +254,11 @@ data %>%
 # Assumptions
 
 --
-* Finite mean and sd
-* independence
-* Linearity
-* Normality
-* Homoskidasticity
+### Finite Mean and Standard Deviation
+### Independence
+### Linearity
+### Normality
+### Homoskidasticity
 
 ---
 
@@ -273,7 +327,7 @@ subsets %>%
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
-  #  #  theme_xaringan() +  +  
+  #    +  
 ```
 
 ---
@@ -291,7 +345,7 @@ subsets %>%
   labs(title = "", x = "Parameters", y = "AIC") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
-  #  #  theme_xaringan() +  +  
+  #    +  
 ```
 
 ---
@@ -500,7 +554,7 @@ hist <- fit_df5 %>%
   broom::augment() %>% 
   ggplot(aes(.resid)) + 
   geom_histogram(bins = 100) +
-  scale_x_continuous(limits = c(-4,4)) + labs(y = "Density", x = "Residual", title = "Histogram")  #  #  theme_xaringan() +  +  
+  scale_x_continuous(limits = c(-4,4)) + labs(y = "Density", x = "Residual", title = "Histogram")
 
 
 qq <- fit_df5 %>% 
@@ -509,7 +563,7 @@ qq <- fit_df5 %>%
   stat_qq() +
   stat_qq_line() + 
 scale_x_continuous(limits = c(-4,4)) + 
-scale_y_continuous(limits = c(-4,4)) + labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected") #  theme_xaringan() +  
+scale_y_continuous(limits = c(-4,4)) + labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected")   
 ```
 
 ```{r}
@@ -550,7 +604,6 @@ fit_df5 %>%
   geom_point(aes(x = yhat, y = resid)) + 
   geom_hline(yintercept = 0, color = "red") + 
   scale_y_continuous(limits = c(-4,4)) + 
-  #  theme_xaringan() +  +
   labs(y = "Residual", x = "Predicted Value")
 ```
 
@@ -611,15 +664,15 @@ data %>%
 # Discussion of outliers
 
 - We identified these outliers.
-- confirmed they are not errors. 
-- decided to keep them because They are indicating a substancial loss in political freedom which falls outside of the scope of the model. However, is important for our reserach Q.
+- Confirmed they are not errors. 
+- Decided to keep them because they are indicating a substantial loss in political freedom which falls outside of the scope of the model. However, is important for our research question.
 ***
 > "A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance". -Chapter 3 p.108
 
 
 ---
 
-#### Brown Forsythe Test Dropping outliers
+#### Brown-Forsythe Test Dropping outliers
 
 ```{r}
 df <- data %>% 
@@ -675,11 +728,11 @@ $$
 t(.975; 643) = 1.963
 \end{align}
 $$
-- Conclude Error variance is not constant
+- Conclude error variance is not constant
 
 ---
 
-#### Brown Forsythe Test Dropping outliers
+#### Brown-Forsythe Test Dropping outliers
 
 ```{r}
 df <- data %>% 
@@ -736,7 +789,7 @@ $$
 t(.975; 639) = 1.963
 \end{align}
 $$
-- Conclude again Error variance is not constant even when outliers are removed
+- Conclude again error variance is not constant even when outliers are removed
 
 ---
 # Conclusions
