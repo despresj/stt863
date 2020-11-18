@@ -1,0 +1,2781 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Measuring Political Freedom Around the World</title>
+
+<script src="site_libs/header-attrs/header-attrs.js"></script>
+<script src="site_libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap/shim/respond.min.js"></script>
+<script src="site_libs/navigation/tabsets.js"></script>
+<link href="site_libs/highlightjs/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs/highlight.js"></script>
+<link href="site_libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections/anchor-sections.js"></script>
+<script src="site_libs/kePrint/kePrint.js"></script>
+<script src="site_libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding/datatables.js"></script>
+<link href="site_libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">test</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:&lt;cats@catemail.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/&lt;YOUR_GH_NAME&gt;/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Measuring Political Freedom Around the World</h1>
+<h3 class="subtitle">Sabrina Ball, Joe Despres, Joe Sigler, Jacob Haywood</h3>
+<h4 class="date">Last compiled 22:41</h4>
+
+</div>
+
+
+<div id="research-question" class="section level1">
+<h1>Research Question</h1>
+<ul>
+<li>This study will focus on political freedom around the world.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>We ask: What factors are associated with an increase in political freedom?.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Observational study of political freedom as a function of social, economic, political factors.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>From data provided by the Gapminder Foundation.</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Filtered to only include OECD Countries from year 2000 to 2018 by necessity.</li>
+</ul>
+<hr />
+<p>class: center, white</p>
+</div>
+<div id="oecd" class="section level1">
+<h1>OECD</h1>
+<p><img src="OECD.jpeg" /></p>
+</div>
+<div id="political-freedom" class="section level1">
+<h1>Political Freedom</h1>
+<ul>
+<li>Freedomhouse quantifies Political Rights by 10 different indicators grouped in three subcategories.</li>
+</ul>
+<p>–</p>
+<div id="electoral-process" class="section level3">
+<h3>1. Electoral Process</h3>
+<p>–</p>
+</div>
+<div id="political-participation-and-pluralism" class="section level3">
+<h3>2. Political Participation and Pluralism</h3>
+<p>–</p>
+</div>
+<div id="discretionary-political-rights" class="section level3">
+<h3>3. Discretionary Political Rights</h3>
+<hr />
+</div>
+</div>
+<div id="covariates" class="section level1">
+<h1>Covariates</h1>
+<ul>
+<li>Corruption Perception Index ranges from 0 to 100 with 0 being the highest perception of corruption</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Education Expenditure in GDP per Person</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Electricity use per person in Kilowatt Hours</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Gini Coefficient: A measure of a nation’s wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation’s wealth</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Percentage of population That use the Internet</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Labor Force Participation</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Life Expectancy</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Military Spending as a percentage of GDP</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Murders per million people</li>
+</ul>
+<hr />
+<p>class: center</p>
+<div id="illustriated-example-inputing-median" class="section level3">
+<h3>Illustriated example Inputing Median</h3>
+<table class="table" style="width: auto !important; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+3
+</td>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>class: center</p>
+</div>
+<div id="illustriated-example-inputing-median-1" class="section level3">
+<h3>Illustriated example Inputing Median</h3>
+<table class="table" style="width: auto !important; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+3
+</td>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="median-264.98" class="section level2">
+<h2><span class="math display">\[Median = 264.98\]</span></h2>
+<p>class: center</p>
+<div id="illustriated-example-inputing-median-2" class="section level3">
+<h3>Illustriated example Inputing Median</h3>
+<table class="table" style="width: auto !important; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+3
+</td>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:center;">
+Obs. Number
+</th>
+<th style="text-align:center;">
+Data Point
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+253.08
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+276.88
+</td>
+</tr>
+<tr>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+3
+</td>
+<td style="text-align:center;color: white !important;background-color: #3C989E !important;">
+264.98
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+286.53
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+236.89
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="median-264.98-1" class="section level2">
+<h2><span class="math display">\[Median = 264.98\]</span></h2>
+<p>class: inverse, middle, center</p>
+</div>
+<div id="summary-statistics" class="section level2">
+<h2># Summary Statistics</h2>
+<p>class: middle, center</p>
+<div id="htmlwidget-67cca66ea6055cf681d9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-67cca66ea6055cf681d9">{"x":{"filter":"none","caption":"<caption>Mean<\/caption>","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"],["Australia","Austria","Belgium","Canada","Chile","Colombia","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Israel","Italy","Japan","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovenia","South Korea","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States"],[75.93,69.41,69.44,77.67,46.16,33.24,57.97,85.54,69.56,80.13,63.99,74.23,43.96,55.54,89.97,62.83,54.23,47.74,74.08,59.37,53.53,79.85,33,83.43,74.84,88.14,52.41,49.42,59.29,80.28,59.91,86.23,78.25,36.09,78.44,70.59],[0.65,0.59,0.53,0.66,0.59,0.68,0.59,0.64,0.61,0.6,0.56,0.59,0.53,0.52,0.76,0.61,0.63,0.49,0.6,0.59,0.58,0.56,0.61,0.64,0.68,0.66,0.56,0.61,0.58,0.62,0.57,0.63,0.68,0.48,0.62,0.64],[81.68,80.47,79.93,81.03,78.63,77.79,77.46,79.23,74.99,80.1,81.29,80.08,80.06,74.47,82.04,80.06,81.21,81.72,83.08,72.78,73.09,80.38,75.48,80.37,80.39,80.87,76.24,79.77,79.02,80.24,81.57,81.3,82.38,77.41,80.02,78.19],[1.85,0.81,1.07,1.16,2.28,3.33,1.33,1.31,1.89,1.42,2.34,1.29,2.67,1.19,0,0.51,6.51,1.49,0.95,1.38,1.17,0.54,0.52,1.3,1.3,1.59,1.89,1.9,1.28,2.54,1.35,1.26,0.77,2.45,2.12,3.75],[1.13,0.59,1.27,1.53,4.4,25.34,0.83,0.74,6.12,1.88,0.66,0.55,1.01,1.35,0.66,0.87,2.92,0.78,0.36,7.08,4.77,1.01,29.07,0.89,1.39,0.82,1.05,1.04,0.82,1.26,0.73,0.91,0.66,1.35,0.34,6.42]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Country<\/th>\n      <th>Internet Users<\/th>\n      <th>Labor Force<\/th>\n      <th>Life Expectancy<\/th>\n      <th>Military Spending<\/th>\n      <th>Murder Rate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>class: middle, center</td>
+</tr>
+<tr class="even">
+<td><div id="htmlwidget-9a2309de81cd3c32cb4c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9a2309de81cd3c32cb4c">{"x":{"filter":"none","caption":"<caption>Mean<\/caption>","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"],["Australia","Austria","Belgium","Canada","Chile","Colombia","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Israel","Italy","Japan","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovenia","South Korea","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States"],[79.72,73.22,75.61,82.06,70.28,36.89,52.89,90.44,69.22,88.89,70,79.94,43.28,52.06,78.61,73.28,61.11,43.94,74,55.22,58.22,81.56,32.39,83.06,90.44,85.61,60.56,62.94,60.22,54.5,58.83,87.83,85.89,43.83,79.22,74.06],[0.19,0.23,0.22,0.18,0.15,0.16,0.13,0.25,0.21,0.19,0.18,0.17,0.2,0.21,0.24,0.15,0.21,0.22,0.22,0.26,0.18,0.2,0.14,0.17,0.19,0.2,0.25,0.21,0.28,0.28,0.19,0.23,0.23,0.13,0.21,0.2],[10572.22,8110,8294.44,16316.67,3294.44,1023.22,6265,6423.33,5971.11,16111.11,7438.89,7116.67,5299.44,3820.56,41555.56,5993.89,6725.56,5524.44,8245.56,3013.33,3410,15622.22,2032.78,6886.67,9473.33,24244.44,3622.22,4675,6691.67,8598.89,5712.78,14916.67,8071.67,2283.33,5901.11,13300],[33.33,30.18,28.27,32.99,48.84,53.64,26.43,26.74,33.44,27.45,32.16,30.94,34.67,29.64,27.92,32.61,41.18,34.54,31.98,35.46,35.39,31.8,47.66,28.92,33.62,27.37,33.14,36.7,25.81,31.82,34.46,27.54,33.16,40.77,34.34,40.89]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Country<\/th>\n      <th>CPI<\/th>\n      <th>Edu Exp<\/th>\n      <th>Electric Use<\/th>\n      <th>Gini<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script></td>
+</tr>
+</tbody>
+</table>
+<p>class: center, middle <img src="slides_files/figure-html/unnamed-chunk-6-1.png" width="1152" /></p>
+<hr />
+</div>
+</div>
+<div id="assumptions" class="section level1">
+<h1>Assumptions</h1>
+<table style="width:4%;">
+<colgroup>
+<col width="4%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>### Finite Mean and Standard Deviation ### Independence ### Linearity ### Normality ### Homoscedasticity</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="best-subsets-by-adjusted-r-squared" class="section level1">
+<h1>Best Subsets by Adjusted R Squared</h1>
+<div id="htmlwidget-6232d449757335361f84" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6232d449757335361f84">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,9,4,3,2,1],[0.544,0.543,0.543,0.543,0.542,0.54,0.532,0.499,0.427],["polrights fh = corruption perception index cpi + edu exp gdp per person + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + labour force participation rate percent + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + gini","polrights fh = corruption perception index cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>A_Rsq<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td># Best Subsets by AIC <div id="htmlwidget-e257bcea42613d43bfe3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e257bcea42613d43bfe3">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[5,6,7,8,4,9,3,2,1],[1026.529,1027.748,1028.942,1030.424,1030.737,1032.24,1041.256,1083.917,1170.321],["polrights fh = corruption perception index cpi + edu exp gdp per person + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + labour force participation rate percent + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + gini","polrights fh = corruption perception index cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>AIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="best-subsets-by-bic" class="section level1">
+<h1>Best Subsets by BIC</h1>
+<div id="htmlwidget-b4e00b460e7cb41dbc69" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b4e00b460e7cb41dbc69">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9"],[4,5,6,3,7,8,9,2,1],[1057.58,1057.847,1063.539,1063.625,1069.207,1075.163,1081.452,1101.812,1183.743],["polrights fh = corruption perception index cpi + edu exp gdp per person + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + edu exp gdp per person + electricity use per person + gini + internet users + labour force participation rate percent + life expectancy years + military spending pct of gdp + murder per mil people","polrights fh = corruption perception index cpi + gini","polrights fh = corruption perception index cpi"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DF<\/th>\n      <th>BIC<\/th>\n      <th>Model<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<p>class: center, middle</p>
+</div>
+<div id="best-subsets" class="section level1">
+<h1>Best Subsets</h1>
+<p><img src="slides_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>class: center, middle</td>
+</tr>
+<tr class="even">
+<td># Best Subsets</td>
+</tr>
+<tr class="odd">
+<td><img src="slides_files/figure-html/unnamed-chunk-11-1.png" width="1152" /></td>
+</tr>
+</tbody>
+</table>
+<p>class: inverse, middle, center</p>
+</div>
+<div id="model" class="section level1">
+<h1>Model</h1>
+<hr />
+<p>class: center, middle</p>
+<p><span class="math display">\[
+\large
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span> — class: center</p>
+<p><span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corruption Perception
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education Expendature
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Life Expectancy
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Military Spending
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murder Rate
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+class: center <span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+Corruption Perception
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.023
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.002
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+14.096
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education Expendature
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Life Expectancy
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Military Spending
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murder Rate
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+class: center <span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corruption Perception
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+Education Expendature
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+1.900
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.534
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+3.561
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Life Expectancy
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Military Spending
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murder Rate
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+class: center <span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corruption Perception
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education Expendature
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+Life Expectancy
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-0.021
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.008
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-2.486
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Military Spending
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murder Rate
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+class: center <span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corruption Perception
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education Expendature
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Life Expectancy
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+Military Spending
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-0.150
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.019
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-8.052
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murder Rate
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+class: center <span class="math display">\[
+\small
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+\]</span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corruption Perception
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Education Expendature
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Life Expectancy
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Military Spending
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+Murder Rate
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-0.035
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.004
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+-8.176
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+r.squared
+</th>
+<th style="text-align:right;">
+adj.r.squared
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+BIC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.544
+</td>
+<td style="text-align:right;">
+1026.529
+</td>
+<td style="text-align:right;">
+1057.847
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>class: center, middle</p>
+<p><img src="slides_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>class: center, middle</td>
+</tr>
+<tr class="even">
+<td><img src="slides_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></td>
+</tr>
+</tbody>
+</table>
+<p><img src="slides_files/figure-html/unnamed-chunk-30-1.png" width="1152" /></p>
+<hr />
+<table>
+<caption>
+Included Outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+corruption_perception_index_cpi
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+edu_exp_gdp_per_person
+</td>
+<td style="text-align:right;">
+1.900
+</td>
+<td style="text-align:right;">
+0.534
+</td>
+<td style="text-align:right;">
+3.561
+</td>
+<td style="text-align:right;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+life_expectancy_years
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+military_spending_pct_of_gdp
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+murder_per_mil_people
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<caption>
+Removed Outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+7.153
+</td>
+<td style="text-align:right;">
+0.568
+</td>
+<td style="text-align:right;">
+12.604
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+corruption_perception_index_cpi
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:right;">
+13.872
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+edu_exp_gdp_per_person
+</td>
+<td style="text-align:right;">
+0.850
+</td>
+<td style="text-align:right;">
+0.465
+</td>
+<td style="text-align:right;">
+1.829
+</td>
+<td style="text-align:right;">
+0.0678686
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+life_expectancy_years
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.007
+</td>
+<td style="text-align:right;">
+-2.939
+</td>
+<td style="text-align:right;">
+0.0034138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+military_spending_pct_of_gdp
+</td>
+<td style="text-align:right;">
+-0.144
+</td>
+<td style="text-align:right;">
+0.016
+</td>
+<td style="text-align:right;">
+-8.986
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+murder_per_mil_people
+</td>
+<td style="text-align:right;">
+-0.043
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-11.557
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<caption>
+Included Outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+6.646
+</td>
+<td style="text-align:right;">
+0.657
+</td>
+<td style="text-align:right;">
+10.113
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+corruption_perception_index_cpi
+</td>
+<td style="text-align:right;">
+0.023
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+14.096
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+edu_exp_gdp_per_person
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+1.900
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.534
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+3.561
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0003973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+life_expectancy_years
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+-2.486
+</td>
+<td style="text-align:right;">
+0.0131773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+military_spending_pct_of_gdp
+</td>
+<td style="text-align:right;">
+-0.150
+</td>
+<td style="text-align:right;">
+0.019
+</td>
+<td style="text-align:right;">
+-8.052
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+murder_per_mil_people
+</td>
+<td style="text-align:right;">
+-0.035
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-8.176
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<caption>
+Removed Outliers
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Term
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+T-Stat
+</th>
+<th style="text-align:right;">
+P-Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+7.153
+</td>
+<td style="text-align:right;">
+0.568
+</td>
+<td style="text-align:right;">
+12.604
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+corruption_perception_index_cpi
+</td>
+<td style="text-align:right;">
+0.020
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:right;">
+13.872
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #3C989E !important;">
+edu_exp_gdp_per_person
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.850
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.465
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+1.829
+</td>
+<td style="text-align:right;color: white !important;background-color: #3C989E !important;">
+0.0678686
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+life_expectancy_years
+</td>
+<td style="text-align:right;">
+-0.021
+</td>
+<td style="text-align:right;">
+0.007
+</td>
+<td style="text-align:right;">
+-2.939
+</td>
+<td style="text-align:right;">
+0.0034138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+military_spending_pct_of_gdp
+</td>
+<td style="text-align:right;">
+-0.144
+</td>
+<td style="text-align:right;">
+0.016
+</td>
+<td style="text-align:right;">
+-8.986
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+murder_per_mil_people
+</td>
+<td style="text-align:right;">
+-0.043
+</td>
+<td style="text-align:right;">
+0.004
+</td>
+<td style="text-align:right;">
+-11.557
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="discussion-of-outliers" class="section level1">
+<h1>Discussion of outliers</h1>
+<ul>
+<li>We identified these outliers.</li>
+<li>Confirmed they are not errors.</li>
+<li>Decided to keep them because they are indicating a substantial loss in political freedom which falls outside of the scope of the model. However, is important for our research question. *** &gt; “A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance”. -Chapter 3 p.108</li>
+</ul>
+<hr />
+<div id="brown-forsythe-test-dropping-outliers" class="section level4">
+<h4>Brown-Forsythe Test Dropping outliers</h4>
+<p><span class="math display">\[ 
+\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[ 
+\begin{align}
+\bar{d_{{1}}}= 0.489 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.177 \\
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {\bar {d}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.489 -{0.177}}{0.176 {\sqrt {{\frac {1}{324}}+{\frac {1}{324}}}}}}} = 9.49
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+t(.975; 643) = 1.963
+\end{align}
+\]</span> - Conclude error variance is not constant</p>
+<hr />
+</div>
+<div id="brown-forsythe-test-dropping-outliers-1" class="section level4">
+<h4>Brown-Forsythe Test Dropping outliers</h4>
+<p><span class="math display">\[ 
+\begin{align}
+d_{{i1}}=\left\vert e_{{i1}}-{\tilde  {e}}_{1}\right\vert  \quad  \quad  \quad  \quad d_{{i2}}=\left\vert e_{{i2}}-{\tilde  {e}}_{2}\right\vert \\
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[ 
+\begin{align}
+\bar{d_{{1}}}= 0.447 \quad  \quad \quad  \quad  \quad \bar{d_{{2}}}=0.176 \\
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {{\bar {d}}_{1}-{\bar {d}}_{2}}{s^2 {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}
+\end{align}
+\]</span> ***</p>
+<p><span class="math display">\[
+\begin{align}
+{\displaystyle t^{*}_{BF} ={\frac {0.447 -{0.176}}{0.176 {\sqrt {{\frac {1}{322}}+{\frac {1}{322}}}}}}} = 10.274
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+t(.975; 639) = 1.963
+\end{align}
+\]</span> - Conclude again error variance is not constant even when outliers are removed</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td># Conclusions</td>
+</tr>
+<tr class="even">
+<td>1. we think this 1. because</td>
+</tr>
+</tbody>
+</table>
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="thanks-you-and-we-are-happy-to-take-questions" class="section level1">
+<h1>Thanks You and We are Happy to Take Questions</h1>
+<p>Slides created via the R package <a href="https://github.com/yihui/xaringan"><strong>xaringan</strong></a>.</p>
+<hr />
+<p><font size="2"></p>
+<table style="text-align:center">
+<caption>
+<strong>Regression Results</strong>
+</caption>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="4">
+polrights_fh
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+corruption_perception_index_cpi
+</td>
+<td>
+0.023<sup>***</sup> (0.002)
+</td>
+<td>
+0.023<sup>***</sup> (0.002)
+</td>
+<td>
+0.022<sup>***</sup> (0.002)
+</td>
+<td>
+0.022<sup>***</sup> (0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+edu_exp_gdp_per_person
+</td>
+<td>
+1.746<sup>***</sup> (0.562)
+</td>
+<td>
+1.900<sup>***</sup> (0.534)
+</td>
+<td>
+1.898<sup>***</sup> (0.536)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+internet_users
+</td>
+<td>
+0.001 (0.001)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+life_expectancy_years
+</td>
+<td>
+-0.025<sup>***</sup> (0.009)
+</td>
+<td>
+-0.021<sup>**</sup> (0.008)
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+military_spending_pct_of_gdp
+</td>
+<td>
+-0.146<sup>***</sup> (0.019)
+</td>
+<td>
+-0.150<sup>***</sup> (0.019)
+</td>
+<td>
+-0.153<sup>***</sup> (0.019)
+</td>
+<td>
+-0.153<sup>***</sup> (0.019)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+murder_per_mil_people
+</td>
+<td>
+-0.035<sup>***</sup> (0.004)
+</td>
+<td>
+-0.035<sup>***</sup> (0.004)
+</td>
+<td>
+-0.033<sup>***</sup> (0.004)
+</td>
+<td>
+-0.037<sup>***</sup> (0.004)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+6.944<sup>***</sup> (0.740)
+</td>
+<td>
+6.646<sup>***</sup> (0.657)
+</td>
+<td>
+5.068<sup>***</sup> (0.171)
+</td>
+<td>
+5.469<sup>***</sup> (0.129)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+648
+</td>
+<td>
+648
+</td>
+<td>
+648
+</td>
+<td>
+648
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.548
+</td>
+<td>
+0.547
+</td>
+<td>
+0.543
+</td>
+<td>
+0.534
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.543
+</td>
+<td>
+0.544
+</td>
+<td>
+0.540
+</td>
+<td>
+0.532
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+0.531 (df = 641)
+</td>
+<td>
+0.531 (df = 642)
+</td>
+<td>
+0.533 (df = 643)
+</td>
+<td>
+0.538 (df = 644)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+129.343<sup>***</sup> (df = 6; 641)
+</td>
+<td>
+155.112<sup>***</sup> (df = 5; 642)
+</td>
+<td>
+190.808<sup>***</sup> (df = 4; 643)
+</td>
+<td>
+245.823<sup>***</sup> (df = 3; 644)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
