@@ -1,0 +1,14 @@
+"0","set.seed(69)"
+"0","t1 <- cbind(1:5, round(runif(5, 200, 300), 2))"
+"0","t1[3,2] <- NA"
+"0","t2 <- t1"
+"0","colnames(t1) <- c(""Obs. Number"", ""Data Point"")"
+"0",""
+"0","colnames(t2) <- c(""Obs. Number"", ""Data Point"")"
+"0",""
+"0","kable(t1, align = ""c"") %>%"
+"0","  kable_styling(position = ""float_left"", full_width = F, html_font = ""Cambria"") %>% "
+"0","  row_spec(3, color = ""white"", background = ""#3C989E"")"
+"2","Error in kable_styling(., position = ""float_left"", full_width = F, html_font = ""Cambria"") : 
+  unused argument (html_font = ""Cambria"")
+"

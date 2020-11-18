@@ -1,0 +1,8 @@
+"0","subsets %>% "
+"0","  group_by(df) %>% "
+"0","  filter(adj.r.squared == max(adj.r.squared)) %>% "
+"0","  mutate_if(is.numeric, round, 3) %>% "
+"0","  rename(a_rsq = adj.r.squared) %>% "
+"0","  select(df, a_rsq, model) %>% "
+"0","  arrange(desc(a_rsq)) %>% "
+"0","DT::datatable(fillContainer = FALSE, options = list(pageLength = 3))"

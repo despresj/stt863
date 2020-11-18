@@ -1,0 +1,9 @@
+"0","equatiomatic::extract_eq(model = model_df5, intercept = ""beta"", terms_per_line = 1)
+"
+"1","$$
+"
+"1",""
+"1","\operatorname{polrights\_fh} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) + \beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon"
+"1",""
+"1","
+$$"

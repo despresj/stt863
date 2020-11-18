@@ -1,0 +1,8 @@
+"0","stargazer::stargazer(fit_df6, model_df5, fit_df4, type = ""html"", 
+                     title = ""Regression Results"", 
+                     covariate.labels = c(),header = FALSE,
+single.row=FALSE,column.sep.width = ""-15pt"", )
+"
+"2","Error in .stargazer.wrap(..., type = type, title = title, style = style,  : 
+  argument is missing, with no default
+"

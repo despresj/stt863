@@ -1,0 +1,512 @@
+geom_smooth(method = "lm", se = TRUE, color = "red") +
+geom_point(data = data %>%
+filter(country == "United States",
+year == 2018),
+aes(x = gini, y = polrights_fh), size = 5, color = "red") +
+labs(x = "GINI Coeffeceint", y = "Political Rights")
+data %>%
+ggplot(aes(x = gini, y = polrights_fh)) +
+geom_smooth(se = FALSE)
+r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
+subsets %>%
+ggplot(aes(x = df, y = adj.r.squared)) +
+geom_point() +
+geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "Green") +
+labs(title = "Best Subsets", x = "Parameters", y = "Adjusted R Squared")
+AIC <- subsets %>% group_by(df) %>% summarise(AIC = max(AIC, na.rm = T))
+subsets %>%
+ggplot(aes(x = df, y = AIC)) +
+geom_point() +
+geom_smooth(data = AIC, aes(df, AIC), se = FALSE, span = .5, color = "Green") +
+labs(title = "Best Subsets", x = "Parameters", y = "AIC")
+model_df5 <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df5
+mean(x) ==
+0
+summary(step(object = fit, direction = "backwards"))
+summary(step(object = fit, direction = "backward"))
+data %>% names()
+subsets %>% select(model) %>% head()
+subsets %>% select(model) %>% tail
+subsets %>% select(model) %>% tail(1)
+subsets %>% select(model) %>% tail(1) %>% as.character()
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+# internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+gini +
+# internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+model_df5
+fit <- lm(model_df5, data = data)
+summary(fit)
+model_df5 <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df5
+View(data)
+data <- data %>%
+filter(year > 2000, year < 2019, country %in% countries) %>%
+group_by(country) %>%
+mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>%
+# Iceland spent 0 so I needed to manually recode that
+mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>%
+mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+# https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
+# these murder rates were not included in the gapminder but i didnt want to
+# lose 3 important countries in LA
+murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
+murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>%
+relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
+military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)
+write_csv(data, here::here("data", "df.csv"))
+data <- readr::read_csv(here::here("data", "df.csv"))
+View(data)
+summary(step(object = fit, direction = "backward"))
+subsets
+model_df5 <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df5
+fit <- lm(model_df5, data = data)
+fit %>% broom::tidy()
+summary(fit)
+# Read and Clean ----------------------------------------------------------
+files <- list.files(path = here::here("raw_data"), pattern = ".csv")
+cleaning <- function(df){
+df <- pivot_longer(df, cols = -country, names_to = "year")
+}
+data <- files %>%
+map(function(x) read_csv(paste0("raw_data/", x))) %>%
+setNames(gsub("\\.csv$", "", files)) %>%
+map(cleaning) %>%
+bind_rows(.id = "id") %>%
+pivot_wider(names_from = id)
+countries <- readRDS(here::here("data", "countries.RDS"))
+write_csv(data, here::here("data", "df.csv"))
+skimr::skim(ungroup(data))
+data <- data %>%
+filter(year > 2000, year < 2019, country %in% countries) %>%
+group_by(country) %>%
+mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>%
+# Iceland spent 0 so I needed to manually recode that
+mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>%
+mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+# https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
+# these murder rates were not included in the gapminder but i didnt want to
+# lose 3 important countries in LA
+murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
+murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>%
+relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh))
+library(tidyverse)
+data <- read_csv(here::here("data", "df.csv"))
+names(data)
+vars <- data %>%
+select(-country, -year, -ends_with("_fh")) %>%
+names()
+outcome <- "polrights_fh"
+models <- list()
+for (i in 1:length(vars)) {
+vc <- combn(vars,i)
+for (j in 1:ncol(vc)) {
+model <- as.formula(paste0(outcome, " ~", paste0(vc[,j], collapse = " + ")))
+models <- c(models, model)
+}
+subsets <- map(models, function(x) lm(x, data)) %>%
+map(broom::glance) %>%
+setNames(models) %>%
+bind_rows(.id = "id") %>%
+distinct() %>%
+rename(model = id)
+write_csv(subsets, here::here("data", "subsets.csv"))
+data <- readr::read_csv(here::here("data", "df.csv"))
+data %>% names()
+View(data)
+summary(step(object = fit, direction = "backward"))
+subsets
+model_df5
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+model_df5 <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+fit <- lm(model_df5, data = data)
+fit %>% broom::tidy()
+summary(fit)
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(fit)
+data <- readr::read_csv(here::here("data", "df.csv"))
+data %>% names()
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+subsets
+model_df5 <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df5
+fit <- lm(model_df5, data = data)
+fit %>% broom::tidy()
+summary(fit)
+View(data)
+library(tidyverse)
+# Read and Clean ----------------------------------------------------------
+files <- list.files(path = here::here("raw_data"), pattern = ".csv")
+cleaning <- function(df){
+df <- pivot_longer(df, cols = -country, names_to = "year")
+}
+data <- files %>%
+map(function(x) read_csv(paste0("raw_data/", x))) %>%
+setNames(gsub("\\.csv$", "", files)) %>%
+map(cleaning) %>%
+bind_rows(.id = "id") %>%
+pivot_wider(names_from = id)
+countries <- readRDS(here::here("data", "countries.RDS"))
+data <- data %>%
+filter(year > 2000, year < 2019, country %in% countries) %>%
+group_by(country) %>%
+mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>%
+# Iceland spent 0 so I needed to manually recode that
+mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>%
+mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+# https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
+# these murder rates were not included in the gapminder but i didnt want to
+# lose 3 important countries in LA
+murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
+murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>%
+relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
+military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)
+write_csv(data, here::here("data", "df.csv"))
+data <- readr::read_csv(here::here("data", "df.csv"))
+fit <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+# electricity_use_per_person +
+# gini +
+# internet_users +
+#labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(fit)
+model_df5 <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = fit, direction = "backward"))
+summary(step(object = fit, direction = "forward"))
+subsets %>% filter(df == 20) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 10) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 9) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+back <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = back, direction = "forward"))
+back <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+electricity_use_per_person +
+gini +
+internet_users +
+labour_force_participation_rate_percent +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+summary(step(object = back, direction = "forward"))
+10
+subsets %>% filter(df == 10) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 9) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 9) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+summary(model_df5)
+subsets
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model)
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared)
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>% View()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% as.character()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model)
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character() %>%
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% View()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>% View()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+View()
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df4_formula <- subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+lm(model_df4_formula, data)
+summary(fit_df4)
+fit_df4 <- lm(model_df4_formula, data)
+summary(fit_df4)
+fit_df4 <- lm(model_df4_formula, data)
+summary(fit_df4)
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+View()
+model_df4_formula <- subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df4 <- lm(model_df4_formula, data)
+summary(fit_df4)
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% View()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% View()
+model_df3_formula <- subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df3 <- lm(model_df3_formula, data)
+summary(fit_df3)
+summary(fit_df4)
+model_df3_formula <- subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df3 <- lm(model_df3_formula, data)
+summary(fit_df3)
+summary(fit_df4)
+summary(fit_df3)
+model_df3_formula <- subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df3 <- lm(model_df3_formula, data)
+summary(fit_df3)
+model_df3_formula
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.formula()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+summary(fit_df3)
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% View()
+model_df3_formula <- subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df3 <- lm(model_df3_formula, data)
+summary(fit_df3)
+View(data)
+data <- data %>%
+filter(year > 2000, year < 2019, country %in% countries) %>%
+group_by(country) %>%
+mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>%
+# Iceland spent 0 so I needed to manually recode that
+mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>%
+mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+# https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
+# these murder rates were not included in the gapminder but i didnt want to
+# lose 3 important countries in LA
+murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
+murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>%
+relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
+military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100,
+corruption_perception_index_cpi = 100 - corruption_perception_index_cpi )
+write_csv(data, here::here("data", "df.csv"))
+data <- readr::read_csv(here::here("data", "df.csv"))
+model_df5_formula <- subsets %>% filter(df == 5) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+model_df5 <- lm(polrights_fh ~ corruption_perception_index_cpi +
+edu_exp_gdp_per_person +
+life_expectancy_years +
+military_spending_pct_of_gdp +
+murder_per_mil_people, data)
+subsets %>% filter(df == 9) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model) %>% head(1) %>% as.character()
+summary(model_df5)
+subsets %>% filter(df == 4) %>%
+arrange(desc(adj.r.squared)) %>%
+View()
+model_df3_formula <- subsets %>% filter(df == 3) %>%
+arrange(desc(adj.r.squared)) %>%
+select(model, AIC, adj.r.squared) %>%
+select(model) %>% head(1) %>% as.character()
+fit_df3 <- lm(model_df3_formula, data)
+summary(fit_df3)
