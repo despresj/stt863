@@ -269,13 +269,10 @@ subsets %>%
   filter(adj.r.squared == max(adj.r.squared)) %>% 
   mutate_if(is.numeric, round, 3) %>% 
   rename(a_rsq = adj.r.squared) %>% 
-  select(df, a_rsq, model) %>% 
-  mutate(
-    model = str_replace_all(model, "_", " "),
-    model = str_replace(model, "~", "=")) %>% 
+  select(df, a_rsq, Model) %>%
   arrange(desc(a_rsq)) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3), 
-              colnames = c("DF", "A_Rsq", "Model"))
+              colnames = c("DF", "$$R^{2}_a$$", "Model"))
 ```
 
 ---
@@ -285,10 +282,7 @@ subsets %>%
   group_by(df) %>% 
   filter(AIC == min(AIC)) %>% 
   mutate_if(is.numeric, round, 3) %>% 
-  select(df, AIC, model) %>% 
-    mutate(
-    model = str_replace_all(model, "_", " "),
-    model = str_replace(model, "~", "=")) %>% 
+  select(df, AIC, Model) %>% 
   arrange(AIC) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
               colnames = c("DF", "AIC", "Model"))
@@ -302,10 +296,7 @@ subsets %>%
   group_by(df) %>% 
   filter(BIC == min(BIC)) %>% 
   mutate_if(is.numeric, round, 3) %>% 
-  select(df, BIC, model) %>% 
-    mutate(
-    model = str_replace_all(model, "_", " "),
-    model = str_replace(model, "~", "=")) %>% 
+  select(df, BIC, Model) %>% 
   arrange(BIC) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
               colnames = c("DF", "BIC", "Model"))
@@ -323,7 +314,7 @@ r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
 subsets %>% 
   ggplot(aes(x = df, y = adj.r.squared)) + 
   geom_point() + 
-  geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "red") + 
+  geom_smooth(data = r, aes(df, adj), se = FALSE, span = 0.5, color = "#3C989E") + 
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
@@ -341,7 +332,7 @@ r <- subsets %>% group_by(df) %>% summarise(AIC = max(AIC, na.rm = T))
 subsets %>% 
   ggplot(aes(x = df, y = AIC)) + 
   geom_point() + 
-  geom_smooth(data = r, aes(df, AIC), se = FALSE, span = 0.5, color = "red") + 
+  geom_smooth(data = r, aes(df, AIC), se = FALSE, span = 0.5, color = "#3C989E") + 
   labs(title = "", x = "Parameters", y = "AIC") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
