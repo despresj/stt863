@@ -199,8 +199,8 @@ class: inverse, middle, center
 # Summary Statistics
 ---
 
-class: middle, center
-
+class: center
+# Mean Values of Covatiates by Country
 ```{r message=FALSE}
 data %>% 
   group_by(country) %>% 
@@ -212,9 +212,9 @@ DT::datatable(fillContainer = FALSE, options = list(pageLength = 5), caption = "
 ```
 
 ---
-class: middle, center
+class: center
 
-
+# Mean Values of Covatiates by Country
 ```{r message=FALSE}
 data %>% 
   group_by(country) %>% 
