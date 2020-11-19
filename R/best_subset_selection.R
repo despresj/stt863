@@ -28,9 +28,9 @@ subsets <- map(models, function(x) lm(x, data)) %>%
   distinct() %>% 
   rename(model = id) %>% 
   mutate(
-    model = str_replace_all(model, "_", " "),
-    model = str_replace(model, "~", "="), 
-    model = str_to_title(model))
+    Model = str_replace_all(model, "_", " "),
+    Model = str_replace(Model, "~", "="), 
+    Model = str_to_title(Model))
 
 
 # writing -----------------------------------------------------------------
