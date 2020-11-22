@@ -663,7 +663,7 @@ data %>%
 
 ---
 
-#### Brown-Forsythe Test Dropping outliers
+#### Brown-Forsythe Test
 
 ```{r}
 df <- data %>% 
@@ -710,15 +710,18 @@ $$
 
 $$
 \begin{align}
+t(.975; 643) = 1.963
+\end{align}
+$$
+***
+
+$$
+\begin{align}
 {\displaystyle t^{*}_{BF} ={\frac {0.489 -{0.177}}{0.176 {\sqrt {{\frac {1}{324}}+{\frac {1}{324}}}}}}} = 9.49
 \end{align}
 $$
 
-$$
-\begin{align}
-t(.975; 643) = 1.963
-\end{align}
-$$
+
 - Conclude error variance is not constant
 
 ---
@@ -768,6 +771,12 @@ $$
 \end{align}
 $$
 ***
+$$
+\begin{align}
+t(.975; 639) = 1.963
+\end{align}
+$$
+***
 
 $$
 \begin{align}
@@ -775,11 +784,7 @@ $$
 \end{align}
 $$
 
-$$
-\begin{align}
-t(.975; 639) = 1.963
-\end{align}
-$$
+
 - Conclude again error variance is not constant even when outliers are removed
 
 ---
