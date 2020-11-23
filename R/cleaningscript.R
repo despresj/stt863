@@ -32,11 +32,9 @@ data <- data %>%
          # these murder rates were not included in the gapminder but i didnt want to 
          # lose 3 important countries in LA
   relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
-                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)
+                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)%>% 
+  mutate(corruption_perception_index_cpi = (corruption_perception_index_cpi - 100) * -1)
 
 # writing -----------------------------------------------------------------
 
 write_csv(data, here::here("data", "df.csv"))
-
-View(data)
-skimr::skim(ungroup(data))
