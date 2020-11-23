@@ -250,18 +250,6 @@ data %>%
 
 ---
 
-```{r}
-data %>% 
-  ggplot(aes(x = year, y = polrights_fh)) + 
-  geom_col() +
-  facet_wrap(~country) + 
-  coord_flip() + 
-  viridis::scale_fill_viridis(discrete = TRUE, direction = -1) +
-  scale_x_continuous(breaks = 1:7) + 
-  theme(legend.position = "none")
-  theme_light(base_size = 12)
-```
----
 
 # Assumptions
 
