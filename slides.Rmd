@@ -20,9 +20,9 @@ library(xaringanthemer)
 style_mono_accent_inverse(base_color = "#3C989E")
 theme_set(theme_light(base_size = 30))
 options(htmltools.dir.version = FALSE, echo = FALSE)
-knitr::opts_chunk$set(echo = FALSE, fig.width = 12, fig.height = 8) 
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE, fig.width = 12, fig.height = 8) 
 
-data <- readr::read_csv(here::here("data", "df.csv"))
+data <- readr::read_csv(here::here("data", "df.csv")) 
 subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 ```
 
@@ -35,7 +35,7 @@ subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 
 --
 
-* We ask: What factors are associated with an increase in political freedom?.
+* We ask: What factors are associated with an increase in political freedom?
 
 --
 
@@ -48,6 +48,9 @@ subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 --
 
 * Filtered to only include OECD Countries from year 2000 to 2018 by necessity.
+--
+
+* Made adjustments for more intuitive interpretations. 
 
 ---
 
@@ -88,39 +91,39 @@ class: inverse, middle, center
 
 # Covariates  
 
-- Corruption Perception Index ranges from 0 to 100 with 0 being the highest perception of corruption
+- **Corruption Perception** Index ranges from 0 to 100 with 100 being the highest perception of corruption
 
 --
 
-- Education Expenditure in GDP per Person
+- **Education Expenditure** in GDP per Person
 
 --
 
-- Electricity use per person in Kilowatt Hours
+- **Electricity use** per person in Kilowatt Hours
 
 --
 
-- Gini Coefficient: A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth
+- **Gini Coefficient:** A measure of a nation's wealth inequality ranging from 0 being perfectly equal distribution of income and 1 being one person has all nation's wealth
 
 --
 
-- Percentage of population That use the Internet
+- **Internet Users** as percentage of Population
 
 --
 
-- Labor Force Participation
+- **Labor Force** Participation rate
 
 --
 
-- Life Expectancy
+- **Life Expectancy**
 
 --
 
-- Military Spending as a percentage of GDP
+- **Military Spending** as a percentage of GDP
 
 --
 
-- Murders per million people
+- **Murders rate** per million people
 
 ---
 class: center
@@ -270,43 +273,14 @@ subsets %>%
   mutate_if(is.numeric, round, 3) %>% 
   rename(a_rsq = adj.r.squared) %>% 
   select(df, a_rsq, Model) %>%
-  arrange(desc(a_rsq)) %>% 
+  arrange(match(df, c(5, 4, 6)), desc(a_rsq)) %>% 
 DT::datatable(fillContainer = FALSE, options = list(pageLength = 3), 
               colnames = c("DF", "$$R^{2}_a$$", "Model"))
 ```
-
 ---
-# Best Subsets by AIC
-```{r message=FALSE}
-subsets %>% 
-  group_by(df) %>% 
-  filter(AIC == min(AIC)) %>% 
-  mutate_if(is.numeric, round, 3) %>% 
-  select(df, AIC, Model) %>% 
-  arrange(AIC) %>% 
-DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
-              colnames = c("DF", "AIC", "Model"))
-```
-
----
-
-# Best Subsets by BIC
-```{r message=FALSE}
-subsets %>% 
-  group_by(df) %>% 
-  filter(BIC == min(BIC)) %>% 
-  mutate_if(is.numeric, round, 3) %>% 
-  select(df, BIC, Model) %>% 
-  arrange(BIC) %>% 
-DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
-              colnames = c("DF", "BIC", "Model"))
-```
-
----
-
 class: center, middle
 
-# Best Subsets
+# Best Subsets by Adjusted R Squared
 
 ```{r, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
 r <- subsets %>% group_by(df) %>% summarise(adj = max(adj.r.squared, na.rm = T))
@@ -318,13 +292,26 @@ subsets %>%
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
-  #    +  
 ```
 
 ---
+# Best Subsets by AIC
+```{r message=FALSE}
+subsets %>% 
+  group_by(df) %>% 
+  filter(AIC == min(AIC)) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  select(df, AIC, Model) %>% 
+  arrange(match(df, c(5, 4, 6)), desc(AIC)) %>% 
+DT::datatable(fillContainer = FALSE, options = list(pageLength = 3),
+              colnames = c("DF", "AIC", "Model"))
+```
+
+---
+
 class: center, middle
 
-# Best Subsets
+# Best Subsets by AIC
 
 ```{r, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
 r <- subsets %>% group_by(df) %>% summarise(AIC = max(AIC, na.rm = T))
@@ -336,18 +323,12 @@ subsets %>%
   labs(title = "", x = "Parameters", y = "AIC") + 
   scale_x_continuous(breaks = 1:9) + 
   theme_test(base_size = 30) 
-  #    +  
 ```
 
 ---
 
-class: inverse, middle, center
-
+class: inverse, center
 # Model
-
----
-
-class: center, middle
 ```{r}
 model_df5_formula <- subsets %>% filter(df == 5) %>% 
   arrange(desc(adj.r.squared)) %>% 
@@ -370,9 +351,82 @@ $$
 $$
 ---
 class: center
+$$
+\scriptsize
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+
+```{r message=FALSE}
+size <- 18
+a <- data %>% 
+  ggplot(aes(x = corruption_perception_index_cpi, y = polrights_fh)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") + 
+  scale_y_continuous(breaks = 1:7) + 
+  labs(x = "Corruption Perception", y = "Political Rights") + theme_light(base_size = size)
+
+b <- data %>% 
+  ggplot(aes(x = edu_exp_gdp_per_person, y = polrights_fh)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") +
+    scale_y_continuous(breaks = 1:7) + 
+  labs(x = "Education Expendature", y = "") + theme_light(base_size = size)
+
+c <- data %>% 
+  ggplot(aes(x = life_expectancy_years, y = polrights_fh)) + 
+  geom_point()+ 
+  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") +
+    scale_y_continuous(breaks = 1:7) + 
+  labs(x = "Life Expectacy", y = "") + theme_light(base_size = size)
+
+d <- data %>% 
+  ggplot(aes(x = military_spending_pct_of_gdp, y = polrights_fh)) + 
+  geom_point()+ 
+  scale_y_continuous(breaks = 1:7) + 
+  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") + 
+  labs(x = "Military Spending", y = "")+ theme_light(base_size = size)
+
+e <- data %>% 
+  ggplot(aes(x = murder_per_mil_people, y = polrights_fh)) + 
+  geom_point() + 
+  scale_y_continuous(breaks = 1:7) + 
+  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") + 
+  labs(x = "Murder Rate", y = "") + theme_light(base_size = size)
+
+(a + b) / (c + d + e) 
+```
+
+---
+class: center
 
 $$
-\small
+\scriptsize
+\begin{align}
+\operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
+\end{align}
+$$
+# Correlation Matrix
+```{r}
+corr_matrix <- data %>%
+  select(polrights_fh,corruption_perception_index_cpi,edu_exp_gdp_per_person,life_expectancy_years,military_spending_pct_of_gdp,murder_per_mil_people) %>% 
+  cor()
+
+rownames(corr_matrix) <- c("Political Rights", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")
+colnames(corr_matrix) <-  c("Political Rights", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")
+kable(round(corr_matrix, 2)) %>% 
+  kable_styling(font_size = 12)
+```
+
+
+---
+
+
+class: center
+
+$$
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -398,7 +452,7 @@ broom::glance(fit_df5) %>%
 ---
 class: center
 $$
-\small
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -426,7 +480,7 @@ broom::glance(fit_df5) %>%
 ---
 class: center
 $$
-\small
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -454,7 +508,7 @@ broom::glance(fit_df5) %>%
 ---
 class: center
 $$
-\small
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -483,7 +537,7 @@ broom::glance(fit_df5) %>%
 
 class: center
 $$
-\small
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -511,7 +565,7 @@ broom::glance(fit_df5) %>%
 
 class: center
 $$
-\small
+\scriptsize
 \begin{align}
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
@@ -539,12 +593,12 @@ broom::glance(fit_df5) %>%
 
 class: center, middle
 
-```{r warning=FALSE}
+```{r}
 
 hist <- fit_df5 %>% 
   broom::augment() %>% 
   ggplot(aes(.resid)) + 
-  geom_histogram(bins = 100) +
+  geom_histogram(bins = 75, fill = "black") +
   scale_x_continuous(limits = c(-4,4)) + labs(y = "Density", x = "Residual", title = "Histogram")
 
 
@@ -552,7 +606,7 @@ qq <- fit_df5 %>%
   broom::augment() %>% 
   ggplot(aes(sample = .resid)) + 
   stat_qq() +
-  stat_qq_line() + 
+  stat_qq_line(color = "#3C989E") + 
 scale_x_continuous(limits = c(-4,4)) + 
 scale_y_continuous(limits = c(-4,4)) + labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected")   
 ```
@@ -621,6 +675,9 @@ data %>%
   mutate(p.value = as.numeric(p.value)) %>% 
   kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
         caption = "Removed Outliers") 
+
+vars <- rownames(summary(fit_df5)$coef)
+vars[1] <- "polrights_fh"
 ```
 
 ---
@@ -654,11 +711,13 @@ data %>%
 
 # Discussion of outliers
 
+> "A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance". -Chapter 3 p.108
+
+***
 - We identified these outliers.
 - Confirmed they are not errors. 
 - Decided to keep them because they are indicating a substantial loss in political freedom which falls outside of the scope of the model. However, is important for our research question.
-***
-> "A safe rule frequently suggested is to discard an outlier only if there is direct evidence that it represents an error in recording, a miscalculation, a malfunctioning of equipment, or a similar type of circumstance". -Chapter 3 p.108
+
 
 
 ---
@@ -785,12 +844,13 @@ $$
 $$
 
 
-- Conclude again error variance is not constant even when outliers are removed
+- Conclude, again, error variance is not constant even when outliers are removed.
+- The model does a much better job at predicting political freedom in countries with more. This is likely due to the fact that our sample is the OCED that skews twards more Political Freedom
 
 ---
 # Conclusions
 
-1. we think this
+1. Despite minor problems with outliers we found that statistically significant 
 1. because
 
 ---
