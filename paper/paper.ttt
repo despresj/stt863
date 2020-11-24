@@ -1,0 +1,31 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-1}}
+
+\begin{tabular}{lllllll}
+\toprule
+Variable & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Median} & \multicolumn{1}{c}{Std} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Max} & \multicolumn{1}{c}{Range}\\
+\midrule
+Political Rights & 6.60 & 7.00 & 0.79 & 2.00 & 7.00 & 5.00\\
+Year & 2,009.50 & 2,009.50 & 5.19 & 2,001.00 & 2,018.00 & 17.00\\
+Corruption Perception & 31.95 & 29.00 & 15.87 & 8.00 & 71.00 & 63.00\\
+Education Expenditure & 0.20 & 0.20 & 0.04 & 0.10 & 0.37 & 0.27\\
+Electricity Use & 8,682.17 & 6,695.00 & 7,533.32 & 866.00 & 54,800.00 & 53,934.00\\
+Gini & 33.77 & 32.70 & 6.35 & 24.40 & 56.80 & 32.40\\
+Internet Users & 65.41 & 70.90 & 22.93 & 2.85 & 99.00 & 96.15\\
+Life Expectancy & 0.60 & 0.61 & 0.06 & 0.45 & 0.78 & 0.33\\
+Labor Force Participation & 79.30 & 80.00 & 2.84 & 70.20 & 84.40 & 14.20\\
+Military Spending & 1.68 & 1.41 & 1.16 & 0.00 & 8.54 & 8.54\\
+Murders rate & 3.13 & 1.04 & 6.15 & 0.15 & 29.07 & 28.92\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
