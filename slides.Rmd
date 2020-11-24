@@ -253,18 +253,6 @@ data %>%
 
 ---
 
-
-# Assumptions
-
---
-### Finite Mean and Standard Deviation
-### Independence
-### Linearity
-### Normality
-### Homoscedasticity
-
----
-
 # Best Subsets by Adjusted R Squared
 ```{r message=FALSE}
 subsets %>% 
@@ -350,6 +338,18 @@ $$
 \end{align}
 $$
 ---
+
+# Assumptions
+
+--
+### Finite Mean and Standard Deviation
+### Independence
+### Linearity
+### Normality
+### Homoscedasticity
+
+---
+
 class: center
 $$
 \scriptsize
