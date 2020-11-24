@@ -12,6 +12,13 @@ model_df5_formula <- subsets %>% filter(df == 5) %>%
   select(model) %>% head(1) %>% as.character()
 
 fit_df5 <- lm(model_df5_formula, data)
+lm(polrights_fh ~ corruption_perception_index_cpi + 
+     I(corruption_perception_index_cpi^2) +  
+     edu_exp_gdp_per_person + 
+     life_expectancy_years + 
+     military_spending_pct_of_gdp + 
+     murder_per_mil_people, data) %>% summary()
+
 
 # Second model ------------------------------------------------------------
 
