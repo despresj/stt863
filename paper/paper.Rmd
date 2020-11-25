@@ -4,26 +4,22 @@ shorttitle        : "Political Freedom Within the OECD"
 
 author: 
   - name          : "Joe Despres"
-    affiliation   : "1"
+    affiliation   : ""
     corresponding : yes    # Define only one corresponding author
   - name          : "Sabrina Ball"
-    affiliation   : "1"
+    affiliation   : ""
   - name          : "Jacob Haywood"
-    affiliation   : "1"
+    affiliation   : ""
   - name          : "Joe Sigler"
-    affiliation   : "1"
+    affiliation   : ""
 
 
 affiliation:
-  - id            : "1"
-    institution   : "Michigan State University"
-
-date: 
-  - "Last compiled `r format(Sys.time(), '%H:%M')`"
-
+  - id            : ""
+    institution   : "Michigan State University  \n  November 30, 2020"
 
   
-keywords          : "keywords"
+keywords          : "keyword"
 wordcount         : "X"
 
 bibliography      : ["r-references.bib"]
