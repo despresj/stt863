@@ -41,11 +41,12 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r setup, include = FALSE}
+```{r setup}
 library(tidyverse)
 library(kableExtra)
 library(stargazer)
 library(patchwork)
+
 size <- 30
 
 library("papaja")
@@ -53,7 +54,9 @@ r_refs("r-references.bib")
 
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE, 
                       fig.width = 12, fig.height = 8) 
+```
 
+```{r, cache=TRUE}
 
 # Read and Clean ----------------------------------------------------------
 files <- list.files(path = here::here("raw_data"), pattern = ".csv")
@@ -78,16 +81,20 @@ data <- data %>%
   group_by(country) %>%
   mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>% 
 # Iceland spent 0 so I needed to manually recode that
-  mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0)) %>% 
+  mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0), 
+         year = as.numeric(year)) %>% 
   mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
          # https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
          # these murder rates were not included in the gapminder but i didnt want to 
          # lose 3 important countries in LA
-  relocate(polrights_fh) %>% mutate(polrights_fh = (8 - polrights_fh),
-                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100)%>% 
-  mutate(corruption_perception_index_cpi = (corruption_perception_index_cpi - 100) * -1)
+  relocate(polrights_fh) %>% 
+  mutate(polrights_fh = (8 - polrights_fh),
+                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100) %>% 
+  mutate(corruption_perception_index_cpi = (corruption_perception_index_cpi - 100) * -1) %>% 
+  ungroup()
+
 
 # Best Subset Selection ---------------------------------------------------------------
 
@@ -156,23 +163,24 @@ This remedied most of the missing datapoints. However, even within the OEDC ther
 ## Descriptive Statistics
 
 ```{r fig.align="center", results='asis'}
-stat <- function(df = data, x, rounding_digits = 2){
+stat <- function(x, df = data, rounding_digits = 2){
 
-    x <- dplyr::enquo(x)
+    x <- enquo(x)
     df %>%
-      dplyr::summarise(
+      summarise(
                        Mean  = mean( !! x),
                      Median  = median( !! x),
                          Std = sd  ( !! x),
                          Min = min ( !! x),
                          Max = max ( !! x),
                        Range = max(!! x) - min(!! x) ) %>%
-      dplyr::mutate_if(is.numeric, round, rounding_digits)
-  }
+      mutate_if(is.numeric, round, rounding_digits)
+}
+
 
 data %>% 
   select(-country) %>% 
-map(function(x){stat(x, df = data)}) %>% 
+map(function(x){stat(x)}) %>% 
   bind_rows(.id = "Variable") %>% 
   mutate(Variable = replace(Variable, 
                             values = c("Political Rights", "Year", 
@@ -229,9 +237,12 @@ subsets %>%
 ```{r results="asis"}
 stargazer(fit_df6, fit_df5, fit_df4, type = "latex", 
                      title = "Regression Results", 
-                     covariate.labels = c("Corruption Perception", "Education Expendature",
-                                          "Internet Users", "Life Expectancy",
-                                          "Military Spending", "Murder Rate", 
+                     covariate.labels = c("Corruption Perception", 
+                                          "Education Expendature",
+                                          "Internet Users", 
+                                          "Life Expectancy",
+                                          "Military Spending", 
+                                          "Murder Rate", 
                                           "Intercept"),
                      dep.var.caption = "Political Rights Index",
                      dep.var.labels = NULL,

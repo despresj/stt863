@@ -200,7 +200,7 @@
 
 \title{Identifying Factors That Affect Political Freedom Within the OECD}
 \author{Joe Despres\textsuperscript{1}, Sabrina Ball\textsuperscript{1}, Jacob Haywood\textsuperscript{1}, \& Joe Sigler\textsuperscript{1}}
-\date{Last compiled 20:41}
+\date{Last compiled 21:15}
 
 
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Michigan State University}
@@ -228,7 +228,7 @@ This remedied most of the missing datapoints. However, even within the OEDC ther
 \subsection{Descriptive Statistics}\label{descriptive-statistics}}
 
 \begin{longtable}[t]{lrrrrrr}
-\caption{\label{tab:unnamed-chunk-1}Descriptive Statistics}\\
+\caption{\label{tab:unnamed-chunk-2}Descriptive Statistics}\\
 \toprule
 Variable & Mean & Median & Std & Min & Max & Range\\
 \midrule
@@ -253,7 +253,7 @@ Table 1 made with the (Zhu, 2020) contains Basic summary statistics from our dat
 With such considerations taken into account, we will not be making any non-linear transformation or variables. First, we examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. With a clean, complete, and dataset that is contains flaws but is still reasonably holds assumptions we performed the best subsection algorithm to obtain a model with the best fit. This lead us to choose between the following models. From the graph of the subsets we can see that the increase in \(R^{2}_a\) and \(AIC\) by adding additional parameters diminishes quite rapidly.
 
 \begin{figure}
-\includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-2-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-2-2} \caption{ }\label{fig:unnamed-chunk-2}
+\includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-2} \caption{ }\label{fig:unnamed-chunk-3}
 \end{figure}
 
 \begin{table}[!htbp] \centering 
@@ -299,7 +299,7 @@ From the best subsets, it was appropriate to narrow our model choices down to th
 Double spacing makes this dificult
 \[\operatorname{polrights\_fh} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\]
 \[ \beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon\]
-\includegraphics{paper_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{paper_files/figure-latex/unnamed-chunk-5-1.pdf}
 The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, accept for life expectancy, concur with the regression coeffeceintes.
 
 \hypertarget{remeidal-measures}{%
@@ -310,7 +310,7 @@ Let's start with plots of residuals. Figure 2, contains a histogram of the resid
 It was clear to us that there is substancial error variance and likely not constant from the posative residuals to negtive residuals. A Brown-Forsythe test confirmed our suspicians telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 \begin{figure}
-\includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-5-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-5-2} \caption{ }\label{fig:unnamed-chunk-5}
+\includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-2} \caption{ }\label{fig:unnamed-chunk-6}
 \end{figure}
 
 \hypertarget{conclusion}{%
@@ -364,6 +364,7 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \KeywordTok{library}\NormalTok{(kableExtra)}
 \KeywordTok{library}\NormalTok{(stargazer)}
 \KeywordTok{library}\NormalTok{(patchwork)}
+
 \NormalTok{size \textless{}{-}}\StringTok{ }\DecValTok{30}
 
 \KeywordTok{library}\NormalTok{(}\StringTok{"papaja"}\NormalTok{)}
@@ -372,8 +373,72 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \NormalTok{knitr}\OperatorTok{::}\NormalTok{opts\_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{warning=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{message =} \OtherTok{FALSE}\NormalTok{, }
                       \DataTypeTok{fig.width =} \DecValTok{12}\NormalTok{, }\DataTypeTok{fig.height =} \DecValTok{8}\NormalTok{) }
 
-\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"df.csv"}\NormalTok{)) }
-\NormalTok{subsets \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"subsets.csv"}\NormalTok{))}
+\CommentTok{\# Read and Clean {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{files \textless{}{-}}\StringTok{ }\KeywordTok{list.files}\NormalTok{(}\DataTypeTok{path =}\NormalTok{ here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"raw\_data"}\NormalTok{), }\DataTypeTok{pattern =} \StringTok{".csv"}\NormalTok{)}
+
+\NormalTok{cleaning \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{  df \textless{}{-}}\StringTok{ }\KeywordTok{pivot\_longer}\NormalTok{(df, }\DataTypeTok{cols =} \OperatorTok{{-}}\NormalTok{country, }\DataTypeTok{names\_to =} \StringTok{"year"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{files }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"raw\_data/"}\NormalTok{, x))) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{setNames}\NormalTok{(}\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.csv$"}\NormalTok{, }\StringTok{""}\NormalTok{, files)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(cleaning) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{bind\_rows}\NormalTok{(}\DataTypeTok{.id =} \StringTok{"id"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{pivot\_wider}\NormalTok{(}\DataTypeTok{names\_from =}\NormalTok{ id)}
+
+\CommentTok{\# Filtering {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{countries \textless{}{-}}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"countries.RDS"}\NormalTok{))}
+
+\NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{2000}\NormalTok{, year }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{2019}\NormalTok{, country }\OperatorTok{\%in\%}\StringTok{ }\NormalTok{countries) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(country) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate\_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country),}\KeywordTok{list}\NormalTok{(}\OperatorTok{\textasciitilde{}}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(.), }\KeywordTok{median}\NormalTok{(., }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), .))) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\CommentTok{\# Iceland spent 0 so I needed to manually recode that}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{military\_spending\_pct\_of\_gdp =} \KeywordTok{replace\_na}\NormalTok{(military\_spending\_pct\_of\_gdp, }\DecValTok{0}\NormalTok{), }
+         \DataTypeTok{year =} \KeywordTok{as.numeric}\NormalTok{(year)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Mexico"}\NormalTok{, }\FloatTok{29.07}\NormalTok{),}
+         \DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Chile"}\NormalTok{, }\FloatTok{4.4}\NormalTok{),}
+         \DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Colombia"}\NormalTok{, }\FloatTok{25.34}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{         }\CommentTok{\# https://en.wikipedia.org/wiki/List\_of\_countries\_by\_intentional\_homicide\_rate}
+\StringTok{         }\CommentTok{\# these murder rates were not included in the gapminder but i didnt want to }
+\StringTok{         }\CommentTok{\# lose 3 important countries in LA}
+\StringTok{  }\KeywordTok{relocate}\NormalTok{(polrights\_fh) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{polrights\_fh =}\NormalTok{ (}\DecValTok{8} \OperatorTok{{-}}\StringTok{ }\NormalTok{polrights\_fh),}
+                                    \DataTypeTok{military\_spending\_pct\_of\_gdp =}\NormalTok{ military\_spending\_pct\_of\_gdp }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{corruption\_perception\_index\_cpi =}\NormalTok{ (corruption\_perception\_index\_cpi }\OperatorTok{{-}}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{{-}1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+
+\CommentTok{\# Best Subset Selection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{vars \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country, }\OperatorTok{{-}}\NormalTok{year, }\OperatorTok{{-}}\KeywordTok{ends\_with}\NormalTok{(}\StringTok{"\_fh"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{names}\NormalTok{()}
+
+\NormalTok{outcome \textless{}{-}}\StringTok{ "polrights\_fh"}
+
+\NormalTok{models \textless{}{-}}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(vars)) \{}
+\NormalTok{  vc \textless{}{-}}\StringTok{ }\KeywordTok{combn}\NormalTok{(vars,i)}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(vc)) \{}
+\NormalTok{    model \textless{}{-}}\StringTok{ }\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(outcome, }\StringTok{" \textasciitilde{}"}\NormalTok{, }\KeywordTok{paste0}\NormalTok{(vc[,j], }\DataTypeTok{collapse =} \StringTok{" + "}\NormalTok{)))}
+\NormalTok{    models \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(models, model)}
+    
+\NormalTok{    \}}
+\NormalTok{  \}}
+
+\NormalTok{subsets \textless{}{-}}\StringTok{ }\KeywordTok{map}\NormalTok{(models, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{lm}\NormalTok{(x, data)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{map}\NormalTok{(broom}\OperatorTok{::}\NormalTok{glance) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{setNames}\NormalTok{(models) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{bind\_rows}\NormalTok{(}\DataTypeTok{.id =} \StringTok{"id"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{model =}\NormalTok{ id) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{Model =} \KeywordTok{str\_replace\_all}\NormalTok{(model, }\StringTok{"\_"}\NormalTok{, }\StringTok{" "}\NormalTok{),}
+    \DataTypeTok{Model =} \KeywordTok{str\_replace}\NormalTok{(Model, }\StringTok{"\textasciitilde{}"}\NormalTok{, }\StringTok{"="}\NormalTok{), }
+    \DataTypeTok{Model =} \KeywordTok{str\_to\_title}\NormalTok{(Model))}
 \NormalTok{model\_df6\_formula \textless{}{-}}\StringTok{ }\NormalTok{subsets }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(adj.r.squared)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(model) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{as.character}\NormalTok{() }
@@ -391,23 +456,24 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{select}\NormalTok{(model) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{as.character}\NormalTok{() }
 
 \NormalTok{fit\_df4 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(model\_df4\_formula, data)}
-\NormalTok{stat \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{df =}\NormalTok{ data, x, }\DataTypeTok{rounding\_digits =} \DecValTok{2}\NormalTok{)\{}
+\NormalTok{stat \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, }\DataTypeTok{df =}\NormalTok{ data, }\DataTypeTok{rounding\_digits =} \DecValTok{2}\NormalTok{)\{}
 
-\NormalTok{    x \textless{}{-}}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{enquo}\NormalTok{(x)}
+\NormalTok{    x \textless{}{-}}\StringTok{ }\KeywordTok{enquo}\NormalTok{(x)}
 \NormalTok{    df }\OperatorTok{\%\textgreater{}\%}
-\StringTok{      }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}
+\StringTok{      }\KeywordTok{summarise}\NormalTok{(}
                        \DataTypeTok{Mean  =} \KeywordTok{mean}\NormalTok{( }\OperatorTok{!!}\StringTok{ }\NormalTok{x),}
                      \DataTypeTok{Median  =} \KeywordTok{median}\NormalTok{( }\OperatorTok{!!}\StringTok{ }\NormalTok{x),}
                          \DataTypeTok{Std =} \KeywordTok{sd}\NormalTok{  ( }\OperatorTok{!!}\StringTok{ }\NormalTok{x),}
                          \DataTypeTok{Min =} \KeywordTok{min}\NormalTok{ ( }\OperatorTok{!!}\StringTok{ }\NormalTok{x),}
                          \DataTypeTok{Max =} \KeywordTok{max}\NormalTok{ ( }\OperatorTok{!!}\StringTok{ }\NormalTok{x),}
                        \DataTypeTok{Range =} \KeywordTok{max}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{x) }\OperatorTok{{-}}\StringTok{ }\KeywordTok{min}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{x) ) }\OperatorTok{\%\textgreater{}\%}
-\StringTok{      }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate\_if}\NormalTok{(is.numeric, round, rounding\_digits)}
-\NormalTok{  \}}
+\StringTok{      }\KeywordTok{mutate\_if}\NormalTok{(is.numeric, round, rounding\_digits)}
+\NormalTok{\}}
+
 
 \NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{stat}\NormalTok{(x, }\DataTypeTok{df =}\NormalTok{ data)\}) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{stat}\NormalTok{(x)\}) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{bind\_rows}\NormalTok{(}\DataTypeTok{.id =} \StringTok{"Variable"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Variable =} \KeywordTok{replace}\NormalTok{(Variable, }
                             \DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"Political Rights"}\NormalTok{, }\StringTok{"Year"}\NormalTok{, }
@@ -454,9 +520,12 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 
 \KeywordTok{stargazer}\NormalTok{(fit\_df6, fit\_df5, fit\_df4, }\DataTypeTok{type =} \StringTok{"latex"}\NormalTok{, }
                      \DataTypeTok{title =} \StringTok{"Regression Results"}\NormalTok{, }
-                     \DataTypeTok{covariate.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Corruption Perception"}\NormalTok{, }\StringTok{"Education Expendature"}\NormalTok{,}
-                                          \StringTok{"Internet Users"}\NormalTok{, }\StringTok{"Life Expectancy"}\NormalTok{,}
-                                          \StringTok{"Military Spending"}\NormalTok{, }\StringTok{"Murder Rate"}\NormalTok{, }
+                     \DataTypeTok{covariate.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Corruption Perception"}\NormalTok{, }
+                                          \StringTok{"Education Expendature"}\NormalTok{,}
+                                          \StringTok{"Internet Users"}\NormalTok{, }
+                                          \StringTok{"Life Expectancy"}\NormalTok{,}
+                                          \StringTok{"Military Spending"}\NormalTok{, }
+                                          \StringTok{"Murder Rate"}\NormalTok{, }
                                           \StringTok{"Intercept"}\NormalTok{),}
                      \DataTypeTok{dep.var.caption =} \StringTok{"Political Rights Index"}\NormalTok{,}
                      \DataTypeTok{dep.var.labels =} \OtherTok{NULL}\NormalTok{,}
