@@ -4,8 +4,6 @@ library(tidyverse)
 
 data <- read_csv(here::here("data", "df.csv"))
 
-names(data)
-
 vars <- data %>% 
   select(-country, -year, -ends_with("_fh")) %>%
   names()
@@ -16,16 +14,11 @@ models <- list()
 for (i in 1:length(vars)) {
   vc <- combn(vars,i)
   for (j in 1:ncol(vc)) {
-    for(k in 1:ncol(vc)){
-    if(k == j){
     model <- as.formula(paste0(outcome, " ~", paste0(vc[,j], collapse = " + ")))
-    }else{
-    model <- as.formula(paste0(outcome, " ~", paste0(vc[,j],"*", vc[,k], collapse = " + ")))
-    }
     models <- c(models, model)
+    
     }
   }
-}
 
 subsets <- map(models, function(x) lm(x, data)) %>% 
   map(broom::glance) %>% 

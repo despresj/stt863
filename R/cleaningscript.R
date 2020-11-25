@@ -16,7 +16,7 @@ data <- files %>%
 
 # Filtering ---------------------------------------------------------------
 
-countries <- readRDS(here::here("data", "countries.RDS"))[15:51]
+countries <- readRDS(here::here("data", "countries.RDS"))
 
 
 data <- data %>%
