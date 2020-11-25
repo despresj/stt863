@@ -167,23 +167,7 @@
 \makeatother
 \shorttitle{Political Freedom Within the OECD}
 \keywords{keyword\newline\indent Word count: X}
-\usepackage{lineno}
-
-\linenumbers
 \usepackage{csquotes}
-\usepackage[titles]{tocloft}
-\cftpagenumbersoff{figure}
-\renewcommand{\cftfigpresnum}{\itshape\figurename\enspace}
-\renewcommand{\cftfigaftersnum}{.\space}
-\setlength{\cftfigindent}{0pt}
-\setlength{\cftafterloftitleskip}{0pt}
-\settowidth{\cftfignumwidth}{Figure 10.\qquad}
-\cftpagenumbersoff{table}
-\renewcommand{\cfttabpresnum}{\itshape\tablename\enspace}
-\renewcommand{\cfttabaftersnum}{.\space}
-\setlength{\cfttabindent}{0pt}
-\setlength{\cftafterloftitleskip}{0pt}
-\settowidth{\cfttabnumwidth}{Table 10.\qquad}
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
@@ -212,18 +196,18 @@ November 30, 2020}
 \hypertarget{introduction}{%
 \subsection{Introduction}\label{introduction}}
 
-2020 is an election year, which has many of use reflecting on political freedoms. Political freedoms are important because they have a dramatic impact on the quality of life for the citizens of a country. Such reflection has us asking: What factors are associated with an increase in political freedom around the world? Political freedom is an abstract concept that does not lend well to quantification. However, Freedom House (\emph{Countries and Territories}, 2020), a U.S. based think tank and research institute, attempts this by assigning a index of political rights to each country every year based on a fixed criteria. Using the Papaja Package by (Aust \& Barth, 2020) package we take rmarkdown directly to APA format.
+2020 is an election year, which has many of use reflecting on political freedoms. Political freedoms are important because they have a dramatic impact on the quality of life for the citizens of a country. Such reflection has us asking: What factors are associated with an increase in political freedom around the world? Political freedom is an abstract concept that does not lend well to quantification. However, Freedomhouse (\emph{Countries and Territories}, 2020), a U.S. based think tank and research institute, attempts this by assigning an index of political rights to each country every year based on a fixed criteria. Using the Papaja Package by (Aust \& Barth, 2020) we take Rmarkdown directly to APA format.
 
-The \textbf{Political Rights} Index is comprised of three subcategories. Electoral process, political participation, and functioning government. Electoral process is a score based on how the current government leaders were selected. How fairly the positions was obtained and kept. As well as the fairness of the current electoral laws, how they are implemented and the degree to which there is an independent judiciary. Political Participation is evaluated on four criteria, right to form parties, realistic opposition to current power, political choice free from military, religious powers, economic oligarchies, or any other unaccountable body, and various minority groups having full political rights. Functioning government, is the current heads of government determine policies, safeguards against corruption, and openness and transparency of government operation. Political freedom has been measured in this manner for every country from the years 1978 to present.
+The \textbf{Political Rights} Index is comprised of three subcategories. Electoral process, political participation, and functioning government. Electoral process is a score based on how the current government leaders were selected. How fairly the positions were obtained and kept. As well as the fairness of the current electoral laws, how they are implemented and the degree to which there is an independent judiciary. Political Participation is evaluated on four criterion, right to form parties, realistic opposition to current power, political choice free from military, religious powers, economic oligarchies, or any other unaccountable body, and various minority groups having full political rights. Functioning government, measures the level of autonomy of the current heads of government when determining policies, safeguards against corruption, and transparency of government operations. Freedom house has measured political freedom in this manner for every country from the years 1978 to present.
 
-Although such a metric is far from perfect. This will serve as a reasonable measure of political freedom around the world and will serve as an adequate sample to study political freedom. We obtained this from the Gapminder Foundation (Rosling, 2020), a non-profit organization that studies and promotes economic development. After carefully selecting a dependent variable, we browsed data that were also available from Gapminder and selected variables that we felt would be helpful in explaining political freedom in various countries. To explain a country's political rights index we selected: Corruption Perception Index, Education Expenditure, Electricity Use, Gini Coefficient, Internet Users as a percentage, Labor Force Participation Rate, Military Spending as percentage of GDP, and Murders per million.
+Although such a metric is far from perfect and often debatable, this will serve as a reasonable measure of political freedom around the world to study political freedom. We obtained the dataset from the Gapminder Foundation (Rosling, 2020), a non-profit organization that studies and promotes economic development. After carefully selecting a dependent variable, we browsed data that were also available from Gapminder and selected variables that we felt would be helpful in explaining political freedom in various countries. To explain a country's political rights index we selected: \textbf{Corruption Perception Index}, \textbf{Education Expenditure}, \textbf{Electricity Use}, \textbf{Gini Coefficient}, \textbf{Internet Users} as a percentage, \textbf{Labor Force Participation} Rate, \textbf{Military Spending} as percentage of GDP, and \textbf{Murders} per million.
 
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
 
-These data sets were separate so we downloaded them individually, cleaned and combined them together using R (R Core Team, 2020) and the Tidyverse Package (Wickham et al., 2019). This resulted in a data set with all 196 countries form years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points. Also, the further back in time the more missing data points. Had we conducted this study as it was it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has a reasonably complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
+These data sets were separate so we downloaded them individually, cleaned and combined them together using R (R Core Team, 2020) and the Tidyverse Package (Wickham et al., 2019). This resulted in a data set with all 196 countries from years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points, and the further back in time the more missing data. Had we conducted this study as it was it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has reasonably complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
 
-This remedied most of the missing datapoints. However, even within the OEDC there were sparse few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period. Which afforded us the ability to keep even more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0\% of their GDP, so we replaced the NA with a 0. This afforded us a full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. For us we wanted to have a more intuitve interpretation so we subtracted 100 and mulitplied by negaitve one.
+This remedied most of the missing datapoints. However, even within the OEDC there were a few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period and inputted it where there was an NA. This afforded us the ability to keep even more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0\% of their GDP, so we replaced the NA with a 0. This is how we obtained a complete and full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. We wanted to have a more intuitive interpretation so we subtracted 100 and multiplied by negative one. This gives us an interpretation of of 0 being the least corrupt and 100 the most corrupt. We did the same for political rights, which originally 1 was the most political freedom and 7 being the least. We want to interpret a higher number to having more political rights.
 
 \hypertarget{descriptive-statistics}{%
 \subsection{Descriptive Statistics}\label{descriptive-statistics}}
@@ -233,29 +217,32 @@ This remedied most of the missing datapoints. However, even within the OEDC ther
 \toprule
 Variable & Mean & Median & Std & Min & Max & Range\\
 \midrule
-Political Rights & 6.60 & 7.00 & 0.79 & 2.00 & 7.00 & 5.00\\
-Year & 2009.50 & 2009.50 & 5.19 & 2001.00 & 2018.00 & 17.00\\
+Political Rights & 6.58 & 7.00 & 0.80 & 2.00 & 7.00 & 5.00\\
+Year & 2009.00 & 2009.00 & 5.48 & 2000.00 & 2018.00 & 18.00\\
 Corruption Perception & 31.95 & 29.00 & 15.87 & 8.00 & 71.00 & 63.00\\
 Education Expenditure & 0.20 & 0.20 & 0.04 & 0.10 & 0.37 & 0.27\\
-Electricity Use & 8682.17 & 6695.00 & 7533.32 & 866.00 & 54800.00 & 53934.00\\
+Electricity Use & 8598.03 & 6660.00 & 7297.72 & 846.00 & 54800.00 & 53954.00\\
 \addlinespace
-Gini & 33.77 & 32.70 & 6.35 & 24.40 & 56.80 & 32.40\\
-Internet Users & 65.41 & 70.90 & 22.93 & 2.85 & 99.00 & 96.15\\
-Life Expectancy & 0.60 & 0.61 & 0.06 & 0.45 & 0.78 & 0.33\\
-Labor Force Participation & 79.30 & 80.00 & 2.84 & 70.20 & 84.40 & 14.20\\
-Military Spending & 1.68 & 1.41 & 1.16 & 0.00 & 8.54 & 8.54\\
+Gini & 33.77 & 32.70 & 6.41 & 24.40 & 57.70 & 33.30\\
+Internet Users & 63.32 & 69.70 & 24.25 & 2.21 & 99.00 & 96.79\\
+Life Expectancy & 0.60 & 0.60 & 0.06 & 0.45 & 0.78 & 0.33\\
+Labor Force Participation & 79.18 & 79.80 & 2.88 & 70.20 & 84.40 & 14.20\\
+Military Spending & 1.69 & 1.43 & 1.16 & 0.00 & 8.54 & 8.54\\
 \addlinespace
-Murders rate & 3.13 & 1.04 & 6.15 & 0.15 & 29.07 & 28.92\\
+Murders rate & 3.17 & 1.06 & 6.16 & 0.15 & 29.07 & 28.92\\
 \bottomrule
 \end{longtable}
 
-Table 1 made with the (Zhu, 2020) contains Basic summary statistics from our dataset. We observe that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. We would much prefer that it was continuous with a substantial variation. First, the methodology of rather than taking continuous values Freedomhouse's classification is discrete classifying countries political rights taking values of the integers 1-7. Secondly countries with a low political rights by nature have a suspect data reporting process. Which is why we had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
-
-With such considerations taken into account, we will not be making any non-linear transformation or variables. First, we examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. With a clean, complete, and dataset that is contains flaws but is still reasonably holds assumptions we performed the best subsection algorithm to obtain a model with the best fit. This lead us to choose between the following models. From the graph of the subsets we can see that the increase in \(R^{2}_a\) and \(AIC\) by adding additional parameters diminishes quite rapidly.
+Table 1, made with the KableExtra package (Zhu, 2020) contains basic summary statistics from our dataset. We observe that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. Freedomhouse's classification of political freedom is in discrete values from 1-7. Additionally, countries with a low political freedom have suspect data reporting. We had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
 
 \begin{figure}
 \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-2} \caption{ }\label{fig:unnamed-chunk-3}
 \end{figure}
+
+We examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. We will not be making any non-linear transformation or variables. With a dataset that contains flaws but still reasonably holds assumptions we performed the best subsection algorithm to obtain a model with the best fit. This lead us to choose between the following models. From the graph of the subsets we can see that the increase in \(R^{2}_a\) and \(AIC\) by adding additional parameters diminishes quite rapidly.
+
+\hypertarget{model-selection}{%
+\subsection{Model Selection}\label{model-selection}}
 
 \begin{table}[!htbp] \centering 
   \caption{Regression Results} 
@@ -267,48 +254,43 @@ With such considerations taken into account, we will not be making any non-linea
 \cline{2-4} 
  & DF = 6 & DF = 5 & DF = 4 \\ 
 \hline \\[-1.8ex] 
- Corruption Perception & $-$0.023$^{***}$ & $-$0.023$^{***}$ & $-$0.022$^{***}$ \\ 
+ Corruption Perception & $-$0.022$^{***}$ & $-$0.023$^{***}$ & $-$0.023$^{***}$ \\ 
   & (0.002) & (0.002) & (0.002) \\ 
-  Education Expendature & 1.746$^{***}$ & 1.900$^{***}$ & 1.898$^{***}$ \\ 
-  & (0.562) & (0.534) & (0.536) \\ 
-  Internet Users & 0.001 &  &  \\ 
+  Education Expendature & 1.655$^{***}$ & 2.076$^{***}$ & 2.064$^{***}$ \\ 
+  & (0.550) & (0.525) & (0.526) \\ 
+  Internet Users & 0.003$^{**}$ &  &  \\ 
   & (0.001) &  &  \\ 
-  Life Expectancy & $-$0.025$^{***}$ & $-$0.021$^{**}$ &  \\ 
+  Life Expectancy & $-$0.024$^{***}$ & $-$0.013 &  \\ 
   & (0.009) & (0.008) &  \\ 
-  Military Spending & $-$0.146$^{***}$ & $-$0.150$^{***}$ & $-$0.153$^{***}$ \\ 
-  & (0.019) & (0.019) & (0.019) \\ 
-  Murder Rate & $-$0.035$^{***}$ & $-$0.035$^{***}$ & $-$0.033$^{***}$ \\ 
+  Military Spending & $-$0.149$^{***}$ & $-$0.160$^{***}$ & $-$0.162$^{***}$ \\ 
+  & (0.019) & (0.018) & (0.018) \\ 
+  Murder Rate & $-$0.034$^{***}$ & $-$0.033$^{***}$ & $-$0.031$^{***}$ \\ 
   & (0.004) & (0.004) & (0.004) \\ 
-  Intercept & 9.212$^{***}$ & 8.979$^{***}$ & 7.284$^{***}$ \\ 
-  & (0.742) & (0.692) & (0.123) \\ 
+  Intercept & 9.035$^{***}$ & 8.306$^{***}$ & 7.264$^{***}$ \\ 
+  & (0.731) & (0.672) & (0.120) \\ 
  \hline \\[-1.8ex] 
-Observations & 648 & 648 & 648 \\ 
-R$^{2}$ & 0.548 & 0.547 & 0.543 \\ 
-Adjusted R$^{2}$ & 0.543 & 0.544 & 0.540 \\ 
-Residual Std. Error & 0.531 & 0.531 & 0.533 \\ 
-F Statistic & 129.343$^{***}$ & 155.112$^{***}$ & 190.808$^{***}$ \\ 
+Observations & 684 & 684 & 684 \\ 
+R$^{2}$ & 0.552 & 0.548 & 0.546 \\ 
+Adjusted R$^{2}$ & 0.548 & 0.545 & 0.544 \\ 
+Residual Std. Error & 0.536 & 0.538 & 0.539 \\ 
+F Statistic & 139.150$^{***}$ & 164.500$^{***}$ & 204.559$^{***}$ \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+Note: Standard Errors are in Prentices & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table}
 
-\hypertarget{model-selection}{%
-\subsection{Model Selection}\label{model-selection}}
+From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer (Hlavac, 2018). The model with six degrees of freedom contains \textbf{Internet Users} which is 0.001, which is not statistically significant and even if it was a one percent increase in the percentage of people using the internet associated with a 0.001 increase in political freedom is not politically significant in any meaningful way. Looking at the model with five degrees of freedom, all of our coefficients are statistically significant at \(p < 0.01\). The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to attempt explain that we can only speculate. We are going to choose the model with five degrees of freedom. So we arrived at the model with five degrees of freedom.
 
-From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer (Hlavac, 2018) on the next page. The model with six degrees of freedom contains \textbf{Internet Users} which is 0.001, which is not statistically significant and even if it was a one percent increase in the percentage of people using the internet associated with a 0.001 increase in political freedom is not politically significant in any meaningful way. Looking at the model with five degrees of freedom, all of our coefficients are statistically significant at \(p < 0.01\). The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to attempt explain that we can only speculate. We are going to choose the model with five degrees of freedom. So we arrived at the following model.\\
-Double spacing makes this dificult
-\[\operatorname{polrights\_fh} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\]
-\[ \beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon\]
 \includegraphics{paper_files/figure-latex/unnamed-chunk-5-1.pdf}
-The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, accept for life expectancy, concur with the regression coeffeceintes.
+The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, accept for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.
 
-\hypertarget{remeidal-measures}{%
-\subsection{Remeidal Measures}\label{remeidal-measures}}
+\hypertarget{assumptions}{%
+\subsection{Assumptions}\label{assumptions}}
 
 Now we will examine some remedial measures to analyze the performance and identify problems.
-Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjcent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection found that these outliers are turkey from 2016 to 2018. These residuals are large and suggest a substancial loss in political freedom. This is confirmed by Freedomhouse (\emph{Countries and Territories}, 2020) reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reasion to eliminate it.\\
-It was clear to us that there is substancial error variance and likely not constant from the posative residuals to negtive residuals. A Brown-Forsythe test confirmed our suspicians telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
+Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse (\emph{Countries and Territories}, 2020) reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.\\
+It was clear to us that there is substantial error variance and likely not constant from the positive residuals to negative residuals. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 \begin{figure}
 \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-2} \caption{ }\label{fig:unnamed-chunk-6}
@@ -365,22 +347,16 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \KeywordTok{library}\NormalTok{(kableExtra)}
 \KeywordTok{library}\NormalTok{(stargazer)}
 \KeywordTok{library}\NormalTok{(patchwork)}
-
 \NormalTok{size \textless{}{-}}\StringTok{ }\DecValTok{30}
-
 \KeywordTok{library}\NormalTok{(}\StringTok{"papaja"}\NormalTok{)}
 \KeywordTok{r\_refs}\NormalTok{(}\StringTok{"r{-}references.bib"}\NormalTok{)}
-
 \NormalTok{knitr}\OperatorTok{::}\NormalTok{opts\_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{warning=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{message =} \OtherTok{FALSE}\NormalTok{, }
                       \DataTypeTok{fig.width =} \DecValTok{12}\NormalTok{, }\DataTypeTok{fig.height =} \DecValTok{8}\NormalTok{) }
-
 \CommentTok{\# Read and Clean {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{files \textless{}{-}}\StringTok{ }\KeywordTok{list.files}\NormalTok{(}\DataTypeTok{path =}\NormalTok{ here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"raw\_data"}\NormalTok{), }\DataTypeTok{pattern =} \StringTok{".csv"}\NormalTok{)}
-
 \NormalTok{cleaning \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
 \NormalTok{  df \textless{}{-}}\StringTok{ }\KeywordTok{pivot\_longer}\NormalTok{(df, }\DataTypeTok{cols =} \OperatorTok{{-}}\NormalTok{country, }\DataTypeTok{names\_to =} \StringTok{"year"}\NormalTok{)}
 \NormalTok{\}}
-
 \NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{files }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"raw\_data/"}\NormalTok{, x))) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{setNames}\NormalTok{(}\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.csv$"}\NormalTok{, }\StringTok{""}\NormalTok{, files)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
@@ -389,76 +365,55 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{pivot\_wider}\NormalTok{(}\DataTypeTok{names\_from =}\NormalTok{ id)}
 
 \CommentTok{\# Filtering {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-
 \NormalTok{countries \textless{}{-}}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"countries.RDS"}\NormalTok{))}
-
 \NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{2000}\NormalTok{, year }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{2019}\NormalTok{, country }\OperatorTok{\%in\%}\StringTok{ }\NormalTok{countries) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{as.numeric}\NormalTok{(year)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{\textgreater{}=}\StringTok{ }\DecValTok{2000}\NormalTok{, year }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{2019}\NormalTok{, country }\OperatorTok{\%in\%}\StringTok{ }\NormalTok{countries) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{group\_by}\NormalTok{(country) }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\KeywordTok{mutate\_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country),}\KeywordTok{list}\NormalTok{(}\OperatorTok{\textasciitilde{}}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(.), }\KeywordTok{median}\NormalTok{(., }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), .))) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \CommentTok{\# Iceland spent 0 so I needed to manually recode that}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{military\_spending\_pct\_of\_gdp =} \KeywordTok{replace\_na}\NormalTok{(military\_spending\_pct\_of\_gdp, }\DecValTok{0}\NormalTok{), }
-         \DataTypeTok{year =} \KeywordTok{as.numeric}\NormalTok{(year)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Mexico"}\NormalTok{, }\FloatTok{29.07}\NormalTok{),}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{military\_spending\_pct\_of\_gdp =} \KeywordTok{replace\_na}\NormalTok{(military\_spending\_pct\_of\_gdp, }\DecValTok{0}\NormalTok{),}
+  \DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Mexico"}\NormalTok{, }\FloatTok{29.07}\NormalTok{),}
          \DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Chile"}\NormalTok{, }\FloatTok{4.4}\NormalTok{),}
          \DataTypeTok{murder\_per\_mil\_people =} \KeywordTok{replace}\NormalTok{(murder\_per\_mil\_people, country }\OperatorTok{==}\StringTok{ "Colombia"}\NormalTok{, }\FloatTok{25.34}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{         }\CommentTok{\# https://en.wikipedia.org/wiki/List\_of\_countries\_by\_intentional\_homicide\_rate}
-\StringTok{         }\CommentTok{\# these murder rates were not included in the gapminder but i didnt want to }
-\StringTok{         }\CommentTok{\# lose 3 important countries in LA}
 \StringTok{  }\KeywordTok{relocate}\NormalTok{(polrights\_fh) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{polrights\_fh =}\NormalTok{ (}\DecValTok{8} \OperatorTok{{-}}\StringTok{ }\NormalTok{polrights\_fh),}
-                                    \DataTypeTok{military\_spending\_pct\_of\_gdp =}\NormalTok{ military\_spending\_pct\_of\_gdp }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{corruption\_perception\_index\_cpi =}\NormalTok{ (corruption\_perception\_index\_cpi }\OperatorTok{{-}}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{{-}1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+ \DataTypeTok{military\_spending\_pct\_of\_gdp =}\NormalTok{ military\_spending\_pct\_of\_gdp }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{corruption\_perception\_index\_cpi =}\NormalTok{ (}\DecValTok{100} \OperatorTok{{-}}\StringTok{ }\NormalTok{corruption\_perception\_index\_cpi)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-
 \CommentTok{\# Best Subset Selection {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-
 \NormalTok{vars \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country, }\OperatorTok{{-}}\NormalTok{year, }\OperatorTok{{-}}\KeywordTok{ends\_with}\NormalTok{(}\StringTok{"\_fh"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\KeywordTok{names}\NormalTok{()}
-
-\NormalTok{outcome \textless{}{-}}\StringTok{ "polrights\_fh"}
-
 \NormalTok{models \textless{}{-}}\StringTok{ }\KeywordTok{list}\NormalTok{()}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(vars)) \{}
 \NormalTok{  vc \textless{}{-}}\StringTok{ }\KeywordTok{combn}\NormalTok{(vars,i)}
   \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(vc)) \{}
-\NormalTok{    model \textless{}{-}}\StringTok{ }\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(outcome, }\StringTok{" \textasciitilde{}"}\NormalTok{, }\KeywordTok{paste0}\NormalTok{(vc[,j], }\DataTypeTok{collapse =} \StringTok{" + "}\NormalTok{)))}
+\NormalTok{    model \textless{}{-}}\StringTok{ }\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"polrights\_fh"}\NormalTok{, }\StringTok{" \textasciitilde{}"}\NormalTok{, }\KeywordTok{paste0}\NormalTok{(vc[,j], }\DataTypeTok{collapse =} \StringTok{" + "}\NormalTok{)))}
 \NormalTok{    models \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(models, model)}
-    
 \NormalTok{    \}}
 \NormalTok{  \}}
-
 \NormalTok{subsets \textless{}{-}}\StringTok{ }\KeywordTok{map}\NormalTok{(models, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{lm}\NormalTok{(x, data)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{map}\NormalTok{(broom}\OperatorTok{::}\NormalTok{glance) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{setNames}\NormalTok{(models) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{bind\_rows}\NormalTok{(}\DataTypeTok{.id =} \StringTok{"id"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{model =}\NormalTok{ id) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{Model =} \KeywordTok{str\_replace\_all}\NormalTok{(model, }\StringTok{"\_"}\NormalTok{, }\StringTok{" "}\NormalTok{),}
-    \DataTypeTok{Model =} \KeywordTok{str\_replace}\NormalTok{(Model, }\StringTok{"\textasciitilde{}"}\NormalTok{, }\StringTok{"="}\NormalTok{), }
-    \DataTypeTok{Model =} \KeywordTok{str\_to\_title}\NormalTok{(Model))}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Model =} \KeywordTok{str\_replace\_all}\NormalTok{(model, }\StringTok{"\_"}\NormalTok{, }\StringTok{" "}\NormalTok{),}
+         \DataTypeTok{Model =} \KeywordTok{str\_replace}\NormalTok{(Model, }\StringTok{"\textasciitilde{}"}\NormalTok{, }\StringTok{"="}\NormalTok{), }
+         \DataTypeTok{Model =} \KeywordTok{str\_to\_title}\NormalTok{(Model))}
 \NormalTok{model\_df6\_formula \textless{}{-}}\StringTok{ }\NormalTok{subsets }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(adj.r.squared)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(model) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{as.character}\NormalTok{() }
-
 \NormalTok{fit\_df6 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(model\_df6\_formula, data)}
-
 \NormalTok{model\_df5\_formula \textless{}{-}}\StringTok{ }\NormalTok{subsets }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(adj.r.squared)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(model) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{as.character}\NormalTok{()}
-
 \NormalTok{fit\_df5 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(model\_df5\_formula, data)}
-
 \NormalTok{model\_df4\_formula \textless{}{-}}\StringTok{ }\NormalTok{subsets }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df }\OperatorTok{==}\StringTok{ }\DecValTok{4}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(adj.r.squared)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(model) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{head}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }\KeywordTok{as.character}\NormalTok{() }
-
 \NormalTok{fit\_df4 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(model\_df4\_formula, data)}
 \NormalTok{stat \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, }\DataTypeTok{df =}\NormalTok{ data, }\DataTypeTok{rounding\_digits =} \DecValTok{2}\NormalTok{)\{}
-
 \NormalTok{    x \textless{}{-}}\StringTok{ }\KeywordTok{enquo}\NormalTok{(x)}
 \NormalTok{    df }\OperatorTok{\%\textgreater{}\%}
 \StringTok{      }\KeywordTok{summarise}\NormalTok{(}
@@ -470,8 +425,6 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
                        \DataTypeTok{Range =} \KeywordTok{max}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{x) }\OperatorTok{{-}}\StringTok{ }\KeywordTok{min}\NormalTok{(}\OperatorTok{!!}\StringTok{ }\NormalTok{x) ) }\OperatorTok{\%\textgreater{}\%}
 \StringTok{      }\KeywordTok{mutate\_if}\NormalTok{(is.numeric, round, rounding\_digits)}
 \NormalTok{\}}
-
-
 \NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{country) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{stat}\NormalTok{(x)\}) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
@@ -504,7 +457,7 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
               \DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{span =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{color =} \StringTok{"\#3C989E"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{""}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Parameters"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Adjusted R Squared"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale\_x\_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{theme\_test}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size) }
+\StringTok{  }\KeywordTok{theme\_test}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size) }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Best Subset Selection"}\NormalTok{)}
 
 \NormalTok{r \textless{}{-}}\StringTok{ }\NormalTok{subsets }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{group\_by}\NormalTok{(df) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
@@ -519,7 +472,8 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{scale\_x\_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme\_test}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size) }
 
-\KeywordTok{stargazer}\NormalTok{(fit\_df6, fit\_df5, fit\_df4, }\DataTypeTok{type =} \StringTok{"latex"}\NormalTok{, }
+\KeywordTok{stargazer}\NormalTok{(fit\_df6, fit\_df5, fit\_df4, }
+                     \DataTypeTok{type =} \StringTok{"latex"}\NormalTok{, }
                      \DataTypeTok{title =} \StringTok{"Regression Results"}\NormalTok{, }
                      \DataTypeTok{covariate.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Corruption Perception"}\NormalTok{, }
                                           \StringTok{"Education Expendature"}\NormalTok{,}
@@ -536,7 +490,8 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
                      \DataTypeTok{df =} \OtherTok{FALSE}\NormalTok{, }
                      \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{,}
                      \DataTypeTok{column.labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"DF = 6"}\NormalTok{, }\StringTok{"DF = 5"}\NormalTok{, }\StringTok{"DF = 4"}\NormalTok{),}
-                     \DataTypeTok{no.space =} \OtherTok{TRUE}\NormalTok{)}
+                     \DataTypeTok{no.space =} \OtherTok{TRUE}\NormalTok{, }
+                     \DataTypeTok{notes.label =} \StringTok{"Note: Standard Errors are in Prentices"}\NormalTok{)}
 \NormalTok{size \textless{}{-}}\StringTok{ }\DecValTok{18}
 \NormalTok{a \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ corruption\_perception\_index\_cpi, }\DataTypeTok{y =}\NormalTok{ polrights\_fh)) }\OperatorTok{+}\StringTok{ }
@@ -544,7 +499,7 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{geom\_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{color =} \StringTok{"\#3C989E"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{scale\_y\_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Corruption Perception"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Political Rights"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme\_light}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size)}
+\StringTok{  }\KeywordTok{theme\_light}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size) }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Response Term on Convariates"}\NormalTok{)}
 
 \NormalTok{b \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ edu\_exp\_gdp\_per\_person, }\DataTypeTok{y =}\NormalTok{ polrights\_fh)) }\OperatorTok{+}\StringTok{ }
@@ -582,7 +537,7 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(.resid)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{bins =} \DecValTok{75}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{scale\_x\_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Density"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Residual"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Histogram"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{y =} \StringTok{"Density"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Residual"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Histogram of Residuals"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{theme\_light}\NormalTok{(}\DataTypeTok{base\_size =}\NormalTok{ size }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)}
 
 
@@ -590,7 +545,7 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\NormalTok{broom}\OperatorTok{::}\KeywordTok{augment}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ .resid)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{stat\_qq}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{stat\_qq\_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"\#3C989E"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{stat\_qq\_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"\#3C989E"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \KeywordTok{scale\_x\_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \KeywordTok{scale\_y\_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"QQ Plot of Residuals "}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Residual"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Expected"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
@@ -598,13 +553,6 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \NormalTok{beepr}\OperatorTok{::}\KeywordTok{beep}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-
-\clearpage
-\renewcommand{\listfigurename}{Figure captions}
-
-\clearpage
-\renewcommand{\listtablename}{Table captions}
 
 
 \end{document}

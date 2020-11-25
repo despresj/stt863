@@ -25,10 +25,10 @@ wordcount         : "X"
 bibliography      : ["r-references.bib"]
 
 floatsintext      : yes
-figurelist        : yes
-tablelist         : yes
+figurelist        : no
+tablelist         : no
 footnotelist      : no
-linenumbers       : yes
+linenumbers       : no
 mask              : no
 draft             : no
 
@@ -42,25 +42,19 @@ library(tidyverse)
 library(kableExtra)
 library(stargazer)
 library(patchwork)
-
 size <- 30
-
 library("papaja")
 r_refs("r-references.bib")
-
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE, 
                       fig.width = 12, fig.height = 8) 
 ```
 
 ```{r, cache=TRUE}
-
 # Read and Clean ----------------------------------------------------------
 files <- list.files(path = here::here("raw_data"), pattern = ".csv")
-
 cleaning <- function(df){
   df <- pivot_longer(df, cols = -country, names_to = "year")
 }
-
 data <- files %>% 
   map(function(x) read_csv(paste0("raw_data/", x))) %>% 
   setNames(gsub("\\.csv$", "", files)) %>% 
@@ -69,98 +63,79 @@ data <- files %>%
   pivot_wider(names_from = id)
 
 # Filtering ---------------------------------------------------------------
-
 countries <- readRDS(here::here("data", "countries.RDS"))
-
 data <- data %>%
-  filter(year > 2000, year < 2019, country %in% countries) %>% 
+  mutate(year = as.numeric(year)) %>% 
+  filter(year >= 2000, year < 2019, country %in% countries) %>% 
   group_by(country) %>%
   mutate_at(vars(-country),list(~ifelse(is.na(.), median(., na.rm = TRUE), .))) %>% 
 # Iceland spent 0 so I needed to manually recode that
-  mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0), 
-         year = as.numeric(year)) %>% 
-  mutate(murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
+  mutate(military_spending_pct_of_gdp = replace_na(military_spending_pct_of_gdp, 0),
+  murder_per_mil_people = replace(murder_per_mil_people, country == "Mexico", 29.07),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Chile", 4.4),
          murder_per_mil_people = replace(murder_per_mil_people, country == "Colombia", 25.34)) %>% 
-         # https://en.wikipedia.org/wiki/List_of_countries_by_intentional_homicide_rate
-         # these murder rates were not included in the gapminder but i didnt want to 
-         # lose 3 important countries in LA
   relocate(polrights_fh) %>% 
   mutate(polrights_fh = (8 - polrights_fh),
-                                    military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100) %>% 
-  mutate(corruption_perception_index_cpi = (corruption_perception_index_cpi - 100) * -1) %>% 
+ military_spending_pct_of_gdp = military_spending_pct_of_gdp * 100) %>% 
+  mutate(corruption_perception_index_cpi = (100 - corruption_perception_index_cpi)) %>% 
   ungroup()
-
-
 # Best Subset Selection ---------------------------------------------------------------
-
 vars <- data %>% 
   select(-country, -year, -ends_with("_fh")) %>%
   names()
-
-outcome <- "polrights_fh"
-
 models <- list()
 for (i in 1:length(vars)) {
   vc <- combn(vars,i)
   for (j in 1:ncol(vc)) {
-    model <- as.formula(paste0(outcome, " ~", paste0(vc[,j], collapse = " + ")))
+    model <- as.formula(paste0("polrights_fh", " ~", paste0(vc[,j], collapse = " + ")))
     models <- c(models, model)
-    
     }
   }
-
 subsets <- map(models, function(x) lm(x, data)) %>% 
   map(broom::glance) %>% 
   setNames(models) %>% 
   bind_rows(.id = "id") %>% 
-  distinct() %>% 
   rename(model = id) %>% 
-  mutate(
-    Model = str_replace_all(model, "_", " "),
-    Model = str_replace(Model, "~", "="), 
-    Model = str_to_title(Model))
+  mutate(Model = str_replace_all(model, "_", " "),
+         Model = str_replace(Model, "~", "="), 
+         Model = str_to_title(Model))
 ```
 
 ```{r models}
 model_df6_formula <- subsets %>% filter(df == 6) %>% 
   arrange(desc(adj.r.squared)) %>% 
   select(model) %>% head(1) %>% as.character() 
-
 fit_df6 <- lm(model_df6_formula, data)
-
 model_df5_formula <- subsets %>% filter(df == 5) %>% 
   arrange(desc(adj.r.squared)) %>% 
   select(model) %>% head(1) %>% as.character()
-
 fit_df5 <- lm(model_df5_formula, data)
-
 model_df4_formula <- subsets %>% filter(df == 4) %>% 
   arrange(desc(adj.r.squared)) %>% 
   select(model) %>% head(1) %>% as.character() 
-
 fit_df4 <- lm(model_df4_formula, data)
 ```
 
+
+
 ## Introduction
 
-2020 is an election year, which has many of use reflecting on political freedoms. Political freedoms are important because they have a dramatic impact on the quality of life for the citizens of a country. Such reflection has us asking: What factors are associated with an increase in political freedom around the world? Political freedom is an abstract concept that does not lend well to quantification. However, Freedom House [@Freedomhouse], a U.S. based think tank and research institute, attempts this by assigning a index of political rights to each country every year based on a fixed criteria. Using the Papaja Package by [@R-papaja] package we take rmarkdown directly to APA format.
+2020 is an election year, which has many of use reflecting on political freedoms. Political freedoms are important because they have a dramatic impact on the quality of life for the citizens of a country. Such reflection has us asking: What factors are associated with an increase in political freedom around the world? Political freedom is an abstract concept that does not lend well to quantification. However, Freedomhouse [@Freedomhouse], a U.S. based think tank and research institute, attempts this by assigning an index of political rights to each country every year based on a fixed criteria. Using the Papaja Package by [@R-papaja] we take Rmarkdown directly to APA format.
 
-The **Political Rights** Index is comprised of three subcategories. Electoral process, political participation, and functioning government. Electoral process is a score based on how the current government leaders were selected. How fairly the positions was obtained and kept. As well as the fairness of the current electoral laws, how they are implemented and the degree to which there is an independent judiciary. Political Participation is evaluated on four criteria, right to form parties, realistic opposition to current power, political choice free from military, religious powers, economic oligarchies, or any other unaccountable body, and various minority groups having full political rights. Functioning government, is the current heads of government determine policies, safeguards against corruption, and openness and transparency of government operation. Political freedom has been measured in this manner for every country from the years 1978 to present.
+The **Political Rights** Index is comprised of three subcategories. Electoral process, political participation, and functioning government. Electoral process is a score based on how the current government leaders were selected. How fairly the positions were obtained and kept. As well as the fairness of the current electoral laws, how they are implemented and the degree to which there is an independent judiciary. Political Participation is evaluated on four criterion, right to form parties, realistic opposition to current power, political choice free from military, religious powers, economic oligarchies, or any other unaccountable body, and various minority groups having full political rights. Functioning government, measures the level of autonomy of the current heads of government when determining policies, safeguards against corruption, and transparency of government operations. Freedom house has measured political freedom in this manner for every country from the years 1978 to present.
 
-Although such a metric is far from perfect. This will serve as a reasonable measure of political freedom around the world and will serve as an adequate sample to study political freedom. We obtained this from the Gapminder Foundation [@Gapminder], a non-profit organization that studies and promotes economic development. After carefully selecting a dependent variable, we browsed data that were also available from Gapminder and selected variables that we felt would be helpful in explaining political freedom in various countries. To explain a country's political rights index we selected: Corruption Perception Index, Education Expenditure, Electricity Use, Gini Coefficient, Internet Users as a percentage, Labor Force Participation Rate, Military Spending as percentage of GDP, and Murders per million.
+Although such a metric is far from perfect and often debatable, this will serve as a reasonable measure of political freedom around the world to study political freedom. We obtained the dataset from the Gapminder Foundation [@Gapminder], a non-profit organization that studies and promotes economic development. After carefully selecting a dependent variable, we browsed data that were also available from Gapminder and selected variables that we felt would be helpful in explaining political freedom in various countries. To explain a country's political rights index we selected: **Corruption Perception Index**, **Education Expenditure**, **Electricity Use**, **Gini Coefficient**, **Internet Users** as a percentage, **Labor Force Participation** Rate, **Military Spending** as percentage of GDP, and **Murders** per million.
 
 ## Data
 
-These data sets were separate so we downloaded them individually, cleaned and combined them together using R [@R-base] and the Tidyverse Package [@R-tidyverse]. This resulted in a data set with all 196 countries form years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points. Also, the further back in time the more missing data points. Had we conducted this study as it was it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has a reasonably complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
+These data sets were separate so we downloaded them individually, cleaned and combined them together using R [@R-base] and the Tidyverse Package [@R-tidyverse]. This resulted in a data set with all 196 countries from years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points, and the further back in time the more missing data. Had we conducted this study as it was it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has reasonably complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
 
-This remedied most of the missing datapoints. However, even within the OEDC there were sparse few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period. Which afforded us the ability to keep even more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0% of their GDP, so we replaced the NA with a 0. This afforded us a full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. For us we wanted to have a more intuitve interpretation so we subtracted 100 and mulitplied by negaitve one.
+This remedied most of the missing datapoints. However, even within the OEDC there were a few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period and inputted it where there was an NA. This afforded us the ability to keep even more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0% of their GDP, so we replaced the NA with a 0. This is how we obtained a complete and full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. We wanted to have a more intuitive interpretation so we subtracted 100 and multiplied by negative one. This gives us an interpretation of of 0 being the least corrupt and 100 the most corrupt. We did the same for political rights, which originally 1 was the most political freedom and 7 being the least. We want to interpret a higher number to having more political rights. 
 
 ## Descriptive Statistics
 
 ```{r fig.align="center", results='asis'}
 stat <- function(x, df = data, rounding_digits = 2){
-
     x <- enquo(x)
     df %>%
       summarise(
@@ -172,8 +147,6 @@ stat <- function(x, df = data, rounding_digits = 2){
                        Range = max(!! x) - min(!! x) ) %>%
       mutate_if(is.numeric, round, rounding_digits)
 }
-
-
 data %>% 
   select(-country) %>% 
 map(function(x){stat(x)}) %>% 
@@ -197,9 +170,7 @@ kable(
  caption = "Descriptive Statistics")
 ```
 
-Table 1 made with the [@R-kableExtra] contains Basic summary statistics from our dataset. We observe that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. We would much prefer that it was continuous with a substantial variation. First, the methodology of rather than taking continuous values Freedomhouse's classification is discrete classifying countries political rights taking values of the integers 1-7. Secondly countries with a low political rights by nature have a suspect data reporting process. Which is why we had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
-
-With such considerations taken into account, we will not be making any non-linear transformation or variables. First, we examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. With a clean, complete, and dataset that is contains flaws but is still reasonably holds assumptions we performed the best subsection algorithm to obtain a model with the best fit. This lead us to choose between the following models. From the graph of the subsets we can see that the increase in $R^{2}_a$ and $AIC$ by adding additional parameters diminishes quite rapidly.
+Table 1, made with the KableExtra package [@R-kableExtra] contains basic summary statistics from our dataset. We observe that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. Freedomhouse's classification of political freedom is in discrete values from 1-7. Additionally, countries with a low political freedom have suspect data reporting. We had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
 
 ```{r fig.show="hold", out.width="50%"}
 r <- subsets %>% 
@@ -213,7 +184,7 @@ subsets %>%
               se = FALSE, span = 0.5, color = "#3C989E") + 
   labs(title = "", x = "Parameters", y = "Adjusted R Squared") + 
   scale_x_continuous(breaks = 1:9) + 
-  theme_test(base_size = size) 
+  theme_test(base_size = size) + labs(title = "Best Subset Selection")
 
 r <- subsets %>% 
   group_by(df) %>% 
@@ -230,8 +201,14 @@ subsets %>%
 
 ```
 
+We examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. We will not be making any non-linear transformation or variables.  With a dataset that contains flaws but still reasonably holds assumptions we performed the best subsection algorithm to obtain a model with the best fit. This lead us to choose between the following models. From the graph of the subsets we can see that the increase in $R^{2}_a$ and $AIC$ by adding additional parameters diminishes quite rapidly.
+
+
+
+## Model Selection
 ```{r results="asis"}
-stargazer(fit_df6, fit_df5, fit_df4, type = "latex", 
+stargazer(fit_df6, fit_df5, fit_df4, 
+                     type = "latex", 
                      title = "Regression Results", 
                      covariate.labels = c("Corruption Perception", 
                                           "Education Expendature",
@@ -248,15 +225,12 @@ stargazer(fit_df6, fit_df5, fit_df4, type = "latex",
                      df = FALSE, 
                      header = FALSE,
                      column.labels = c("DF = 6", "DF = 5", "DF = 4"),
-                     no.space = TRUE)
+                     no.space = TRUE, 
+                     notes.label = "Note: Standard Errors are in Prentices")
 ```
 
-## Model Selection
+From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer [@R-stargazer]. The model with six degrees of freedom contains **Internet Users** which is 0.001, which is not statistically significant and even if it was a one percent increase in the percentage of people using the internet associated with a 0.001 increase in political freedom is not politically significant in any meaningful way. Looking at the model with five degrees of freedom, all of our coefficients are statistically significant at $p < 0.01$. The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to attempt explain that we can only speculate. We are going to choose the model with five degrees of freedom. So we arrived at the model with five degrees of freedom. 
 
-From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer [@R-stargazer] on the next page. The model with six degrees of freedom contains **Internet Users** which is 0.001, which is not statistically significant and even if it was a one percent increase in the percentage of people using the internet associated with a 0.001 increase in political freedom is not politically significant in any meaningful way. Looking at the model with five degrees of freedom, all of our coefficients are statistically significant at $p < 0.01$. The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to attempt explain that we can only speculate. We are going to choose the model with five degrees of freedom. So we arrived at the following model.  
-Double spacing makes this dificult
-$$\operatorname{polrights\_fh} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) + \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +$$
-$$ \beta_{3}(\operatorname{life\_expectancy\_years}) + \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) + \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon$$
 ```{r message=FALSE}
 size <- 18
 a <- data %>% 
@@ -265,7 +239,7 @@ a <- data %>%
   geom_smooth(method = "lm", se = FALSE, color = "#3C989E") + 
   scale_y_continuous(breaks = 1:7) + 
   labs(x = "Corruption Perception", y = "Political Rights") +
-  theme_light(base_size = size)
+  theme_light(base_size = size) + labs(title = "Response Term on Convariates")
 
 b <- data %>% 
   ggplot(aes(x = edu_exp_gdp_per_person, y = polrights_fh)) + 
@@ -299,12 +273,13 @@ e <- data %>%
 
 (a + b) / (c + d + e) 
 ```
-The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, accept for life expectancy, concur with the regression coeffeceintes.  
+The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, accept for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative. 
 
-## Remeidal Measures
+## Assumptions
+
 Now we will examine some remedial measures to analyze the performance and identify problems. 
-Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjcent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection found that these outliers are turkey from 2016 to 2018. These residuals are large and suggest a substancial loss in political freedom. This is confirmed by Freedomhouse [@Freedomhouse] reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reasion to eliminate it.  
-It was clear to us that there is substancial error variance and likely not constant from the posative residuals to negtive residuals. A Brown-Forsythe test confirmed our suspicians telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
+Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse [@Freedomhouse] reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.  
+It was clear to us that there is substantial error variance and likely not constant from the positive residuals to negative residuals. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 ```{r fig.show="hold", out.width="50%"}
 fit_df5 %>% 
@@ -312,7 +287,7 @@ fit_df5 %>%
   ggplot(aes(.resid)) + 
   geom_histogram(bins = 75, fill = "black") +
   scale_x_continuous(limits = c(-4,4)) + 
-  labs(y = "Density", x = "Residual", title = "Histogram") + 
+  labs(y = "Density", x = "Residual", title = "Histogram of Residuals") + 
   theme_light(base_size = size + 10)
 
 
@@ -320,7 +295,7 @@ fit_df5 %>%
   broom::augment() %>% 
   ggplot(aes(sample = .resid)) + 
   stat_qq() +
-  stat_qq_line(color = "#3C989E", size = 3) + 
+  stat_qq_line(color = "#3C989E", size = 2) + 
 scale_x_continuous(limits = c(-4,4)) + 
 scale_y_continuous(limits = c(-4,4)) + 
   labs(title = "QQ Plot of Residuals ", x = "Residual", y = "Expected") + 
