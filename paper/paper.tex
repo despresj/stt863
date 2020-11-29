@@ -346,8 +346,8 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \KeywordTok{library}\NormalTok{(kableExtra)}
 \KeywordTok{library}\NormalTok{(stargazer)}
 \KeywordTok{library}\NormalTok{(patchwork)}
-\NormalTok{size \textless{}{-}}\StringTok{ }\DecValTok{30}
 \KeywordTok{library}\NormalTok{(}\StringTok{"papaja"}\NormalTok{)}
+\NormalTok{size \textless{}{-}}\StringTok{ }\DecValTok{30}
 \KeywordTok{r\_refs}\NormalTok{(}\StringTok{"r{-}references.bib"}\NormalTok{)}
 \NormalTok{knitr}\OperatorTok{::}\NormalTok{opts\_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{warning=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{message =} \OtherTok{FALSE}\NormalTok{, }
                       \DataTypeTok{fig.width =} \DecValTok{12}\NormalTok{, }\DataTypeTok{fig.height =} \DecValTok{8}\NormalTok{) }
@@ -362,7 +362,6 @@ Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe 
 \StringTok{  }\KeywordTok{map}\NormalTok{(cleaning) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{bind\_rows}\NormalTok{(}\DataTypeTok{.id =} \StringTok{"id"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{  }\KeywordTok{pivot\_wider}\NormalTok{(}\DataTypeTok{names\_from =}\NormalTok{ id)}
-
 \CommentTok{\# Filtering {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{countries \textless{}{-}}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"countries.RDS"}\NormalTok{))}
 \NormalTok{data \textless{}{-}}\StringTok{ }\NormalTok{data }\OperatorTok{\%\textgreater{}\%}
