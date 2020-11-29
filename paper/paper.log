@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.25)  29 NOV 2020 12:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.25)  29 NOV 2020 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -551,17 +551,34 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \TPTL@width=\skip84
 )
 \longtablewidth=\skip85
-
+(/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count298
+\output=\toks30
+\linenoprevgraf=\count299
+\linenumbersep=\dimen195
+\linenumberwidth=\dimen196
+\c@linenumber=\count300
+\c@pagewiselinenumber=\count301
+\c@LN@truepage=\count302
+\c@internallinenumber=\count303
+\c@internallinenumbers=\count304
+\quotelinenumbersep=\dimen197
+\bframerule=\dimen198
+\bframesep=\dimen199
+\bframebox=\box60
+LaTeX Info: Redefining \\ on input line 3056.
+)
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.st
 y
 Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
-\csq@reset=\count298
-\csq@gtype=\count299
-\csq@glevel=\count300
-\csq@qlevel=\count301
-\csq@maxlvl=\count302
-\csq@tshold=\count303
-\csq@ltx@everypar=\toks30
+\csq@reset=\count305
+\csq@gtype=\count306
+\csq@glevel=\count307
+\csq@qlevel=\count308
+\csq@maxlvl=\count309
+\csq@tshold=\count310
+\csq@ltx@everypar=\toks31
 
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.de
 f
@@ -577,15 +594,15 @@ File: csquotes.cfg
 Package: babel 2020/10/27 3.51 The Babel package
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/10/27 3.51 Babel common definitions
-\babel@savecnt=\count304
-\U@D=\dimen195
+\babel@savecnt=\count311
+\U@D=\dimen256
 \l@babelnohyphens=\language5
 
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def
 )
 \bbl@readstream=\read3
 )
-\bbl@dirlevel=\count305
+\bbl@dirlevel=\count312
 
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/generic/babel-english/engl
 ish.ldf
@@ -614,29 +631,29 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-
 pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count306
-\l__pdf_internal_box=\box60
+\l__kernel_color_stack_int=\count313
+\l__pdf_internal_box=\box61
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 196.
+LaTeX Font Info:    ... okay on input line 196.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -704,7 +721,7 @@ y
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 193.
+Package hyperref Info: Link coloring OFF on input line 196.
 
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -717,11 +734,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 titlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count307
+\c@section@level=\count314
 )
-LaTeX Info: Redefining \ref on input line 193.
-LaTeX Info: Redefining \pageref on input line 193.
-LaTeX Info: Redefining \nameref on input line 193.
+LaTeX Info: Redefining \ref on input line 196.
+LaTeX Info: Redefining \pageref on input line 196.
+LaTeX Info: Redefining \nameref on input line 196.
 (./paper.out) (./paper.out)
 \@outlinefile=\write6
 \openout6 = `paper.out'.
@@ -729,38 +746,43 @@ LaTeX Info: Redefining \nameref on input line 193.
 
 Class apa6 Warning: Abstract not defined.
 
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
+98.
+(/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-95.
+98.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-95.
+98.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-195.
+198.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-195.
+198.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 195.
+(Font)              <12> on input line 198.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 195.
+(Font)              <8> on input line 198.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 195.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 195
+(Font)              <6> on input line 198.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 198
 .
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 195
+LaTeX Font Info:    Trying to load font information for U+msb on input line 198
 .
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -771,39 +793,39 @@ tex.map}
 Overfull \vbox (5.04488pt too high) has occurred while \output is active []
 
 [4]
-<paper_files/figure-latex/unnamed-chunk-3-1.pdf, id=61, 839.135pt x 544.0325pt>
+<paper_files/figure-latex/unnamed-chunk-3-1.pdf, id=58, 839.135pt x 544.0325pt>
 
 File: paper_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-3-1.pdf  used o
-n input line 239.
+n input line 242.
 (pdftex.def)             Requested size: 234.87936pt x 152.27824pt.
-<paper_files/figure-latex/unnamed-chunk-3-2.pdf, id=62, 839.135pt x 494.84875pt
+<paper_files/figure-latex/unnamed-chunk-3-2.pdf, id=59, 839.135pt x 494.84875pt
 >
 File: paper_files/figure-latex/unnamed-chunk-3-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-3-2.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-3-2.pdf  used o
-n input line 239.
+n input line 242.
 (pdftex.def)             Requested size: 234.87936pt x 138.5114pt.
 
-Overfull \hbox (2.61478pt too wide) in paragraph at lines 239--239
+Overfull \hbox (2.61478pt too wide) in paragraph at lines 242--242
 [][] [] 
  []
 
 
-LaTeX Warning: Float too large for page by 3.66473pt on input line 281.
+LaTeX Warning: Float too large for page by 3.66473pt on input line 284.
 
 [5 <./paper_files/figure-latex/unnamed-chunk-3-1.pdf> <./paper_files/figure-lat
 ex/unnamed-chunk-3-2.pdf>] [6]
-<paper_files/figure-latex/unnamed-chunk-5-1.pdf, id=93, 842.14626pt x 551.05875
+<paper_files/figure-latex/unnamed-chunk-5-1.pdf, id=90, 842.14626pt x 551.05875
 pt>
 File: paper_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-5-1.pdf  used o
-n input line 285.
+n input line 288.
 (pdftex.def)             Requested size: 469.76112pt x 307.38837pt.
 
-Overfull \hbox (28.91365pt too wide) in paragraph at lines 285--287
+Overfull \hbox (28.91365pt too wide) in paragraph at lines 288--289
 [][] 
  []
 
@@ -811,14 +833,14 @@ Overfull \hbox (28.91365pt too wide) in paragraph at lines 285--287
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [7 <./paper_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<paper_files/figure-latex/unnamed-chunk-6-1.pdf, id=106, 841.1425pt x 546.04pt>
+<paper_files/figure-latex/unnamed-chunk-6-1.pdf, id=103, 841.1425pt x 546.04pt>
 
 File: paper_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-6-1.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-6-1.pdf  used o
 n input line 295.
 (pdftex.def)             Requested size: 234.87656pt x 152.47356pt.
-<paper_files/figure-latex/unnamed-chunk-6-2.pdf, id=107, 841.1425pt x 546.04pt>
+<paper_files/figure-latex/unnamed-chunk-6-2.pdf, id=104, 841.1425pt x 546.04pt>
 
 File: paper_files/figure-latex/unnamed-chunk-6-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-6-2.pdf>
@@ -889,36 +911,37 @@ Underfull \vbox (badness 10000) detected at line 554
 
 [17] AED endfloat: Processing end Figures and Tables [18] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: E3447566D0056039495A8C17D2C0D840;966.
+(rerunfilecheck)             Checksum: 787CDE0325F4A1A56DA55BE0DAEA9A54;866.
  ) 
 Here is how much of TeX's memory you used:
- 15133 strings out of 481408
- 226222 string characters out of 5917848
- 588039 words of memory out of 5000000
- 31564 multiletter control sequences out of 15000+600000
- 573503 words of font info for 65 fonts, out of 8000000 for 9000
+ 15370 strings out of 481408
+ 230057 string characters out of 5917848
+ 591912 words of memory out of 5000000
+ 31794 multiletter control sequences out of 15000+600000
+ 579262 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 80i,11n,85p,2244b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,11n,85p,2244b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-}{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
-enc}{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
-it.enc}{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-r
-m.enc}</Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
+}{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}
+{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.e
+nc}{/Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
+t.enc}</Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
 bx12.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/public/lm
 /lmmi12.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/public
 /lm/lmmi8.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/publ
 ic/lm/lmr12.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/pu
 blic/lm/lmr8.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type1/p
 ublic/lm/lmri12.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/type
-1/public/lm/lmsy10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmsy8.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts
-/type1/public/lm/lmtk10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fo
-nts/type1/public/lm/lmtt12.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmtti10.pfb>
-Output written on paper.pdf (18 pages, 424025 bytes).
+1/public/lm/lmss8.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts/ty
+pe1/public/lm/lmsy10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts
+/type1/public/lm/lmsy8.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fon
+ts/type1/public/lm/lmtk10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/
+fonts/type1/public/lm/lmtt12.pfb></Users/josephdespres/Library/TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmtti10.pfb>
+Output written on paper.pdf (18 pages, 438937 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
+ 245 PDF objects out of 1000 (max. 8388607)
  196 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 90 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 named destinations out of 1000 (max. 500000)
+ 82 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -28,7 +28,7 @@ floatsintext      : yes
 figurelist        : no
 tablelist         : no
 footnotelist      : no
-linenumbers       : no
+linenumbers       : yes
 mask              : no
 draft             : no
 
@@ -273,12 +273,10 @@ e <- data %>%
 
 (a + b) / (c + d + e) 
 ```
-The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative. 
-
-## Assumptions
-
+The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.  
 Now we will examine some regression diagnostics to analyze the performance and identify problems. Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse [@Freedomhouse] reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.  
-It was clear to us that there is substantial error variance and likely not constant from the positive residuals to negative residuals. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
+
+It was clear from the plots that error variance may not be constant. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is not consistent. We calculated a $t^{*}_{BF} = 9.49$ Which informed us that the error variance is substantially higher when the values of political freedom are lower. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 ```{r fig.show="hold", out.width="50%"}
 fit_df5 %>% 

@@ -167,6 +167,9 @@
 \makeatother
 \shorttitle{Political Freedom Within the OECD}
 \keywords{keyword\newline\indent Word count: X}
+\usepackage{lineno}
+
+\linenumbers
 \usepackage{csquotes}
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
@@ -283,13 +286,10 @@ Note: Standard Errors are in Prentices & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**
 From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer (Hlavac, 2018). The model with six degrees of freedom contains \textbf{Internet Users} which is 0.003, which is statistically significant, however, a one percent increase in the percentage of people using the internet is associated with a 0.003 increase in political freedom is not politically significant. Looking at the model with five degrees of freedom, all of our coefficients are significant at the 99\% level. The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to explain that we can only speculate. This is how we arrived at the model with five degrees of freedom.
 
 \includegraphics{paper_files/figure-latex/unnamed-chunk-5-1.pdf}
-The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.
+The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.\\
+Now we will examine some regression diagnostics to analyze the performance and identify problems. Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse (\emph{Countries and Territories}, 2020) reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.
 
-\hypertarget{assumptions}{%
-\subsection{Assumptions}\label{assumptions}}
-
-Now we will examine some regression diagnostics to analyze the performance and identify problems. Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse (\emph{Countries and Territories}, 2020) reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.\\
-It was clear to us that there is substantial error variance and likely not constant from the positive residuals to negative residuals. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is significantly higher when the residuals are negative. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
+It was clear from the plots that error variance may not be constant. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is not consistent. We calculated a \(t^{*}_{BF} = 9.49\) Which informed us that the error variance is substantially higher when the values of political freedom are lower. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 \begin{figure}
 \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-6-2} \caption{ }\label{fig:unnamed-chunk-6}
