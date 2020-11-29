@@ -39,7 +39,7 @@ subsets <- readr::read_csv(here::here("data", "subsets.csv"))
 
 --
 
-* Observational study of political freedom as a function of social, economic, political factors.
+* Observational study of political freedom as a function of social, economic, and political factors.
 
 --
 
@@ -86,6 +86,8 @@ class: inverse, middle, center
 
 ### 3. Discretionary Political Rights
 
+- Political Freedom Index takes values from 1 to 7
+
 ---
 
 
@@ -123,7 +125,7 @@ class: inverse, middle, center
 
 --
 
-- **Murders rate** per million people
+- **Murders per million**
 
 ---
 class: center
@@ -431,7 +433,7 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
-
+# Regression Results
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -457,6 +459,8 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
+# Regression Results
+
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -485,6 +489,8 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
+# Regression Results
+
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -513,6 +519,8 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
+# Regression Results
+
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -542,6 +550,8 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
+# Regression Results
+
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -570,6 +580,8 @@ $$
 \operatorname{polrights} = \beta_{0} + \beta_{1}(\operatorname{corruption\_perception\_index\_cpi}) +\\ \beta_{2}(\operatorname{edu\_exp\_gdp\_per\_person}) +\\ \beta_{3}(\operatorname{life\_expectancy\_years}) +\\ \beta_{4}(\operatorname{military\_spending\_pct\_of\_gdp}) +\\ \beta_{5}(\operatorname{murder\_per\_mil\_people}) + \epsilon
 \end{align}
 $$
+# Regression Results
+
 ```{r}
 broom::tidy(fit_df5) %>% 
   mutate(p.value = as.character(p.value)) %>%
@@ -632,25 +644,12 @@ labeled_qq <- qq + geom_point(outliers, mapping = aes(x = -3, y = -3.9),
                               color = "#D7261E", shape = 0, size = 15) +
                    geom_point(outliers, mapping = aes(x = -2.6, y = -2.7), color = "#D7261E", shape = 0, size = 15) +
                    geom_label(outliers, mapping = aes(x = -3, y = -3.5, label = "OUTLIERS"), color = "#D7261E", size = 5)
-
 ```
 
 ```{r message=FALSE}
 labeled_outliers + labeled_qq
 ```
----
 
-```{r}
-fit_df5 %>% 
-  broom::augment() %>% 
-  mutate(yhat = predict(fit_df5),
-         resid = resid(fit_df5)) %>% 
-  ggplot() + 
-  geom_point(aes(x = yhat, y = resid)) + 
-  geom_hline(yintercept = 0, color = "red") + 
-  scale_y_continuous(limits = c(-4,4)) + 
-  labs(y = "Residual", x = "Predicted Value")
-```
 
 ---
 
@@ -659,6 +658,7 @@ broom::tidy(fit_df5) %>%
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
+    mutate(term = c("(Intercept)", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")) %>% 
   kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
         caption = "Included Outliers") 
 ```
@@ -673,6 +673,7 @@ data %>%
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
+    mutate(term = c("(Intercept)", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")) %>% 
   kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
         caption = "Removed Outliers") 
 
@@ -687,6 +688,7 @@ broom::tidy(fit_df5) %>%
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
+    mutate(term = c("(Intercept)", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")) %>% 
   kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
         caption = "Included Outliers") %>% 
   row_spec(3, color = "white", background = "#3C989E")
@@ -702,6 +704,7 @@ data %>%
   mutate(p.value = as.character(p.value)) %>%
   mutate_if(is.numeric, round, 3) %>% 
   mutate(p.value = as.numeric(p.value)) %>% 
+    mutate(term = c("(Intercept)", "Corruption Perception", "Education Expendature", "Life Expectancy", "Military Spending", "Murder Rate")) %>% 
   kable(col.names =  c("Term", "Estimate", "Std. Error", "T-Stat", "P-Value"),
         caption = "Removed Outliers") %>% 
   row_spec(3, color = "white", background = "#3C989E")
@@ -716,7 +719,7 @@ data %>%
 ***
 - We identified these outliers.
 - Confirmed they are not errors. 
-- Decided to keep them because they are indicating a substantial loss in political freedom which falls outside of the scope of the model. However, is important for our research question.
+- Decided to keep them because they are indicating a substantial loss in political freedom which falls outside of the scope of the model. However, this is important for our research question.
 
 
 
@@ -781,7 +784,7 @@ $$
 $$
 
 
-- Conclude error variance is not constant
+- $t^{*}_{BF} > t(.975; 643)$ Therefore we conclude error variance is not constant
 
 ---
 
@@ -845,18 +848,48 @@ $$
 
 
 - Conclude, again, error variance is not constant even when outliers are removed.
-- The model does a much better job at predicting political freedom in countries with more. This is likely due to the fact that our sample is the OCED that skews twards more Political Freedom
+- The model does a much better job explaining the political freedom in countries when they have a higher degree of it. This is likely due to the fact that our sample is the OECD that skews towards more Political Freedom
 
 ---
 # Conclusions
 
-1. Despite minor problems with outliers we found that statistically significant 
-1. because
+
+1. With minimal violations of assumptions, we found statistically significant associations between our response term and covariates
+
+
+---
+
+# Conclusions
+
+
+1. With minimal violations of assumptions, we found statistically significant associations between our response term and covariates
+1. There is a degree of heteroscedasticity
+
+
+---
+
+# Conclusions
+
+
+1. With minimal violations of assumptions, we found statistically significant associations between our response term and covariates
+1. There is a degree of heteroscedasticity
+1. Results are only valid for countries within the OECD and should not be used to make inferences for every country.
+
+
+---
+
+# Conclusions
+
+
+1. With minimal violations of assumptions, we found statistically significant associations between our response term and covariates
+1. There is a degree of heteroscedasticity
+1. Results are only valid for countries within the OECD and should not be used to make inferences for every country.
+1. The few outliers did not have dramatic impact on the results
 
 ---
 class: center, middle
 
-# Thanks You and We are Happy to Take Questions
+# Thank You and We are Happy to Take Questions
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
 
@@ -891,3 +924,8 @@ stargazer::stargazer(fit_df6, fit_df5, fit_df4, fit_df3, type = "html",
                      header = FALSE,
                      single.row = TRUE)
 ```
+
+```{r}
+beepr::beep()
+```
+
