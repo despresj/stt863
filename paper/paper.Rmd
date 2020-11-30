@@ -127,9 +127,9 @@ Although such a metric is imperfect and debatable, this will serve as a reasonab
 
 ## Data
 
-These data sets were separate so we downloaded them individually, cleaned and combined them together using R [@R-base] and the Tidyverse Package [@R-tidyverse]. We included all the code in the appendix. This resulted in a data set with all 196 countries from years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points, and the further back in time the more missing data. Had we conducted this study as it was it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has much more complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
+These data sets were separate so we downloaded them individually, cleaned and combined them together using R [@R-base] and the Tidyverse Package [@R-tidyverse]. We included all the code in the appendix. This resulted in a data set with all 196 countries from years 1950 to 2030 (data after 2019 were projections). It was immediately apparent that there was a substantial amount of missing data in an obvious pattern. Less developed countries tended to have more missing data points, and the further back in time the more missing data. Had we conducted this study as it was, it would have been severely biased towards more developed countries as missing data points would be dropped. This forced us to narrow the scope of the study and focus only on countries within the Organization for Economic Co-operation and Development (OECD). This subset of countries has much more complete data. Therefore, we removed data from countries that are not members of the OECD and selected only the years 2000 through 2018.
 
-This remedied most of the missing datapoints. However, even within the OEDC there were a few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period and inputted it where there was an NA. This afforded us the ability to keep even more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0% of their GDP, so we replaced the NA with a 0. This is how we obtained a complete and full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. We wanted to have a more intuitive interpretation so we subtracted 100 and multiplied by negative one. This gives us an interpretation of of 0 being the least corrupt and 100 the most corrupt. We did the same for political rights, which originally 1 was the most political freedom and 7 being the least. We want to interpret a higher number to having more political rights. 
+This remedied most of the missing datapoints. However, even within the OEDC there were a few missing data points. From there, we imputed the median of each country's variable. For instance, Austria's electricity consumption was missing for 2012, so we took the median of Austria's consumption over the 18 year period and inputted it where there was an NA. This afforded us the ability to keep more data with minimal compromise. This is a reasonable procedure because the covariates do not fluctuate wildly year over year. After that, there were a few other cases which we needed to input manually, for example, Iceland's Military spending is 0% of their GDP, so we replaced the NA with a 0. This is how we obtained a complete and full data set with no missing data points. The only other adjustment made was to make a few of the variables more intuitive. Corruption perception for example was originally having 0 be the most perception of corruption and 100 being the least. We wanted to have a more intuitive interpretation so we subtracted 100 and multiplied by negative one. This gives us an interpretation of of 0 being the least corrupt and 100 the most corrupt. We did the same for political rights, which originally 1 was the most political freedom and 7 being the least. We want to interpret a higher number to having more political rights. 
 
 ## Descriptive Statistics
 
@@ -169,7 +169,7 @@ kable(
  caption = "Descriptive Statistics")
 ```
 
-Table 1, made with the KableExtra package [@R-kableExtra] contains basic summary statistics from our dataset. We observe that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. Freedomhouse's classification of political freedom is in discrete values from 1-7. Additionally, countries with a low political freedom have suspect data reporting. We had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
+Table 1, made with the KableExtra package [@R-kableExtra] contains basic summary statistics from our dataset. We observed that the mean political rights is 6.6 nearly full with a fairly low standard deviation. This is not ideal. Freedomhouse's classification of political freedom is in discrete values from 1-7. Additionally, countries with a low political freedom have suspect data reporting. We had to select a subset of countries and that subset leans towards having more political freedom. We precede on the understanding that there are moderate problems with the data, first having a discrete response variable and the nature of the distribution being skewed towards the maximum 7/7 political freedom.
 
 ```{r fig.show="hold", out.width="50%"}
 r <- subsets %>% 
@@ -200,7 +200,7 @@ subsets %>%
 
 ```
 
-We examined the results of that we did not find compelling evidence to support making a such a transformation and the data are roughly linear. We will not be making any non-linear transformation of variables.  With a dataset that contains flaws but still reasonably holds assumptions we performed the best subset algorithm to obtain a model with the best fit. From the graph of the subsets we can see that the increase in $R^{2}_a$ and $AIC$ by adding additional parameters diminishes quite rapidly.
+We examined the results and did not find compelling evidence to support making a such a transformation and the data are roughly linear. We will not be making any non-linear transformation of variables.  With a dataset that contains flaws but still reasonably holds assumptions we performed the best subset algorithm to obtain a model with the best fit. From the graph of the subsets we can see that the increase in $R^{2}_a$ and $AIC$ by adding additional parameters diminishes quite rapidly.
 
 
 
@@ -228,7 +228,7 @@ stargazer(fit_df6, fit_df5, fit_df4,
                      notes.label = "Note: Standard Errors are in Prentices")
 ```
 
-From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer [@R-stargazer]. The model with six degrees of freedom contains **Internet Users** which is 0.003, which is statistically significant, however, a one percent increase in the percentage of people using the internet is associated with a 0.003 increase in political freedom is not politically significant. Looking at the model with five degrees of freedom, all of our coefficients are significant at the 99% level. The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to explain that we can only speculate. This is how we arrived at the model with five degrees of freedom. 
+From the best subsets, it was appropriate to narrow our model choices down to three. First, the model with six degrees of freedom, next one with five, and one with four. The results from these three models is in Table 2 made using Stargazer [@R-stargazer]. The model with six degrees of freedom contains **Internet Users** with coeffecient 0.003, which is statistically significant, however, a one percent increase in the percentage of people using the internet is associated with a 0.003 increase in political freedom is not politically significant. Looking at the model with five degrees of freedom, all of our coefficients are significant at the 99% level. The model with four degrees of freedom also has statistically significant coefficients and we would pick it had life expectancy not been significant. Counterintuitively, politically freedom seems to decrease as life expectancy increases. We are not qualified to explain that we can only speculate. This is how we arrived at the model with five degrees of freedom.  
 
 ```{r message=FALSE}
 size <- 18
@@ -243,7 +243,7 @@ a <- data %>%
 b <- data %>% 
   ggplot(aes(x = edu_exp_gdp_per_person, y = polrights_fh)) + 
   geom_point() + 
-  geom_smooth(method = "lm", se = FALSE, color = "#3C989E") +
+  geom_smooth(method = "lm", se = FALSE,color = "#3C989E") +
     scale_y_continuous(breaks = 1:7) + 
   labs(x = "Education Expendature", y = "") +
   theme_light(base_size = size)
@@ -271,11 +271,12 @@ e <- data %>%
   labs(x = "Murder Rate", y = "") + theme_light(base_size = size)
 
 (a + b) / (c + d + e) 
-```
-The scatter plots look a bit strange at first because of the nature of the discrete response variable. However, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.  
+```  
+
+  The scatter plots look a bit strange at first because of the nature of the discrete response variable, however, this does seem to fit the data reasonably. There is a fairly linear relationship with a clear sloping line which, except for life expectancy, concur with the regression coefficient. Life expectancy on its own has a positive association with political freedom, however when holding the other covariates constant we find that slope to be negative.  
 Now we will examine some regression diagnostics to analyze the performance and identify problems. Let's start with plots of residuals. Figure 2, contains a histogram of the residuals adjacent to a QQ normal plot. It is clear that there are substantial outliers at the lower end of political freedom. Upon further inspection we found that these outliers are Turkey from 2016 to 2018. These residuals are large and suggest a substantial loss in political freedom. This is confirmed by Freedomhouse [@Freedomhouse] reporting that a coup attempt in Turkey resulted in a political retaliation against perceived opponents and constitutional changes were made that concentrated political power to the president. After much discussion we concluded that since the regression results were not severely affected and this is not an entry error there is not a compelling reason to eliminate it.  
 
-It was clear from the plots that error variance may not be constant. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is not consistent. We calculated a $t^{*}_{BF} = 9.49$ Which informed us that the error variance is substantially higher when the values of political freedom are lower. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
+It was clear from the plots that error variance may not be constant. A Brown-Forsythe test confirmed our suspicions telling us that the error variance is not consistent. We calculated a $t^{*}_{BF} = 9.49$ which informed us that the error variance is substantially higher when the values of political freedom are lower. This is likely due to the fact that our sample includes predominately values that are on the upper end of the political freedom.
 
 ```{r fig.show="hold", out.width="50%"}
 fit_df5 %>% 
@@ -300,7 +301,7 @@ scale_y_continuous(limits = c(-4,4)) +
 
 ## Conclusion
 
-The results are statistically significant but can only be interpreted for countries in the OECD. The model does a reasonably good job predicting political freedom in the 6 and 7 range. However, completely falls apart at the one case of a substantial loss in freedom. Again, we don't have an exhaustive sample of countries losing freedom so this is consistent with the dataset we have. However, we can conclude as one of our more robust results is that an increase in education expenditure is associated with an increase in political freedom. The less corrupt a country is perceived to be the more freedom the citizens are afforded. Military spending is associated with a decrease in political freedom.
+The results are statistically significant but can only be interpreted for countries in the OECD. The model does a reasonably good job predicting political freedom in the 6 and 7 range. However, the model completely falls apart at the one case of a substantial loss in freedom. Again, we don't have an exhaustive sample of countries losing freedom so this is consistent with the dataset we have. However, we can conclude as one of our more robust results is that an increase in education expenditure is associated with an increase in political freedom. The less corrupt a country is perceived to be the more freedom the citizens are afforded. Military spending is associated with a decrease in political freedom.
 
 
 \newpage

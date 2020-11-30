@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.25)  29 NOV 2020 17:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.25)  29 NOV 2020 19:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -826,11 +826,8 @@ n input line 288.
 (pdftex.def)             Requested size: 469.76112pt x 307.38837pt.
 
 Overfull \hbox (28.91365pt too wide) in paragraph at lines 288--289
-[][] 
+[][]  
  []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [7 <./paper_files/figure-latex/unnamed-chunk-5-1.pdf>]
 <paper_files/figure-latex/unnamed-chunk-6-1.pdf, id=103, 841.1425pt x 546.04pt>
@@ -838,75 +835,75 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: paper_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-6-1.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-6-1.pdf  used o
-n input line 295.
+n input line 296.
 (pdftex.def)             Requested size: 234.87656pt x 152.47356pt.
 <paper_files/figure-latex/unnamed-chunk-6-2.pdf, id=104, 841.1425pt x 546.04pt>
 
 File: paper_files/figure-latex/unnamed-chunk-6-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/unnamed-chunk-6-2.pdf>
 Package pdftex.def Info: paper_files/figure-latex/unnamed-chunk-6-2.pdf  used o
-n input line 295.
+n input line 296.
 (pdftex.def)             Requested size: 234.87656pt x 152.47356pt.
 
-Overfull \hbox (2.60916pt too wide) in paragraph at lines 295--295
+Overfull \hbox (2.60916pt too wide) in paragraph at lines 296--296
 [][] [] 
  []
 
 [8] [9 <./paper_files/figure-latex/unnamed-chunk-6-1.pdf> <./paper_files/figure
 -latex/unnamed-chunk-6-2.pdf>] [10]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-44.
+45.
 (/Users/josephdespres/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 345.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 346.
 [11]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [12]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [13]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [14]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [15]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [16]
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 
-Underfull \vbox (badness 10000) detected at line 553
+Underfull \vbox (badness 10000) detected at line 554
  []
 
 [17] AED endfloat: Processing end Figures and Tables [18] (./paper.aux)
@@ -938,7 +935,7 @@ pe1/public/lm/lmsy10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/fonts
 ts/type1/public/lm/lmtk10.pfb></Users/josephdespres/Library/TinyTeX/texmf-dist/
 fonts/type1/public/lm/lmtt12.pfb></Users/josephdespres/Library/TinyTeX/texmf-di
 st/fonts/type1/public/lm/lmtti10.pfb>
-Output written on paper.pdf (18 pages, 438995 bytes).
+Output written on paper.pdf (18 pages, 439041 bytes).
 PDF statistics:
  245 PDF objects out of 1000 (max. 8388607)
  196 compressed objects within 2 object streams
