@@ -1,6 +1,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
   english,
@@ -42,7 +43,11 @@
   pdfauthor={Joe Despres, Sabrina Ball, Jacob Haywood, \& Joe Sigler},
   pdflang={en-EN},
   pdfkeywords={keyword},
-  hidelinks,
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=blue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
@@ -248,8 +253,10 @@ Table 1, made with the KableExtra package (Zhu, 2020) contains basic summary sta
 \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-1} \includegraphics[width=0.5\linewidth]{paper_files/figure-latex/unnamed-chunk-3-2} \caption{ }\label{fig:unnamed-chunk-3}
 \end{figure}
 
-We examined the results and due to the categorical nature we are not aware of any function that would map discrete values onto the real line. Therefore, we did not find compelling evidence to support making such a transformation and the data are roughly linear. We will not be making any non-linear transformation of variables. With a flawed dataset that reasonably holds all other assumptions we performed the best subset algorithm to obtain a model with the best fit. From the graph of the subsets we can see that the increase in \(R^{2}_a\) and \(AIC\) by adding additional parameters diminishes quite rapidly.\\
-\#\# Model Selection
+We examined the results and due to the categorical nature we are not aware of any function that would map discrete values onto the real line. Therefore, we did not find compelling evidence to support making such a transformation and the data are roughly linear. We will not be making any non-linear transformation of variables. With a flawed dataset that reasonably holds all other assumptions we performed the best subset algorithm to obtain a model with the best fit. From the graph of the subsets we can see that the increase in \(R^{2}_a\) and \(AIC\) by adding additional parameters diminishes quite rapidly.
+
+\hypertarget{model-selection}{%
+\subsection{Model Selection}\label{model-selection}}
 
 \begin{table}[!htbp] \centering 
   \caption{Regression Results} 
