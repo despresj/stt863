@@ -35,6 +35,7 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
+urlcolor: blue
 ---
 
 ```{r setup}
@@ -203,6 +204,7 @@ subsets %>%
 ```
 
 We examined the results and due to the categorical nature we are not aware of any function that would map discrete values onto the real line. Therefore, we did not find compelling evidence to support making such a transformation and the data are roughly linear. We will not be making any non-linear transformation of variables. With a flawed dataset that reasonably holds all other assumptions we performed the best subset algorithm to obtain a model with the best fit. From the graph of the subsets we can see that the increase in $R^{2}_a$ and $AIC$ by adding additional parameters diminishes quite rapidly.  
+
 ## Model Selection
 
 ```{r results="asis"}
